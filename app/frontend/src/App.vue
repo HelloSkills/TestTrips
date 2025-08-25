@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useJsonServer } from "@/composables/useJsonServer.ts"
+import { getUsers, getAviaVariants, getTrips, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
 
-const { users, aviaVariants, trips, getUsers, getAviaVariants, getTrips } = useJsonServer()
 getUsers()
 getAviaVariants()
 getTrips()
