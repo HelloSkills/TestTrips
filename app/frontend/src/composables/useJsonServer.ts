@@ -1,23 +1,33 @@
 import { ref } from 'vue'
+import type { User, AviaVariant, Trip } from "@/types/types"
 import axios from "axios"
 
 const BACKEND_URL = "http://localhost:3000"
 
-export const users = ref([])
-export const aviaVariants = ref([])
-export const trips = ref([])
+export const users = ref<User[]>([])
+export const aviaVariants = ref<AviaVariant[]>([])
+export const trips = ref<Trip[]>([])
 
-// Получаем всех юзеров
+// Юзеры
 export const getUsers = async () => {
     users.value = (await axios.get(`${BACKEND_URL}/users`)).data
 }
 
-// Получаем все услуги
+// Услуги
 export const getAviaVariants = async () => {
     aviaVariants.value = (await axios.get(`${BACKEND_URL}/aviaVariants`)).data
 }
 
-// Получаем все путёвки
+// Поездки
+
+// Получаем все поездки
 export const getTrips = async () => {
     trips.value = (await axios.get(`${BACKEND_URL}/trips`)).data
+}
+
+// Добавляем новую поездку
+export const postTrip = async (tripData: Omit<Trip, 'id'>) => {
+    const res = await axios.post(`${BACKEND_URL}/trips`, tripData)
+    trips.value.push(res.data)
+    console.log('Сработал postTrip')
 }

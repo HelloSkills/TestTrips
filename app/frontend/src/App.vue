@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { getUsers, getAviaVariants, getTrips, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
+import { getUsers, getAviaVariants, getTrips, postTrip, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
 
 getUsers()
 getAviaVariants()
 getTrips()
-
+// postTrip({})
 </script>
 
 <template>

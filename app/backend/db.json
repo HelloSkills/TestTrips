@@ -1,13 +1,13 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "first_name": "Иванов",
       "second_name": "Иван",
       "last_name": "Иванович"
     },
     {
-      "id": 3,
+      "id": "3",
       "first_name": "Петрова",
       "second_name": "Мария",
       "last_name": "Ивановна"
@@ -15,7 +15,7 @@
   ],
   "aviaVariants": [
     {
-      "id": 1,
+      "id": "1",
       "provider": "S7",
       "placeFrom": "Москва",
       "placeTo": "Сочи",
@@ -28,7 +28,7 @@
       "price": 92333
     },
     {
-      "id": 2,
+      "id": "2",
       "provider": "Aeroflot",
       "placeFrom": "Санкт-Петербург",
       "placeTo": "Сочи",
@@ -43,7 +43,7 @@
   ],
   "trips": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Поездка в Сочи",
       "price": 101233,
       "passengers": [
@@ -68,7 +68,7 @@
             "second_name": "Иван",
             "last_name": "Иванович"
           },
-          "ticket":  {
+          "ticket": {
             "id": 1,
             "provider": "S7",
             "placeFrom": "Москва",
@@ -89,7 +89,7 @@
             "second_name": "Иван",
             "last_name": "Иванович"
           },
-          "ticket":  {
+          "ticket": {
             "id": 2,
             "provider": "Aeroflot",
             "placeFrom": "Санкт-Петербург",
