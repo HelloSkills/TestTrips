@@ -1,12 +1,14 @@
 <template>
   <Header/>
-<div :class="$style.test">{{users}}</div>
-<div :class="$style.test">{{aviaVariants}}</div>
-<div :class="$style.test">{{trips}}</div>
+  <Trips/>
+<!--<div :class="$style.test">{{users}}</div>-->
+<!--<div :class="$style.test">{{aviaVariants}}</div>-->
+<!--<div :class="$style.test">{{trips}}</div>-->
 </template>
 
 <script setup lang="ts">
 import Header from "@/components/header.vue"
+import Trips from "@/components/trips.vue"
 import { getUsers, getAviaVariants, getTrips, postTrip, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
 
 getUsers()
