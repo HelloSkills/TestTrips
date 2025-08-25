@@ -19,10 +19,7 @@
       </div>
       <div :class="$style.name">Имя</div>
     </div>
-    <div :class="$style.toTravel"><a>Перейти к поездке ➝</a></div>
-
-
-
+    <div :class="$style.toTravel"><a href="">Перейти к поездке ➝</a></div>
   </div>
 </template>
 
