@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Иванов",
+      "second_name": "Иван",
+      "last_name": "Иванович"
+    },
+    {
+      "id": 3,
+      "first_name": "Петрова",
+      "second_name": "Мария",
+      "last_name": "Ивановна"
+    }
+  ],
+  "aviaVariants": [
+    {
+      "id": 1,
+      "provider": "S7",
+      "placeFrom": "Москва",
+      "placeTo": "Сочи",
+      "dateFrom": "25-08-2025",
+      "dateTo": "25-08-2025",
+      "timeFrom": "10:04",
+      "timerTo": "19:22",
+      "iataFrom": "DME",
+      "iataTo": "AER",
+      "price": 92333
+    },
+    {
+      "id": 2,
+      "provider": "Aeroflot",
+      "placeFrom": "Санкт-Петербург",
+      "placeTo": "Сочи",
+      "dateFrom": "26-08-2025",
+      "dateTo": "28-08-2025",
+      "timeFrom": "10:04",
+      "timerTo": "00:22",
+      "iataFrom": "LED",
+      "iataTo": "AER",
+      "price": 8900
+    }
+  ],
+  "trips": [
+    {
+      "id": 1,
+      "name": "Поездка в Сочи",
+      "price": 101233,
+      "passengers": [
+        {
+          "id": 1,
+          "first_name": "Иванов",
+          "second_name": "Иван",
+          "last_name": "Иванович"
+        },
+        {
+          "id": 3,
+          "first_name": "Петрова",
+          "second_name": "Мария",
+          "last_name": "Ивановна"
+        }
+      ],
+      "services": [
+        {
+          "user": {
+            "id": 1,
+            "first_name": "Иванов",
+            "second_name": "Иван",
+            "last_name": "Иванович"
+          },
+          "ticket":  {
+            "id": 1,
+            "provider": "S7",
+            "placeFrom": "Москва",
+            "placeTo": "Сочи",
+            "dateFrom": "25-08-2025",
+            "dateTo": "25-08-2025",
+            "timeFrom": "10:04",
+            "timerTo": "19:22",
+            "iataFrom": "DME",
+            "iataTo": "AER",
+            "price": 92333
+          }
+        },
+        {
+          "user": {
+            "id": 1,
+            "first_name": "Иванов",
+            "second_name": "Иван",
+            "last_name": "Иванович"
+          },
+          "ticket":  {
+            "id": 2,
+            "provider": "Aeroflot",
+            "placeFrom": "Санкт-Петербург",
+            "placeTo": "Сочи",
+            "dateFrom": "26-08-2025",
+            "dateTo": "28-08-2025",
+            "timeFrom": "10:04",
+            "timerTo": "00:22",
+            "iataFrom": "LED",
+            "iataTo": "AER",
+            "price": 8900
+          }
+        }
+      ]
+    }
+  ]
+}
