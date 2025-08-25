@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import Header from "@/components/header.vue"
-import Trips from "@/components/trips.vue"
+import Trips from "@/components/Trips/index.vue"
 import { getUsers, getAviaVariants, getTrips, postTrip, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
 
 getUsers()

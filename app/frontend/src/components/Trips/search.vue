@@ -1,22 +1,20 @@
 <template>
-  <div :class="$style.container">
-    <div :class="$style.trips">Поездки</div>
-    <div :class="$style.search">
-      <div :class="$style.wrap">
-        <img src="/icons/search.svg" alt="search_icon" width="20" height="20" />
-        <input
-            type="text"
-            placeholder="Введите название поездки или её номер"
-            :class="$style.inputSearch"
-        >
-      </div>
-      <button @click="search" :class="$style.btnSearch">Найти</button>
+  <div :class="$style.trips">Поездки</div>
+  <div :class="$style.search">
+    <div :class="$style.wrap">
+      <img src="/icons/search.svg" alt="search_icon" width="20" height="20" />
+      <input
+          type="text"
+          placeholder="Введите название поездки или её номер"
+          :class="$style.inputSearch"
+      >
     </div>
-    <div :class="$style.list">
-      <div>Список поездок пуст</div>
-      <a href="" :class="$style.createTravel">создать поездку</a>
-    </div>
+    <button @click="search" :class="$style.btnSearch">Найти</button>
   </div>
+<!--  <div :class="$style.list">-->
+<!--    <div>Список поездок пуст</div>-->
+<!--    <a href="" :class="$style.createTravel">создать поездку</a>-->
+<!--  </div>-->
 </template>
 
 <script setup lang="ts">
