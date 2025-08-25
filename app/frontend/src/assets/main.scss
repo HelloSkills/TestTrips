@@ -1,4 +1,19 @@
+/* Глобальный сброс box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+}
+
 body {
-  background-color: black;
-  color: white;
+  background-color: #F6F8FC;
+  color: #050505;
+  font-family: 'Roboto', sans-serif;
 }
