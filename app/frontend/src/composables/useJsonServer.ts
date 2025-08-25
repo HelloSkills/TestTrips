@@ -10,24 +10,23 @@ export const trips = ref<Trip[]>([])
 
 // Юзеры
 export const getUsers = async () => {
-    users.value = (await axios.get(`${BACKEND_URL}/users`)).data
+    users.value = (await axios.get<User[]>(`${BACKEND_URL}/users`)).data
 }
 
 // Услуги
 export const getAviaVariants = async () => {
-    aviaVariants.value = (await axios.get(`${BACKEND_URL}/aviaVariants`)).data
+    aviaVariants.value = (await axios.get<AviaVariant[]>(`${BACKEND_URL}/aviaVariants`)).data
 }
 
 // Поездки
 
 // Получаем все поездки
 export const getTrips = async () => {
-    trips.value = (await axios.get(`${BACKEND_URL}/trips`)).data
+    trips.value = (await axios.get<Trip[]>(`${BACKEND_URL}/trips`)).data
 }
 
 // Добавляем новую поездку
 export const postTrip = async (tripData: Omit<Trip, 'id'>) => {
-    const res = await axios.post(`${BACKEND_URL}/trips`, tripData)
+    const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
     trips.value.push(res.data)
-    console.log('Сработал postTrip')
 }
