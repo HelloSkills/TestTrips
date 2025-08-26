@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useTripStore } from '@/stores/tripStore'
+import { useTripStore } from '@/stores/SelectedTripStore'
 
 const tripStore = useTripStore()
 const { selectedTrip } = storeToRefs(tripStore)

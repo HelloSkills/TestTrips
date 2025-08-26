@@ -1,20 +1,13 @@
 <template>
   <div :class="$style.container" >
-    <Search :trips="props.trips"/>
-    <Item :trips="props.trips"/>
+    <Search/>
+    <Item/>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Trip } from "@/types/types.ts"
 import Search from "@/components/Trips/search.vue"
 import Item from "@/components/Trips/item.vue"
-
-const props = defineProps<{
-  trips: Trip[]
-}>()
-
-console.log('props', props.trips)
 </script>
 
 <style lang="scss" module>

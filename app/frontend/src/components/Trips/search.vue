@@ -20,14 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Trip } from "@/types/types.ts";
 import { computed } from 'vue'
 
-const props = defineProps<{
-  trips: Trip[]
-}>()
+import { useTripsStore } from '@/stores/tripsStore'
+const tripsStore = useTripsStore()
 
-const isTrips = computed(() => props.trips && props.trips.length > 0)
+const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
 </script>
 
 <style lang="scss" module>

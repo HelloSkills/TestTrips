@@ -1,15 +1,15 @@
 <template>
-  <div :class="$style.container" v-for="trip in props.trips" :key="trip.id">
+  <div :class="$style.container" v-for="trip in tripsStore.trips" :key="trip.id">
     <div :class="$style.wrap">
       <div :class="$style.info">
         <div :class="$style.date">#{{ trip.id }} от {{ getEarliestDate(trip.services) }} </div>
         <div v-if="trip.price > 0" :class="$style.price">{{ formatPrice(trip.price) }}</div>
       </div>
       <div :class="$style.nameTravel">
-        {{trip.name}}
+        {{ trip.name }}
       </div>
     </div>
-    <div :class="[$style.wrapItem]" v-for="services in trip.services">
+    <div :class="[$style.wrapItem]" v-for="services in trip.services" :key="services.user.id">
       <div :class="$style.ticketInfo">
         <div :class="$style.ticketWrap">
           <img src="/icons/air.svg" alt="avia_icon" width="14" height="14">
@@ -32,18 +32,16 @@ import { formatPrice } from "@/utils/price.ts"
 
 import { useRouter } from 'vue-router'
 const router = useRouter()
-import { useTripStore } from '@/stores/tripStore'
-const tripStore = useTripStore()
 
+import { useTripsStore } from '@/stores/tripsStore'
+import { useTripStore } from '@/stores/selectedTripStore'
+const tripsStore = useTripsStore()
+const selectedTripStore = useTripStore()
 
-const props = defineProps<{
-  trips: Trip[]
-}>()
 
 function goToTrip(trip: Trip) {
-  tripStore.selectTrip(trip)
+  selectedTripStore.selectTrip(trip)
   router.push('/selected-trip')
-  console.log('Выбрана поездка:', tripStore.selectedTrip)
 }
 </script>
 
