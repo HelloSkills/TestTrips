@@ -47,8 +47,7 @@ console.log('props', props.services)
 
 <style lang="scss" module>
 .container {
-  min-width: 840px;
-  width: 100%;
+  width: 840px;
   margin: 0 auto 20px;
   padding: 20px;
   background: white;
