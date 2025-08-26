@@ -1,6 +1,6 @@
 <template>
   <Header/>
-  <Trips v-if="trips.length" :trips="trips"/>
+  <Trips :trips="trips"/>
 <!--<div :class="$style.test">{{users}}</div>-->
 <!--<div :class="$style.test">{{aviaVariants}}</div>-->
 <!--<div :class="$style.test">{{trips}}</div>-->

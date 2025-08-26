@@ -12,15 +12,22 @@
       </div>
       <button @click="search" :class="$style.btnSearch">Найти</button>
     </div>
-<!--  <div :class="$style.list">-->
-<!--    <div>Список поездок пуст</div>-->
-<!--    <a href="" :class="$style.createTravel">создать поездку</a>-->
-<!--  </div>-->
+    <div v-if="!isTrips" :class="$style.list">
+      <div>Список поездок пуст</div>
+      <a href="" :class="$style.createTravel">создать поездку</a>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Trip } from "@/types/types.ts";
+import { computed } from 'vue'
 
+const props = defineProps<{
+  trips: Trip[]
+}>()
+
+const isTrips = computed(() => props.trips && props.trips.length > 0)
 </script>
 
 <style lang="scss" module>
