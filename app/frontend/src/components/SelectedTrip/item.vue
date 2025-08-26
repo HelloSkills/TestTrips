@@ -1,0 +1,109 @@
+<template>
+  <div :class="$style.container" v-for="service in services" :key="service.id">
+    <div :class="$style.ticketInfo">
+      <div :class="$style.infoAir">
+        <div :class="$style.ticketWrap">
+          <img src="/icons/air.svg" alt="avia_icon" width="16" height="16">
+          <div :class="$style.fromTo">{{ service.ticket.placeFrom }} ➝ {{ service.ticket.placeTo }}</div>
+        </div>
+        <div :class="$style.provider">
+          Перевозчик {{ service.ticket.provider }}
+        </div>
+      </div>
+      <div :class="$style.wrapInfo">
+        <div :class="$style.date">
+          <div :class="$style.dateFrom">
+            {{ formatDate(service.ticket.dateFrom) }}
+          </div>
+          <div :class="$style.time">
+            {{ service.ticket.timeFrom }} - {{ service.ticket.timerTo }}
+          </div>
+        </div>
+        <div :class="$style.price">
+          {{ formatPrice(service.ticket.price) }}
+        </div>
+      </div>
+    </div>
+    <div :class="$style.passenger">
+      <div :class="$style.name">
+        {{ service.user.second_name }} {{ service.user.last_name }}
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { Passenger, Services } from "@/types/types.ts"
+import {formatPrice} from "@/utils/price.ts"
+import { formatDate } from "@/utils/date.ts"
+
+const props = defineProps<{
+  price: number
+  passengers: Passenger[]
+  services: Services[]
+}>()
+console.log('props', props.services)
+</script>
+
+<style lang="scss" module>
+.container {
+  max-width: 840px;
+  width: 100%;
+  margin: 0 auto 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.infoAir {
+  margin-bottom: 20px;
+}
+
+.ticketWrap {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 5px;
+}
+
+.fromTo {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.provider {
+  color: #B3C1D1;
+}
+
+.wrapInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.passenger {
+  height: 50px;
+  width: 800px;
+  padding: 10px;
+  background: #F6F8FC;
+  margin: 20px auto 0;
+  border-radius: 5px;
+}
+
+.name {
+  height: 30px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  min-width: max-content;
+  width: 186px;
+}
+</style>

@@ -41,7 +41,7 @@ const selectedTripStore = useTripStore()
 
 function goToTrip(trip: Trip) {
   selectedTripStore.selectTrip(trip)
-  router.push('/selected-trip')
+  router.push(`/trip/${trip.id}`)
 }
 </script>
 

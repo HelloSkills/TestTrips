@@ -35,3 +35,17 @@ export interface Trip {
     passengers: User[],
     services: Service[],
 }
+
+export type Passenger = {
+    id: string | number
+    first_name: string
+    last_name: string
+}
+
+export type Services = {
+    id: string | number
+    ticket: {
+        dateFrom: string
+        dateTo: string
+    }
+}
