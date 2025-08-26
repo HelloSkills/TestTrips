@@ -38,14 +38,14 @@ const props = defineProps<{
 .container {
   width: 840px;
   height: max-content;
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: #FFFFFF;
-  //padding: 0 20px;
   border-radius: 10px;
 }
 
 .wrap {
   padding: 0 20px 20px;
+  margin-bottom: 20px;
   border-bottom: 1px solid #DDE2EB;
 }
 
@@ -54,7 +54,7 @@ const props = defineProps<{
   flex-direction: column;
   gap: 10px;
   background: #F6F8FC;
-  margin: 20px;
+  margin: 10px 20px;
   padding: 10px;
   border-radius: 5px;
 }
@@ -97,6 +97,7 @@ const props = defineProps<{
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+  margin-top: 20px;
   border-top: 1px solid #DDE2EB;
 }
 </style>
