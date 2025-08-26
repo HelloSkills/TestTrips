@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import type { Passenger, Services } from "@/types/types.ts"
-import {formatPrice} from "@/utils/price.ts"
+import { formatPrice } from "@/utils/price.ts"
 import { formatDate } from "@/utils/date.ts"
 
 const props = defineProps<{
@@ -47,7 +47,7 @@ console.log('props', props.services)
 
 <style lang="scss" module>
 .container {
-  max-width: 840px;
+  min-width: 840px;
   width: 100%;
   margin: 0 auto 20px;
   padding: 20px;

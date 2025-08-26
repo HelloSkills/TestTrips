@@ -26,7 +26,7 @@ const services = selectedTrip.value.services
 .title {
   text-align: center;
   margin: 50px auto 30px;
-
+  min-width: 840px;
   font-weight: 700;
   font-size: 26px;
   color: #4361EE;

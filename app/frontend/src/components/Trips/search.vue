@@ -5,9 +5,11 @@
       <div :class="$style.wrap">
         <img src="/icons/search.svg" alt="search_icon" width="20" height="20" />
         <input
+            v-model="searchQuery"
             type="text"
             placeholder="Введите название поездки или её номер"
             :class="$style.inputSearch"
+            @keyup.enter="search"
         >
       </div>
       <button @click="search" :class="$style.btnSearch">Найти</button>
@@ -20,12 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { useTripsStore } from '@/stores/tripsStore'
 const tripsStore = useTripsStore()
 
 const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
+const searchQuery = ref('')
+const search = () => {
+  tripsStore.filterTrips(searchQuery.value)
+}
 </script>
 
 <style lang="scss" module>
@@ -61,12 +67,18 @@ const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
 .inputSearch {
   all: unset;
   width: 100%;
+  border-bottom: 1px solid transparent;
 
   &::placeholder {
     color: #9ca3af;
     font-size: 14px;
     font-weight: 400;
     line-height: 100%;
+  }
+
+  &:focus {
+    border-bottom: 1px solid #4361EE;
+    width: 270px;
   }
 }
 

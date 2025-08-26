@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container" v-for="trip in tripsStore.trips" :key="trip.id">
+  <div :class="$style.container" v-for="trip in tripsStore.filteredTrips" :key="trip.id">
     <div :class="$style.wrap">
       <div :class="$style.info">
         <div :class="$style.date">#{{ trip.id }} от {{ getEarliestDate(trip.services) }} </div>
