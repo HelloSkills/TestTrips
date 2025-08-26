@@ -68,11 +68,12 @@ console.log('props', props.services)
 .fromTo {
   font-size: 16px;
   line-height: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .provider {
   color: #B3C1D1;
+  font-size: 14px;
 }
 
 .wrapInfo {
@@ -86,6 +87,15 @@ console.log('props', props.services)
   gap: 5px;
 }
 
+.time {
+  font-size: 12px;
+}
+
+.dateFrom, .price {
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .passenger {
   height: 50px;
   width: 800px;
@@ -97,6 +107,8 @@ console.log('props', props.services)
 
 .name {
   height: 30px;
+  font-size: 12px;
+  font-weight: 400;
   border-radius: 5px;
   background: #FFFFFF;
   display: flex;
