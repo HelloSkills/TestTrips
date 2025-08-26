@@ -1,29 +1,36 @@
 <template>
-  <div :class="$style.container">
+  <div :class="$style.container" v-for="trip in props.trips" :key="trip.id">
     <div :class="$style.wrap">
       <div :class="$style.info">
-        <div :class="$style.date">Тут дата</div>
-        <div :class="$style.price">Тут цена</div>
+        <div :class="$style.date">#{{ trip.id }} от {{ getEarliestDate(trip.services) }} </div>
+        <div :class="$style.price">{{ formatPrice(trip.price) }}</div>
       </div>
       <div :class="$style.nameTravel">
-        Тут название поездки
+        {{trip.name}}
       </div>
     </div>
-    <div :class="[$style.wrapItem]">
+    <div :class="[$style.wrapItem]" v-for="services in trip.services">
       <div :class="$style.ticketInfo">
         <div :class="$style.ticketWrap">
           <img src="/icons/air.svg" alt="avia_icon" width="14" height="14">
-          <div :class="$style.price">тут ценник ₽</div>
-          <div :class="$style.fromTo">Откуда ➝ Куда</div>
+          <div :class="$style.price">{{ formatPrice(services.ticket.price) }}</div>
+          <div :class="$style.fromTo">{{ services.ticket.placeFrom }} ➝ {{ services.ticket.placeTo }}</div>
         </div>
       </div>
-      <div :class="$style.name">Имя</div>
+      <div :class="$style.name">{{ services.user.second_name }} {{ services.user.last_name }}</div>
     </div>
     <div :class="$style.toTravel"><a href="">Перейти к поездке ➝</a></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Trip } from "@/types/types.ts"
+import { getEarliestDate } from "@/utils/date.ts"
+import { formatPrice } from "@/utils/price.ts"
+
+const props = defineProps<{
+  trips: Trip[]
+}>()
 
 </script>
 
@@ -83,6 +90,7 @@
   display: flex;
   gap: 5px;
   height: 14px;
+  line-height: 14px;
 }
 
 .toTravel {

@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
     <Search/>
-    <Item/>
+    <Item :trips="props.trips"/>
   </div>
 </template>
 
@@ -9,7 +9,6 @@
 import type { Trip } from "@/types/types.ts"
 import Search from "@/components/Trips/search.vue"
 import Item from "@/components/Trips/item.vue"
-
 
 const props = defineProps<{
   trips: Trip[]

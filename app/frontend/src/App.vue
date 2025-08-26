@@ -14,7 +14,6 @@ import { getUsers, getAviaVariants, getTrips, postTrip, users, aviaVariants, tri
 
 getUsers()
 getAviaVariants()
-getTrips()
 // postTrip({})
 
 onMounted(async () => {
