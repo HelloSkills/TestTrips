@@ -3,7 +3,7 @@
     <div :class="$style.wrap">
       <div :class="$style.info">
         <div :class="$style.date">#{{ trip.id }} от {{ getEarliestDate(trip.services) }} </div>
-        <div :class="$style.price">{{ formatPrice(trip.price) }}</div>
+        <div v-if="trip.price > 0" :class="$style.price">{{ formatPrice(trip.price) }}</div>
       </div>
       <div :class="$style.nameTravel">
         {{trip.name}}
@@ -19,7 +19,9 @@
       </div>
       <div :class="$style.name">{{ services.user.second_name }} {{ services.user.last_name }}</div>
     </div>
-    <div :class="$style.toTravel"><a href="">Перейти к поездке ➝</a></div>
+    <div :class="$style.toTravel" @click="goToTrip(trip)">
+      Перейти к поездке ➝
+    </div>
   </div>
 </template>
 
@@ -28,10 +30,21 @@ import type { Trip } from "@/types/types.ts"
 import { getEarliestDate } from "@/utils/date.ts"
 import { formatPrice } from "@/utils/price.ts"
 
+import { useRouter } from 'vue-router'
+const router = useRouter()
+import { useTripStore } from '@/stores/tripStore'
+const tripStore = useTripStore()
+
+
 const props = defineProps<{
   trips: Trip[]
 }>()
 
+function goToTrip(trip: Trip) {
+  tripStore.selectTrip(trip)
+  router.push('/selected-trip')
+  console.log('Выбрана поездка:', tripStore.selectedTrip)
+}
 </script>
 
 <style lang="scss" module>
@@ -99,5 +112,7 @@ const props = defineProps<{
   padding: 20px;
   margin-top: 20px;
   border-top: 1px solid #DDE2EB;
+  color: #4361EE;
+  cursor: pointer;
 }
 </style>
