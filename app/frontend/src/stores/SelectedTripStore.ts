@@ -11,6 +11,9 @@ export const useTripStore = defineStore('trip', {
         },
         clearTrip() {
             this.selectedTrip = null
+        },
+        getServices() {
+            return this.selectedTrip ? this.selectedTrip.services : []
         }
     }
 })

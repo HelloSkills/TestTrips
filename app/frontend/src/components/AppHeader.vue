@@ -3,14 +3,14 @@
   <Drawer v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
       <router-link to="/" :class="$style.logo">
-        <img src="/images/logo.svg" width="40" height="40" alt="logo">
+        <img src="/images/logo.svg" @click="goToPage('trips')" width="40" height="40" alt="logo">
       </router-link>
       <div v-if="!isSelected" :class="$style.travel">
-        <a href="" :class="$style.logo"><img src="/icons/suitcase.svg" alt="suitcase_logo"></a>
+        <router-link to="/" :class="$style.logo"><img src="/icons/suitcase.svg" alt="suitcase_logo"></router-link>
         <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>
       <div v-else :class="$style.avia">
-        <router-link to="/" @click="goBack">
+        <router-link to="Avia" @click="goToPage('avia')">
           <img src="/icons/air.svg" alt="air_logo" width="20" height="20" :class="$style.icon">
         </router-link>
       </div>
@@ -38,14 +38,26 @@ const tripStore = useTripStore()
 import { useModalStore } from '@/stores/modal'
 const modalStore = useModalStore()
 
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const props = defineProps<{
   selectedTrip: Trip | null
 }>()
 
 const isSelected = computed(() => !!props.selectedTrip)
 
-const goBack = () => {
+const goToPage = (page) => {
   tripStore.clearTrip()
+
+  if (page === 'avia') {
+    router.push(`/avia`)
+  }
+
+  if (page === 'trips') {
+    router.push(`/`)
+  }
+
 }
 
 const endTrip = () => {

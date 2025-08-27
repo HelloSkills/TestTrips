@@ -6,19 +6,33 @@
         :services="services"
         :price="price"
     />
+
+    <div v-if="!isServices" :class="$style.list">
+      <div>Список услуг пуст</div>
+      <div :class="$style.createTravel" @click="goToPage">поиск авиа</div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue"
 import { storeToRefs } from 'pinia'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 import Item from "@/components/SelectedTrip/item.vue"
+const isServices = computed(() => tripStore.getServices().length > 0)
 
 const tripStore = useTripStore()
 const { selectedTrip } = storeToRefs(tripStore)
 const price = selectedTrip.value.price
 const passengers = selectedTrip.value.passengers
 const services = selectedTrip.value.services
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToPage = () => {
+  router.push('/avia')
+}
 </script>
 
 
@@ -30,5 +44,21 @@ const services = selectedTrip.value.services
   font-weight: 700;
   font-size: 26px;
   color: #4361EE;
+}
+
+.list {
+  width: max-content;
+  margin: 30px auto 0;
+  font-size: 16px;
+  line-height: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.createTravel {
+  color: #4361EE;
+  cursor: pointer;
 }
 </style>

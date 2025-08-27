@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Trips from "@/components/Trips/index.vue"
 import SelectedTrip from '@/components/SelectedTrip/index.vue'
 import Drawer from '@/components/Drawer/index.vue'
+import Avia from '@/components/Avia/index.vue'
 
 const routes = [
     { path: '/', name: 'Trips', component: Trips },
-    { path: '/drawer', component: Drawer },
+    { path: '/drawer', name: 'Drawer', component: Drawer },
+    { path: '/avia', name: 'Avia', component: Avia },
     { path: '/trip/:id', name: 'SelectedTrip', component: SelectedTrip }
 ]
 
