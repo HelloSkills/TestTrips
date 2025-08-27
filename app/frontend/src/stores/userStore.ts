@@ -1,0 +1,48 @@
+import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
+import type { User } from '@/types/types'
+import { getUsers } from '@/composables/useJsonServer'
+
+export const useUserStore = defineStore('user', () => {
+    const users = ref<User[]>([])
+    const selectedUsers = ref<User[]>([])
+
+    // Получаем юзеров из useJsonServer
+    const loadUsers = async () => {
+        users.value = await getUsers()
+        console.log('Наши юзеры из стора', users.value)
+    }
+
+    // Выбираем пользователя
+    const selectUser = (user: User) => {
+        if (selectedUsers.value.length >= 10) {
+            window.alert('Нельзя выбрать более 10 сотрудников')
+            return
+        }
+
+        if (!selectedUsers.value.find(u => u.id === user.id)) {
+            selectedUsers.value.push(user)
+        }
+    }
+
+    // Удаляем пользователя
+    const deleteUser = (id: User['id']) => {
+        selectedUsers.value = selectedUsers.value.filter(u => u.id !== id)
+    }
+
+    // Список доступных (не выбранных) пользователей
+    const availableUsers = computed(() => {
+        return users.value.filter(
+            u => !selectedUsers.value.some(sel => sel.id === u.id)
+        )
+    })
+
+    return {
+        users,
+        selectedUsers,
+        loadUsers,
+        selectUser,
+        deleteUser,
+        availableUsers
+    }
+})
