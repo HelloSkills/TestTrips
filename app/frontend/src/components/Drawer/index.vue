@@ -1,26 +1,26 @@
 <template>
-  <div :class="$style.container">
-    <div :class="$style.wrap">
-      <div :class="$style.title">
-        <div :class="$style.create">
-          Создание поездки
+  <div :class="[$style.overlay, modelValue ? $style.open : '']" @click.self="close">
+    <div :class="[$style.drawer, modelValue ? $style.open : '']">
+      <div :class="$style.container">
+        <div :class="$style.wrap">
+          <div :class="$style.title">
+            <div :class="$style.create">Создание поездки</div>
+            <img :class="$style.close" src="/icons/close.svg" alt="close_icon" @click="close">
+          </div>
+          <div :class="$style.name">
+            <input
+                v-model="nameTrip"
+                type="text"
+                placeholder="Введите название поездки"
+                :class="$style.inputSearch"
+                @keyup.enter="createTrip"
+            >
+          </div>
+          <SelectUsers/>
         </div>
-        <img :class="$style.close" src="/icons/close.svg" alt="close_icon">
-      </div>
-      <div :class="$style.name">
-        <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Введите название поездки"
-            :class="$style.inputSearch"
-            @keyup.enter="search"
-        >
-      </div>
-      <SelectUsers/>
-    </div>
-    <div :class="$style.createTrip">
-      <div :class="$style.createBtn">
-        Создать
+        <div :class="$style.createTrip">
+          <div :class="$style.createBtn" @click="createTrip">Создать</div>
+        </div>
       </div>
     </div>
   </div>
@@ -28,20 +28,27 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import SelectUsers from "@/components/Drawer/SelectUsers.vue";
-const searchQuery = ref('')
-const search = () => {
-  console.log('searchQuery.value', searchQuery.value)
+import SelectUsers from "@/components/Drawer/SelectUsers.vue"
+const nameTrip = ref('')
+
+const createTrip = () => {
+  console.log('Создаём поездку')
 }
+const props = defineProps({
+  modelValue: Boolean
+})
+
+const emit = defineEmits(['update:modelValue'])
+const close = () => emit('update:modelValue', false)
+
 </script>
 
 <style lang="scss" module>
 
 .container {
   width: 400px;
-  height: 855px; // потом уберём
+  height: 100%;
   background-color: #F6F8FC;
-  border: 1px solid green;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -62,6 +69,7 @@ const search = () => {
   font-size: 14px;
   line-height: 14px;
   font-weight: 500;
+  color: #000000;
 }
 
 .name {
@@ -111,5 +119,41 @@ const search = () => {
   font-size: 14px;
   line-height: 14px;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+// Стили overlay
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  background-color: #F6F8FC;
+  transform: translateX(100%); // уезжает полностью вправо за экран
+  transition: transform 0.3s ease;
+  z-index: 1010;
+}
+
+.drawer.open {
+  transform: translateX(0); // выезжает на экран
 }
 </style>
