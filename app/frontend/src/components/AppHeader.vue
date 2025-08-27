@@ -1,12 +1,13 @@
 <template>
 <div :class="$style.container">
+  <Drawer v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
       <router-link to="/" :class="$style.logo">
         <img src="/images/logo.svg" width="40" height="40" alt="logo">
       </router-link>
       <div v-if="!isSelected" :class="$style.travel">
         <a href="" :class="$style.logo"><img src="/icons/suitcase.svg" alt="suitcase_logo"></a>
-        <a href="" :class="$style.createTravel">Создать поездку</a>
+        <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>
       <div v-else :class="$style.avia">
         <router-link to="/" @click="goBack">
@@ -28,10 +29,14 @@
 
 <script setup lang="ts">
 import { computed } from "vue"
-import { useTripStore } from '@/stores/SelectedTripStore.ts'
-import type { Trip } from "@/types/types.ts";
+import type { Trip } from "@/types/types.ts"
+import Drawer from '@/components/Drawer/index.vue'
 
+import { useTripStore } from '@/stores/SelectedTripStore.ts'
 const tripStore = useTripStore()
+
+import { useModalStore } from '@/stores/modal'
+const modalStore = useModalStore()
 
 const props = defineProps<{
   selectedTrip: Trip | null
@@ -44,7 +49,11 @@ const goBack = () => {
 }
 
 const endTrip = () => {
-  console.log('Завершаем поездку по клику "завершить поездку"')
+  console.log('Завершаем поездку - надо обработать и добавлять лейбл')
+}
+
+const createTrip = () => {
+  modalStore.toggleDrawer()
 }
 </script>
 
@@ -101,6 +110,7 @@ const endTrip = () => {
   font-weight: 400;
   font-size: 14px;
   line-height: 14px;
+  cursor: pointer;
 }
 
 .wrapper {

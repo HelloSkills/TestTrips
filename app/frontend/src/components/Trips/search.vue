@@ -16,7 +16,7 @@
     </div>
     <div v-if="!isTrips" :class="$style.list">
       <div>Список поездок пуст</div>
-      <a href="" :class="$style.createTravel">создать поездку</a>
+      <div :class="$style.createTravel" @click="createTrip">создать поездку</div>
     </div>
   </div>
 </template>
@@ -27,10 +27,17 @@ import { computed, ref } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 const tripsStore = useTripsStore()
 
+import { useModalStore } from '@/stores/modal.ts'
+const modalStore = useModalStore()
+
 const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
 const searchQuery = ref('')
 const search = () => {
   tripsStore.filterTrips(searchQuery.value)
+}
+
+const createTrip = () => {
+  modalStore.toggleDrawer()
 }
 </script>
 
@@ -105,5 +112,10 @@ const search = () => {
   flex-direction: column;
   align-items: center;
   gap: 5px;
+}
+
+.createTravel {
+  color: #4361EE;
+  cursor: pointer;
 }
 </style>
