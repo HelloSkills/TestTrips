@@ -15,27 +15,36 @@
       </div>
     </div>
 
-    <a href="" :class="$style.user">
-      <span :class="$style.name">AA</span>
-    </a>
-
+    <div :class="$style.wrapper">
+      <div v-if="isSelected" :class="$style.endTrip" @click="endTrip">
+        завершить поездку
+      </div>
+      <a href="" :class="$style.user">
+        <span :class="$style.name">AA</span>
+      </a>
+    </div>
 </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue"
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
+import type { Trip } from "@/types/types.ts";
 
 const tripStore = useTripStore()
 
 const props = defineProps<{
-  selectedTrip: object[]
+  selectedTrip: Trip | null
 }>()
 
 const isSelected = computed(() => !!props.selectedTrip)
 
 const goBack = () => {
   tripStore.clearTrip()
+}
+
+const endTrip = () => {
+  console.log('Завершаем поездку по клику "завершить поездку"')
 }
 </script>
 
@@ -92,6 +101,24 @@ const goBack = () => {
   font-weight: 400;
   font-size: 14px;
   line-height: 14px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+
+.endTrip {
+  height: 30px;
+  background: #4361EE;
+  color: #FFFFFF;
+  padding: 7px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
 }
 
 .user {

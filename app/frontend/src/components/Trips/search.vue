@@ -78,7 +78,7 @@ const search = () => {
 
   &:focus {
     border-bottom: 1px solid #4361EE;
-    width: 270px;
+    width: 265px;
   }
 }
 
