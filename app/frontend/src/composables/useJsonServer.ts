@@ -28,5 +28,5 @@ export const getTrips = async () => {
 // Добавляем новую поездку
 export const postTrip = async (tripData: Omit<Trip, 'id'>) => {
     const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
-    trips.value.push(res.data)
+    return res.data
 }

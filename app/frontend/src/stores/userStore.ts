@@ -10,7 +10,6 @@ export const useUserStore = defineStore('user', () => {
     // Получаем юзеров из useJsonServer
     const loadUsers = async () => {
         users.value = await getUsers()
-        console.log('Наши юзеры из стора', users.value)
     }
 
     // Выбираем пользователя

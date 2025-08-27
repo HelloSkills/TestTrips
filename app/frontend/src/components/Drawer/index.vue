@@ -29,10 +29,27 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
+import type { User } from "@/types/types.ts"
+
 const nameTrip = ref('')
+const selected = ref<User | null>(null)
+
+import { useTripsStore } from "@/stores/tripsStore.ts"
+const tripStore = useTripsStore()
+
+import { useUserStore } from "@/stores/userStore.ts"
+const userStore = useUserStore()
+selected.value = userStore.selectedUsers
 
 const createTrip = () => {
   console.log('Создаём поездку')
+  tripStore.createTrip({
+    name: nameTrip.value,
+    price: 0,
+    passengers: selected.value,
+    services: [],
+  })
+
 }
 const props = defineProps({
   modelValue: Boolean
