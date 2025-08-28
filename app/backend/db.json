@@ -1467,24 +1467,60 @@
       "name": "Поездка в Сочи",
       "price": 101233,
       "passengers": [
-        {"id": 1, "first_name": "Смирнов", "second_name": "Алексей", "last_name": "Сергеевич"},
-        {"id": 2, "first_name": "Кузнецова", "second_name": "Анна", "last_name": "Дмитриевна"}
+        {
+          "id": 1,
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        },
+        {
+          "id": 2,
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        }
       ],
       "services": [
         {
-          "user": {"id": 1, "first_name": "Смирнов", "second_name": "Алексей", "last_name": "Сергеевич"},
+          "user": {
+            "id": 1,
+            "first_name": "Смирнов",
+            "second_name": "Алексей",
+            "last_name": "Сергеевич"
+          },
           "ticket": {
-            "id": 1, "provider": "S7", "placeFrom": "Москва", "placeTo": "Сочи",
-            "dateFrom": "25-08-2025", "dateTo": "25-08-2025", "timeFrom": "10:04",
-            "timerTo": "19:22", "iataFrom": "DME", "iataTo": "AER", "price": 92333
+            "id": 1,
+            "provider": "S7",
+            "placeFrom": "Москва",
+            "placeTo": "Сочи",
+            "dateFrom": "25-08-2025",
+            "dateTo": "25-08-2025",
+            "timeFrom": "10:04",
+            "timerTo": "19:22",
+            "iataFrom": "DME",
+            "iataTo": "AER",
+            "price": 92333
           }
         },
         {
-          "user": {"id": 2, "first_name": "Кузнецова", "second_name": "Анна", "last_name": "Дмитриевна"},
+          "user": {
+            "id": 2,
+            "first_name": "Кузнецова",
+            "second_name": "Анна",
+            "last_name": "Дмитриевна"
+          },
           "ticket": {
-            "id": 2, "provider": "Aeroflot", "placeFrom": "Санкт-Петербург", "placeTo": "Сочи",
-            "dateFrom": "26-08-2025", "dateTo": "28-08-2025", "timeFrom": "10:04",
-            "timerTo": "00:22", "iataFrom": "LED", "iataTo": "AER", "price": 8900
+            "id": 2,
+            "provider": "Aeroflot",
+            "placeFrom": "Санкт-Петербург",
+            "placeTo": "Сочи",
+            "dateFrom": "26-08-2025",
+            "dateTo": "28-08-2025",
+            "timeFrom": "10:04",
+            "timerTo": "00:22",
+            "iataFrom": "LED",
+            "iataTo": "AER",
+            "price": 8900
           }
         }
       ]
@@ -1494,15 +1530,33 @@
       "name": "Поездка в Москву",
       "price": 5100,
       "passengers": [
-        {"id": 3, "first_name": "Попов", "second_name": "Михаил", "last_name": "Андреевич"}
+        {
+          "id": 3,
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        }
       ],
       "services": [
         {
-          "user": {"id": 3, "first_name": "Попов", "second_name": "Михаил", "last_name": "Андреевич"},
+          "user": {
+            "id": 3,
+            "first_name": "Попов",
+            "second_name": "Михаил",
+            "last_name": "Андреевич"
+          },
           "ticket": {
-            "id": 3, "provider": "Pobeda", "placeFrom": "Казань", "placeTo": "Москва",
-            "dateFrom": "27-08-2025", "dateTo": "27-08-2025", "timeFrom": "07:12",
-            "timerTo": "09:05", "iataFrom": "KZN", "iataTo": "DME", "price": 5100
+            "id": 3,
+            "provider": "Pobeda",
+            "placeFrom": "Казань",
+            "placeTo": "Москва",
+            "dateFrom": "27-08-2025",
+            "dateTo": "27-08-2025",
+            "timeFrom": "07:12",
+            "timerTo": "09:05",
+            "iataFrom": "KZN",
+            "iataTo": "DME",
+            "price": 5100
           }
         }
       ]

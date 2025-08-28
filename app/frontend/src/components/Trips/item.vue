@@ -1,5 +1,6 @@
 <template>
   <div :class="$style.container" v-for="trip in tripsStore.filteredTrips" :key="trip.id">
+    <div v-if="trip.price > 0" :class="$style.withPrice">
     <div :class="$style.wrap">
       <div :class="$style.info">
         <div :class="$style.date">#{{ trip.id }} от {{ getEarliestDate(trip.services) }} </div>
@@ -19,8 +20,23 @@
       </div>
       <div :class="$style.name">{{ services.user.second_name }} {{ services.user.last_name }}</div>
     </div>
-    <div :class="$style.toTravel" @click="goToTrip(trip)">
-      Перейти к поездке ➝
+      <div :class="$style.toTravel" @click="goToTrip(trip)">
+        Перейти к поездке ➝
+      </div>
+    </div>
+
+    <div v-else :class="$style.withoutPrice">
+      <div :class="$style.wrapElse">
+        <div :class="$style.info">
+          <div :class="$style.date">#{{ trip.id }} </div>
+        </div>
+        <div :class="$style.nameTravel">
+          {{ trip.name }}
+        </div>
+      </div>
+      <div :class="$style.toTravel" @click="goToTrip(trip)">
+        Перейти к поездке ➝
+      </div>
     </div>
   </div>
 </template>
@@ -60,6 +76,10 @@ function goToTrip(trip: Trip) {
   border-bottom: 1px solid #DDE2EB;
 }
 
+.wrapElse {
+  padding: 0 20px;
+}
+
 .wrapItem {
   display: flex;
   flex-direction: column;
@@ -68,6 +88,8 @@ function goToTrip(trip: Trip) {
   margin: 10px 20px;
   padding: 10px;
   border-radius: 5px;
+  //min-height: 91px;
+  //height: 100%;
 }
 .info {
   padding-top: 30px;
@@ -113,4 +135,5 @@ function goToTrip(trip: Trip) {
   color: #4361EE;
   cursor: pointer;
 }
+
 </style>

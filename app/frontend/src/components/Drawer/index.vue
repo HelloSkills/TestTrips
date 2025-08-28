@@ -42,14 +42,21 @@ const userStore = useUserStore()
 selected.value = userStore.selectedUsers
 
 const createTrip = () => {
-  console.log('Создаём поездку')
+  if (nameTrip.value.length === 0) {
+    alert('Необходимо указать название поездки')
+    return
+  }
+  if (selected.value.length === 0) {
+    alert('Необходимо указать хотя бы 1 участника поездки')
+    return
+  }
   tripStore.createTrip({
     name: nameTrip.value,
     price: 0,
     passengers: selected.value,
     services: [],
   })
-
+close()
 }
 const props = defineProps({
   modelValue: Boolean
