@@ -3,11 +3,21 @@
     <div :class="$style.inputsAll">
       <div :class="$style.placeFrom">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
-        <input :class="$style.input" type="text" placeholder="Город вылета" />
+        <input
+            v-model="placeFrom"
+            :class="$style.input"
+            type="text"
+            placeholder="Город вылета"
+        />
       </div>
       <div :class="$style.placeTo">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
-        <input :class="$style.input" type="text" placeholder="Город прилёта" />
+        <input
+            v-model="placeTo"
+            :class="$style.input"
+            type="text"
+            placeholder="Город прилёта"
+        />
       </div>
       <div :class="$style.timeFrom">
         <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
@@ -16,20 +26,24 @@
             placeholder="Туда"
             :enable-time-picker="false"
             :hide-input-icon="true"
+            :locale="'ru'"
+            :auto-apply="true"
         />
       </div>
       <div :class="$style.timerTo">
         <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
         <Datepicker
-            v-model="dateFrom"
+            v-model="dateTo"
             placeholder="Обратно"
             :enable-time-picker="false"
             :hide-input-icon="true"
+            :locale="'ru'"
+            :auto-apply="true"
         />
       </div>
     </div>
     <div :class="$style.searchBtn">
-      <div :class="$style.search">Найти</div>
+      <div :class="$style.search" @click="searchAir">Найти</div>
     </div>
   </div>
 </template>
@@ -39,8 +53,15 @@ import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue'
 
+const placeFrom = ref('')
+const placeTo = ref('')
 const dateFrom = ref(null)
 const dateTo = ref(null)
+
+const searchAir = () => {
+  console.log('Получили',placeFrom.value, placeTo.value, dateFrom.value, dateTo.value)
+}
+
 </script>
 
 <style lang="scss" module>
@@ -90,6 +111,7 @@ const dateTo = ref(null)
   line-height: 14px;
   padding: 12px 70px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 :global(.dp__input) {
