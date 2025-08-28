@@ -11,10 +11,10 @@
 
       <div v-if="isOpen" :class="[$style.dropdown, isAvia ? $style.aviadropdown : '']">
         <div
-            v-for="user in userStore.availableUsers"
+            v-for="user in availableUsers"
             :key="user.id"
             :class="$style.dropdownItem"
-            @click="userStore.selectUser(user)"
+            @click="selectUser(user)"
         >
           {{ user.first_name }} {{ user.second_name }}
         </div>
@@ -22,33 +22,14 @@
 
     </div>
 
-    <div v-if="!isAvia"
-         v-for="user in userStore.selectedUsers"
-         :class="$style.selectedUsers"
-         :key="user.id"
-    >
-      <div :class="$style.userName">
-        {{ user.first_name }} {{ user.second_name }}
-      </div>
-      <img
-          :class="$style.icon"
-          @click="userStore.deleteUser(user.id)"
-          src="/icons/delete.svg"
-          alt="delete_icon"
-          width="16"
-          height="16"
-      />
-    </div>
-
-    <div v-else :class="$style.selectedUsersAvia">
+    <!-- Список выбранных пользователей для модалки -->
+    <div v-if="!isAvia">
       <div
           v-for="user in userStore.selectedUsers"
           :key="user.id"
-          :class="$style.aviaUserItem"
+          :class="$style.selectedUsers"
       >
-        <div :class="$style.userName">
-          {{ user.first_name }} {{ user.second_name }}
-        </div>
+        <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
         <img
             :class="$style.icon"
             @click="userStore.deleteUser(user.id)"
@@ -60,38 +41,78 @@
       </div>
     </div>
 
+    <!-- Список выбранных пользователей для авиа -->
+    <div v-else :class="$style.selectedUsersAvia">
+      <div
+          v-for="user in aviaPassengers"
+          :key="user.id"
+          :class="$style.aviaUserItem"
+      >
+        <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
+        <img
+            :class="$style.icon"
+            @click="userStore.deleteUser(user.id)"
+            src="/icons/delete.svg"
+            alt="delete_icon"
+            width="16"
+            height="16"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted, computed} from "vue"
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
+import { useTripsStore } from '@/stores/tripsStore'
+
+const route = useRoute()
+const tripId = route.params.id as string
 
 const userStore = useUserStore()
-onMounted(() => {
-  userStore.loadUsers()
-})
+const tripsStore = useTripsStore()
 
-const props = defineProps({
-  isAvia: Boolean,
-})
+onMounted(() => userStore.loadUsers())
 
-const textPassengers = computed(() => {
-  return props.isAvia ? 'Выберите пассажира' : 'Выберите сотрудников'
-})
+const props = defineProps({ isAvia: Boolean })
+const isAvia = computed(() => props.isAvia)
 
 const isOpen = ref(false)
-const toggleDropdown = () => {
-  isOpen.value = !isOpen.value
-}
-
-const closeDropdown = () => {
-  isOpen.value = false
-}
-
+const toggleDropdown = () => isOpen.value = !isOpen.value
+const closeDropdown = () => isOpen.value = false
 defineExpose({ closeDropdown })
 
 const selectRef = ref<HTMLElement | null>(null)
+
+const textPassengers = computed(() => isAvia.value ? 'Выберите пассажира' : 'Выберите сотрудников')
+
+// Список доступных пользователей для дропдауна
+const availableUsers = computed(() => {
+  const users = isAvia.value && tripId
+      ? tripsStore.getUsersForTrip(tripId)
+      : userStore.users
+
+  // исключаем уже выбранных
+  return users.filter(u => !userStore.selectedUsers.some(sel => sel.id.toString() === u.id.toString()))
+})
+
+// Выбранные пользователи для авиа
+const aviaPassengers = computed(() => {
+  return isAvia.value
+      ? userStore.selectedUsers.filter(u =>
+          availableUsers.value.some(a => a.id.toString() === u.id.toString()) || // если нужен полный список выбранных, можно убрать условие
+          tripsStore.getUsersForTrip(tripId).some(a => a.id.toString() === u.id.toString())
+      )
+      : []
+})
+
+// Выбор пользователя
+const selectUser = (user: any) => {
+  userStore.selectUser(user)
+  if (isAvia.value) isOpen.value = false
+}
 </script>
 
 <style lang="scss" module>

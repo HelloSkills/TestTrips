@@ -6,12 +6,13 @@ import { getTrips, postTrip } from '@/composables/useJsonServer.ts'
 export const useTripsStore = defineStore('trips', {
     state: () => ({
         trips: [] as Trip[],
-        filteredTrips: [] as Trip[]
+        filteredTrips: [] as Trip[],
+        selectedTrip: null as Trip | null, // выбранная поездка
     }),
     actions: {
         async loadTrips() {
             this.trips = await getTrips()
-            this.filteredTrips = [...this.trips] // для фильтрованного списка создаём копию, чтоб не дублировать значения
+            this.filteredTrips = [...this.trips] // для фильтрованного списка создаём копию
         },
 
         filterTrips(query: string) {
@@ -30,6 +31,23 @@ export const useTripsStore = defineStore('trips', {
             const createdTrip = await postTrip(newTrip)
             this.trips.push(createdTrip)
             this.filteredTrips.push(createdTrip)
-        }
+        },
+
+        // Получить пользователей конкретной поездки по id
+        getUsersForTrip(id: string | number) {
+            const trip = this.trips.find(trip => trip.id.toString() === id.toString())
+            const users = trip ? trip.passengers : []
+            console.log(`Участники поездки ${id}:`, users)
+            return users
+        },
+
+        // Установить выбранную поездку
+        // setSelectedTrip(trip: Trip) {
+        //     this.selectedTrip = trip
+        // },
+        //
+        // clearSelectedTrip() {
+        //     this.selectedTrip = null
+        // }
     }
 })

@@ -1562,17 +1562,10 @@
       ]
     },
     {
-      "id": "8c74",
-      "name": "ASD",
+      "id": "662c",
+      "name": "321",
       "price": 0,
-      "passengers": [
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
-        }
-      ],
+      "passengers": [],
       "services": []
     }
   ]

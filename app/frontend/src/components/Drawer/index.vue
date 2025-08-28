@@ -29,12 +29,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
-import type { User } from "@/types/types.ts"
 
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 
 const nameTrip = ref('')
-const selected = ref<User[]>([])
 
 import { useTripsStore } from "@/stores/tripsStore.ts"
 const tripStore = useTripsStore()
@@ -44,7 +42,6 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from "@/stores/userStore.ts"
 const userStore = useUserStore()
 const { selectedUsers } = storeToRefs(userStore)
-
 
 const createTrip = () => {
   if (nameTrip.value.length === 0) {
