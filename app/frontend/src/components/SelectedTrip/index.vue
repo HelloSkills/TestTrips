@@ -1,16 +1,17 @@
 <template>
   <div v-if="selectedTrip">
-    <div :class="$style.title">{{ selectedTrip.name }}</div>
+    <div v-if="showSearch" :class="$style.title">{{ selectedTrip.name }}</div>
     <Item
         :passengers="passengers"
         :services="services"
         :price="price"
     />
 
-    <div v-if="!isServices" :class="$style.list">
+    <div v-if="!isServices && showSearch" :class="$style.list">
       <div>Список услуг пуст</div>
       <div :class="$style.createTravel" @click="goToPage">поиск авиа</div>
     </div>
+    <router-view />
   </div>
 </template>
 
@@ -20,18 +21,20 @@ import { storeToRefs } from 'pinia'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 import Item from "@/components/SelectedTrip/item.vue"
 const isServices = computed(() => tripStore.getServices().length > 0)
+const showSearch = computed(() => !route.path.endsWith('/services'))
 
 const tripStore = useTripStore()
 const { selectedTrip } = storeToRefs(tripStore)
 const price = selectedTrip.value.price
 const passengers = selectedTrip.value.passengers
 const services = selectedTrip.value.services
-import { useRouter } from 'vue-router'
 
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
 const router = useRouter()
 
 const goToPage = () => {
-  router.push('/avia')
+  router.push(route.fullPath + '/services')
 }
 </script>
 

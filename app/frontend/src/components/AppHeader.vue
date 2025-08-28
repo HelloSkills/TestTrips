@@ -12,9 +12,9 @@
       </div>
 
       <div v-else-if="isSelected" :class="$style.avia">
-        <router-link to="Avia" @click="goToPage('avia')">
+        <div @click="goToPage('trips')">
           <img src="/icons/air.svg" alt="air_logo" width="20" height="20" :class="$style.icon">
-        </router-link>
+        </div>
       </div>
 
       <div v-else :class="$style.travel">

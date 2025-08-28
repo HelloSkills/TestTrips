@@ -28,6 +28,8 @@
             :hide-input-icon="true"
             :locale="'ru'"
             :auto-apply="true"
+            format="dd-MM-yyyy"
+            model-type="format"
         />
       </div>
       <div :class="$style.timerTo">
@@ -39,6 +41,8 @@
             :hide-input-icon="true"
             :locale="'ru'"
             :auto-apply="true"
+            format="dd-MM-yyyy"
+            model-type="format"
         />
       </div>
     </div>

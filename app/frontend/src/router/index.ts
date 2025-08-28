@@ -7,8 +7,18 @@ import Avia from '@/components/Avia/index.vue'
 const routes = [
     { path: '/', name: 'Trips', component: Trips },
     { path: '/drawer', name: 'Drawer', component: Drawer },
-    { path: '/avia', name: 'Avia', component: Avia },
-    { path: '/trip/:id', name: 'SelectedTrip', component: SelectedTrip }
+    {
+        path: '/trip/:id',
+        name: 'SelectedTrip',
+        component: SelectedTrip,
+        children: [
+            {
+                path: 'services',
+                name: 'Avia',
+                component: Avia
+            }
+        ]
+    }
 ]
 
 // TODO надо сделать асинхронный компонент (лейзи загрузку)
