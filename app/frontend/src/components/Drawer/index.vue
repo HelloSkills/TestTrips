@@ -34,28 +34,31 @@ import type { User } from "@/types/types.ts"
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 
 const nameTrip = ref('')
-const selected = ref<User | null>(null)
+const selected = ref<User[]>([])
 
 import { useTripsStore } from "@/stores/tripsStore.ts"
 const tripStore = useTripsStore()
 
+import { storeToRefs } from 'pinia'
+
 import { useUserStore } from "@/stores/userStore.ts"
 const userStore = useUserStore()
-selected.value = userStore.selectedUsers
+const { selectedUsers } = storeToRefs(userStore)
+
 
 const createTrip = () => {
   if (nameTrip.value.length === 0) {
     alert('Необходимо указать название поездки')
     return
   }
-  if (selected.value.length === 0) {
+  if (selectedUsers.value.length === 0) {
     alert('Необходимо указать хотя бы 1 участника поездки')
     return
   }
   tripStore.createTrip({
     name: nameTrip.value,
     price: 0,
-    passengers: selected.value,
+    passengers: selectedUsers.value,
     services: [],
   })
 close()
@@ -68,6 +71,7 @@ const emit = defineEmits(['update:modelValue'])
 const close = () => {
   emit('update:modelValue', false)
   userStore.clearSelectedUsers()
+  nameTrip.value = ''
   selectUsersRef.value?.closeDropdown()
 }
 

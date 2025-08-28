@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <SelectUsers :isAvia="true" :class="aviaSelect"/>
+    <SelectUsers :isAvia="true"/>
     <SelectAvia/>
   </div>
 </template>
