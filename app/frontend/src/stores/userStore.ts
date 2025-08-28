@@ -2,10 +2,12 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { User } from '@/types/types'
 import { getUsers } from '@/composables/useJsonServer'
+import { useRouter } from "vue-router"
 
 export const useUserStore = defineStore('user', () => {
     const users = ref<User[]>([])
     const selectedUsers = ref<User[]>([])
+    const router = useRouter()
 
     // Получаем юзеров из useJsonServer
     const loadUsers = async () => {
@@ -29,6 +31,15 @@ export const useUserStore = defineStore('user', () => {
         selectedUsers.value = selectedUsers.value.filter(u => u.id !== id)
     }
 
+    // Удаляем выбранных пользователей при закрытии
+    const clearSelectedUsers = () => {
+        selectedUsers.value = []
+    }
+
+    router.afterEach(() => {
+        clearSelectedUsers()
+    })
+
     // Список доступных (не выбранных) пользователей
     const availableUsers = computed(() => {
         return users.value.filter(
@@ -42,6 +53,7 @@ export const useUserStore = defineStore('user', () => {
         loadUsers,
         selectUser,
         deleteUser,
-        availableUsers
+        availableUsers,
+        clearSelectedUsers
     }
 })

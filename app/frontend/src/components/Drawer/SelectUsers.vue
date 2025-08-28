@@ -85,6 +85,12 @@ const toggleDropdown = () => {
   isOpen.value = !isOpen.value
 }
 
+const closeDropdown = () => {
+  isOpen.value = false
+}
+
+defineExpose({ closeDropdown })
+
 const selectRef = ref<HTMLElement | null>(null)
 </script>
 

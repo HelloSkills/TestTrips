@@ -16,7 +16,7 @@
                 @keyup.enter="createTrip"
             >
           </div>
-          <SelectUsers/>
+          <SelectUsers ref="selectUsersRef"/>
         </div>
         <div :class="$style.createTrip">
           <div :class="$style.createBtn" @click="createTrip">Создать</div>
@@ -30,6 +30,8 @@
 import { ref } from 'vue'
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
 import type { User } from "@/types/types.ts"
+
+const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 
 const nameTrip = ref('')
 const selected = ref<User | null>(null)
@@ -63,7 +65,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const close = () => emit('update:modelValue', false)
+const close = () => {
+  emit('update:modelValue', false)
+  userStore.clearSelectedUsers()
+  selectUsersRef.value?.closeDropdown()
+}
 
 </script>
 
