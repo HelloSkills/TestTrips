@@ -5,24 +5,33 @@
       <router-link to="/" :class="$style.logo">
         <img src="/images/logo.svg" @click="goToPage('trips')" width="40" height="40" alt="logo">
       </router-link>
-      <div v-if="!isSelected" :class="$style.travel">
-        <router-link to="/" :class="$style.logo"><img src="/icons/suitcase.svg" alt="suitcase_logo"></router-link>
-        <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
+      <div v-if="isAviaPage">
+        <router-link v-if="selectedTrip" :to="`/trip/${selectedTrip.id}`" :class="$style.backTrip">
+          вернуться в поездку
+        </router-link>
       </div>
-      <div v-else :class="$style.avia">
+
+      <div v-else-if="isSelected" :class="$style.avia">
         <router-link to="Avia" @click="goToPage('avia')">
           <img src="/icons/air.svg" alt="air_logo" width="20" height="20" :class="$style.icon">
         </router-link>
       </div>
+
+      <div v-else :class="$style.travel">
+        <router-link to="/" :class="$style.logo">
+          <img src="/icons/suitcase.svg" alt="suitcase_logo">
+        </router-link>
+        <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
+      </div>
     </div>
 
     <div :class="$style.wrapper">
-      <div v-if="isSelected" :class="$style.endTrip" @click="endTrip">
+      <div v-if="isSelected && !isAviaPage" :class="$style.endTrip" @click="endTrip">
         завершить поездку
       </div>
-      <a href="" :class="$style.user">
+      <router-link to="/" :class="$style.user">
         <span :class="$style.name">AA</span>
-      </a>
+      </router-link>
     </div>
 </div>
 </template>
@@ -38,8 +47,11 @@ const tripStore = useTripStore()
 import { useModalStore } from '@/stores/modal'
 const modalStore = useModalStore()
 
-import { useRouter } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
+const route = useRoute()
 const router = useRouter()
+
+const isAviaPage = computed(() => route.name === 'Avia')
 
 const props = defineProps<{
   selectedTrip: Trip | null
@@ -157,5 +169,16 @@ const createTrip = () => {
 
 .name {
   color: #FFFFFF;
+}
+
+.backTrip {
+  padding: 7px 30px;
+  font-size: 14px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #F6F8FC;
+  color: #050505;
 }
 </style>

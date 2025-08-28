@@ -1,15 +1,19 @@
 <template>
   <div :class="$style.container">
-    Сделаем тут авиабилеты
+    <SelectUsers :isAvia="true" :class="aviaSelect"/>
   </div>
 </template>
 
 <script setup lang="ts">
 
+import SelectUsers from "@/components/Drawer/SelectUsers.vue"
 </script>
 
 <style lang="scss" module>
 .container {
-  width: 100%;
+  width: 840px;
+  margin: 58px auto 0;
 }
+
+
 </style>
