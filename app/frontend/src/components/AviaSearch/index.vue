@@ -18,17 +18,23 @@
      </label>
    </div>
 
-   <Item :variants="variants"/>
+   <Item
+       :variants="filteredVariants"
+       :tripType="tripType"
+   />
  </div>
 </template>
 
 <script setup lang="ts">
 import Item from '@/components/AviaSearch/item.vue'
-import { onMounted, ref } from 'vue'
-import {aviaVariants, getAviaVariants} from '@/composables/useJsonServer.ts'
-import type {AviaVariant} from "@/types/types.ts";
-const tripType = ref('cheap')
+import { computed, onMounted, ref} from 'vue'
+import { aviaVariants, getAviaVariants} from '@/composables/useJsonServer.ts'
+import type { AviaVariant } from "@/types/types.ts"
+import { sortByPrice } from '@/utils/sortVariants.ts'
+const tripType = ref<'cheap' | 'expensive'>('cheap')
 const variants = ref<AviaVariant[]>([])
+
+const filteredVariants = computed(() => sortByPrice(variants.value, tripType.value))
 const onChange = () => {
   console.log('Выбрано tripType.value', tripType.value)
 }

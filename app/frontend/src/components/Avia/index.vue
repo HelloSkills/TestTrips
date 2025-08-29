@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.container">
-<!--    <SelectUsers :isAvia="true"/>-->
-<!--    <SelectAvia/>-->
+    <SelectUsers :isAvia="true"/>
+    <SelectAvia/>
     <AviaSearch/>
   </div>
 </template>

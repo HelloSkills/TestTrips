@@ -52,6 +52,7 @@ import { formatPrice } from '@/utils/price.ts'
 import { formatDayMonth } from '@/utils/date.ts'
 const props = defineProps<{
   variants: AviaVariant[]
+  tripType: string
 }>()
 
 </script>
@@ -75,6 +76,10 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #cbd1da;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .name {
@@ -86,7 +91,7 @@ const props = defineProps<{
 .dateTime {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 50px;
   margin: 15px 0 20px;
 }
 
@@ -148,11 +153,13 @@ const props = defineProps<{
 .bookBtn {
   color: #FFFFFF;
   background-color: #4361EE;
-  width: 239px;
+  width: 250px;
   height: 40px;
   border-radius: 5px;
   padding: 12px 30px;
   font-weight: 400;
   font-size: 14px;
+  display: flex;
+  justify-content: center;
 }
 </style>
