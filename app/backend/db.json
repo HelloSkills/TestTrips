@@ -1783,6 +1783,56 @@
         }
       ],
       "services": []
+    },
+    {
+      "id": "25ef",
+      "name": "Грузия",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "2",
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        },
+        {
+          "id": "6",
+          "first_name": "Морозова",
+          "second_name": "Ольга",
+          "last_name": "Сергеевна"
+        },
+        {
+          "id": "4",
+          "first_name": "Соколова",
+          "second_name": "Екатерина",
+          "last_name": "Владимировна"
+        },
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        },
+        {
+          "id": "9",
+          "first_name": "Михайлов",
+          "second_name": "Владимир",
+          "last_name": "Петрович"
+        },
+        {
+          "id": "5",
+          "first_name": "Лебедев",
+          "second_name": "Никита",
+          "last_name": "Александрович"
+        },
+        {
+          "id": "10",
+          "first_name": "Алексеева",
+          "second_name": "Марина",
+          "last_name": "Александровна"
+        }
+      ],
+      "services": []
     }
   ]
 }

@@ -1,7 +1,8 @@
 <template>
   <div :class="$style.container">
-    <SelectUsers :isAvia="true"/>
-    <SelectAvia/>
+<!--    <SelectUsers :isAvia="true"/>-->
+<!--    <SelectAvia/>-->
+    <AviaSearch/>
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
 import SelectAvia from "@/components/Avia/SelectAvia.vue"
+import AviaSearch from "@/components/AviaSearch/index.vue"
 </script>
 
 <style lang="scss" module>
