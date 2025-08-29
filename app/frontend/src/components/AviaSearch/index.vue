@@ -18,18 +18,29 @@
      </label>
    </div>
 
-   <Item/>
+   <Item :variants="variants"/>
  </div>
 </template>
 
 <script setup lang="ts">
 import Item from '@/components/AviaSearch/item.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import {aviaVariants, getAviaVariants} from '@/composables/useJsonServer.ts'
+import type {AviaVariant} from "@/types/types.ts";
 const tripType = ref('cheap')
+const variants = ref<AviaVariant[]>([])
 const onChange = () => {
-  console.log('Выбрано', tripType.value)
+  console.log('Выбрано tripType.value', tripType.value)
 }
-const searchLength = ref(150)
+const searchLength = ref(0)
+
+onMounted(async () => {
+  await getAviaVariants()
+  variants.value = aviaVariants.value
+  searchLength.value = variants.value.length
+  console.log('variantsValue', variants.value)
+  console.log('searchLength.value', searchLength.value)
+})
 </script>/
 
 <style lang="scss" module>
@@ -63,5 +74,7 @@ const searchLength = ref(150)
 .labels {
   display: flex;
   gap: 5px;
+  font-weight: 400;
+  font-size: 14px;
 }
 </style>

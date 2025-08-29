@@ -1,53 +1,43 @@
 <template>
-  <div :class="$style.container">
+  <div v-for="item in variants" :key="item.id" :class="$style.container">
     <div :class="$style.wrapper">
+      <!-- Информация о билете -->
       <div :class="$style.ticketInfo">
         <div :class="$style.name">
-          Перевозчик: {{ }}
+          Перевозчик: {{ item.provider }}
         </div>
         <div :class="$style.dateTime">
+          <!-- Вылет -->
           <div :class="$style.dateFrom">
-            <div :class="$style.time">
-              6:35
-            </div>
-            <div :class="$style.date">
-              26.08
-            </div>
+            <div :class="$style.time">{{ item.timeFrom }}</div>
+            <div :class="$style.date">{{ item.dateFrom }}</div>
           </div>
-
+          <!-- Города и IATA -->
           <div :class="$style.cityInfo">
             <div :class="$style.cities">
-              <div :class="$style.cityFrom">
-                Сочи
-              </div>
-              <div :class="$style.cityTo">
-                Москва
-              </div>
+              <div :class="$style.cityFrom">{{ item.placeFrom }}</div>
+              <div :class="$style.cityTo">{{ item.placeTo }}</div>
             </div>
+
             <div :class="$style.line"></div>
+
             <div :class="$style.iata">
-              <div :class="$style.iataFrom">
-                AER
-              </div>
-              <div :class="$style.iataTo">
-                DME
-              </div>
+              <div :class="$style.iataFrom">{{ item.iataFrom }}</div>
+              <div :class="$style.iataTo">{{ item.iataTo }}</div>
             </div>
           </div>
+          <!-- Прилет -->
           <div :class="$style.dateTo">
-            <div :class="$style.time">
-              10:22
-            </div>
-            <div :class="$style.date">
-              27.08
-            </div>
+            <div :class="$style.time">{{ item.timerTo }}</div>
+            <div :class="$style.date">{{ item.dateTo }}</div>
           </div>
         </div>
       </div>
 
+      <!-- Бронь -->
       <div :class="$style.booking">
         <div :class="$style.bookBtn">
-          Забронировать от {{  }}
+          Забронировать от {{ item.price }}
         </div>
       </div>
 
@@ -57,6 +47,12 @@
 
 <script setup lang="ts">
 
+import type {AviaVariant} from "@/types/types.ts";
+
+const props = defineProps<{
+  variants: AviaVariant[]
+}>()
+
 </script>
 
 <style lang="scss" module>
@@ -65,6 +61,7 @@
   height: 200px;
   background-color: #FFFFFF;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .wrapper {
