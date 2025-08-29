@@ -10,7 +10,7 @@
           <!-- Вылет -->
           <div :class="$style.dateFrom">
             <div :class="$style.time">{{ item.timeFrom }}</div>
-            <div :class="$style.date">{{ item.dateFrom }}</div>
+            <div :class="$style.date">{{ formatDayMonth(item.dateFrom) }}</div>
           </div>
           <!-- Города и IATA -->
           <div :class="$style.cityInfo">
@@ -29,7 +29,7 @@
           <!-- Прилет -->
           <div :class="$style.dateTo">
             <div :class="$style.time">{{ item.timerTo }}</div>
-            <div :class="$style.date">{{ item.dateTo }}</div>
+            <div :class="$style.date">{{ formatDayMonth(item.dateTo) }}</div>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
       <!-- Бронь -->
       <div :class="$style.booking">
         <div :class="$style.bookBtn">
-          Забронировать от {{ item.price }}
+          Забронировать от {{ formatPrice(item.price) }}
         </div>
       </div>
 
@@ -47,8 +47,9 @@
 
 <script setup lang="ts">
 
-import type {AviaVariant} from "@/types/types.ts";
-
+import type { AviaVariant } from "@/types/types.ts";
+import { formatPrice } from '@/utils/price.ts'
+import { formatDayMonth } from '@/utils/date.ts'
 const props = defineProps<{
   variants: AviaVariant[]
 }>()

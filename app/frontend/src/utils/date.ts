@@ -7,6 +7,12 @@ export function formatDate(dateStr: string): string {
     return `${day}.${month}.${year}`
 }
 
+// Возвращает дату в формате Day.Month (26.08)
+export function formatDayMonth(dateStr: string): string {
+    if (!dateStr) return ''
+    const [day, month] = dateStr.split('-')
+    return `${day}.${month}`
+}
 
 // Поиск самой ранней даты
 export function getEarliestDate(services: any[]): string {
