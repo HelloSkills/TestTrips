@@ -83,9 +83,6 @@ const searchAir = async () => {
   const dateFromStr = dateFrom.value ? formatDateForFilter(dateFrom.value) : null
   const dateToStr = dateTo.value ? formatDateForFilter(dateTo.value) : null
 
-  console.log('Фильтр дата от:', dateFromStr, 'Дата до:', dateToStr)
-  console.log('JSON даты:', items.map(i => ({ dateFrom: i.dateFrom, dateTo: i.dateTo })))
-
   aviaSearchStore.setFilters({
     placeFrom: placeFrom.value.trim().toLowerCase(),
     placeTo: placeTo.value.trim().toLowerCase(),

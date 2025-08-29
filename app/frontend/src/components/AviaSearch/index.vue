@@ -8,12 +8,12 @@
     </div>
     <div :class="$style.options">
       <label :class="$style.labels">
-        <input type="radio" name="sort" value="cheap" v-model="aviaSearchStore.tripType" @click="onChange" />
+        <input type="radio" name="sort" value="cheap" v-model="aviaSearchStore.tripType" @change="onChange" />
         Сначала дешёвые
       </label>
 
       <label :class="$style.labels">
-        <input type="radio" name="sort" value="expensive" v-model="aviaSearchStore.tripType" @click="onChange" />
+        <input type="radio" name="sort" value="expensive" v-model="aviaSearchStore.tripType" @change="onChange" />
         Сначала дорогие
       </label>
     </div>
