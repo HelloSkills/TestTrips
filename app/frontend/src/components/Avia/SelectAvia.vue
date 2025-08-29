@@ -1,6 +1,7 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.inputsAll">
+      <!-- Город вылета -->
       <div :class="$style.placeFrom">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
         <input
@@ -10,6 +11,8 @@
             placeholder="Город вылета"
         />
       </div>
+
+      <!-- Город прилёта -->
       <div :class="$style.placeTo">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
         <input
@@ -19,6 +22,8 @@
             placeholder="Город прилёта"
         />
       </div>
+
+      <!-- Дата туда -->
       <div :class="$style.timeFrom">
         <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
         <Datepicker
@@ -29,9 +34,10 @@
             :locale="'ru'"
             :auto-apply="true"
             format="dd-MM-yyyy"
-            model-type="format"
         />
       </div>
+
+      <!-- Дата обратно -->
       <div :class="$style.timerTo">
         <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
         <Datepicker
@@ -42,10 +48,11 @@
             :locale="'ru'"
             :auto-apply="true"
             format="dd-MM-yyyy"
-            model-type="format"
         />
       </div>
     </div>
+
+    <!-- Кнопка поиска -->
     <div :class="$style.searchBtn">
       <div :class="$style.search" @click="searchAir">Найти</div>
     </div>
@@ -55,17 +62,42 @@
 <script setup lang="ts">
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
+import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
+import { getAviaVariants } from '@/composables/useJsonServer.ts'
+import { formatDateForFilter } from '@/utils/date.ts'
 
+// Реактивные поля
 const placeFrom = ref('')
 const placeTo = ref('')
-const dateFrom = ref(null)
-const dateTo = ref(null)
+const dateFrom = ref<Date | null>(null)
+const dateTo = ref<Date | null>(null)
 
-const searchAir = () => {
-  console.log('Получили',placeFrom.value, placeTo.value, dateFrom.value, dateTo.value)
+const aviaSearchStore = useAviaSearchStore()
+
+// Функция поиска
+const searchAir = async () => {
+  const items = await getAviaVariants()
+  aviaSearchStore.setVariants(items)
+
+  const dateFromStr = dateFrom.value ? formatDateForFilter(dateFrom.value) : null
+  const dateToStr = dateTo.value ? formatDateForFilter(dateTo.value) : null
+
+  console.log('Фильтр дата от:', dateFromStr, 'Дата до:', dateToStr)
+  console.log('JSON даты:', items.map(i => ({ dateFrom: i.dateFrom, dateTo: i.dateTo })))
+
+  aviaSearchStore.setFilters({
+    placeFrom: placeFrom.value.trim().toLowerCase(),
+    placeTo: placeTo.value.trim().toLowerCase(),
+    dateFrom: dateFromStr,
+    dateTo: dateToStr
+  })
 }
 
+// Сбрасываем поиск при уходе со страницы
+onUnmounted(() => {
+  aviaSearchStore.clearSearch()
+})
 </script>
 
 <style lang="scss" module>

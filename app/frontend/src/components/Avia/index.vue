@@ -2,7 +2,7 @@
   <div :class="$style.container">
     <SelectUsers :isAvia="true"/>
     <SelectAvia/>
-    <AviaSearch/>
+    <AviaSearch v-if="aviaSearchStore.searchCompleted"/>
   </div>
 </template>
 
@@ -11,6 +11,9 @@
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
 import SelectAvia from "@/components/Avia/SelectAvia.vue"
 import AviaSearch from "@/components/AviaSearch/index.vue"
+
+import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
+const aviaSearchStore = useAviaSearchStore()
 </script>
 
 <style lang="scss" module>

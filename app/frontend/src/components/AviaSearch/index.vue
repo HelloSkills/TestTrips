@@ -1,53 +1,52 @@
 <template>
- <div :class="$style.container">
-   <div v-if="searchLength" :class="$style.title">
-     Найдено <span :class="$style.length"> {{searchLength}} </span> вариантов
-   </div>
-   <div v-else :class="$style.title">
-     Поиск вариантов
-   </div>
-   <div :class="$style.options">
-     <label :class="$style.labels">
-       <input type="radio" name="sort" value="cheap" v-model="tripType" @click="onChange" />
-       Сначала дешёвые
-     </label>
+  <div :class="$style.container">
+    <div v-if="aviaSearchStore.searchCompleted" :class="$style.title">
+      Найдено <span :class="$style.length"> {{ aviaSearchStore.filteredVariants.length }} </span> вариантов
+    </div>
+    <div v-else :class="$style.title">
+      Поиск вариантов
+    </div>
+    <div :class="$style.options">
+      <label :class="$style.labels">
+        <input type="radio" name="sort" value="cheap" v-model="aviaSearchStore.tripType" @click="onChange" />
+        Сначала дешёвые
+      </label>
 
-     <label :class="$style.labels">
-       <input type="radio" name="sort" value="expensive" v-model="tripType" @click="onChange" />
-       Сначала дорогие
-     </label>
-   </div>
+      <label :class="$style.labels">
+        <input type="radio" name="sort" value="expensive" v-model="aviaSearchStore.tripType" @click="onChange" />
+        Сначала дорогие
+      </label>
+    </div>
 
-   <Item
-       :variants="filteredVariants"
-       :tripType="tripType"
-   />
- </div>
+    <Item
+        :variants="aviaSearchStore.filteredVariants"
+        :tripType="aviaSearchStore.tripType"
+    />
+  </div>
 </template>
+
 
 <script setup lang="ts">
 import Item from '@/components/AviaSearch/item.vue'
-import { computed, onMounted, ref} from 'vue'
-import { aviaVariants, getAviaVariants} from '@/composables/useJsonServer.ts'
-import type { AviaVariant } from "@/types/types.ts"
-import { sortByPrice } from '@/utils/sortVariants.ts'
-const tripType = ref<'cheap' | 'expensive'>('cheap')
-const variants = ref<AviaVariant[]>([])
+import { onMounted } from 'vue'
+import { getAviaVariants } from '@/composables/useJsonServer.ts'
+import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 
-const filteredVariants = computed(() => sortByPrice(variants.value, tripType.value))
+const aviaSearchStore = useAviaSearchStore()
+
+// Сортировка по выбранному типу
 const onChange = () => {
-  console.log('Выбрано tripType.value', tripType.value)
+  aviaSearchStore.sortVariants(aviaSearchStore.tripType)
+  console.log('Выбрано tripType.value', aviaSearchStore.tripType)
 }
-const searchLength = ref(0)
 
+// Загрузка данных при монтировании
 onMounted(async () => {
-  await getAviaVariants()
-  variants.value = aviaVariants.value
-  searchLength.value = variants.value.length
-  console.log('variantsValue', variants.value)
-  console.log('searchLength.value', searchLength.value)
+  const items = await getAviaVariants()
+  aviaSearchStore.setVariants(items)
 })
-</script>/
+</script>
+
 
 <style lang="scss" module>
 .container {

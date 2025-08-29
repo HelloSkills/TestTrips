@@ -14,6 +14,13 @@ export function formatDayMonth(dateStr: string): string {
     return `${day}.${month}`
 }
 
+export const formatDateForFilter = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+}
+
 // Поиск самой ранней даты
 export function getEarliestDate(services: any[]): string {
     if (!Array.isArray(services) || services.length === 0) return ''
