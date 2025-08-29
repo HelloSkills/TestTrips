@@ -1567,6 +1567,144 @@
       "price": 0,
       "passengers": [],
       "services": []
+    },
+    {
+      "id": "1b59",
+      "name": "333",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        }
+      ],
+      "services": []
+    },
+    {
+      "id": "a520",
+      "name": "2",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        },
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        }
+      ],
+      "services": []
+    },
+    {
+      "id": "b4c7",
+      "name": "Едем в Тайланд",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "2",
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        },
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        },
+        {
+          "id": "5",
+          "first_name": "Лебедев",
+          "second_name": "Никита",
+          "last_name": "Александрович"
+        }
+      ],
+      "services": []
+    },
+    {
+      "id": "22ce",
+      "name": "222",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "2",
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        },
+        {
+          "id": "4",
+          "first_name": "Соколова",
+          "second_name": "Екатерина",
+          "last_name": "Владимировна"
+        },
+        {
+          "id": "7",
+          "first_name": "Новиков",
+          "second_name": "Дмитрий",
+          "last_name": "Игоревич"
+        }
+      ],
+      "services": []
+    },
+    {
+      "id": "d1f7",
+      "name": "Едем в Тай",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        },
+        {
+          "id": "6",
+          "first_name": "Морозова",
+          "second_name": "Ольга",
+          "last_name": "Сергеевна"
+        },
+        {
+          "id": "4",
+          "first_name": "Соколова",
+          "second_name": "Екатерина",
+          "last_name": "Владимировна"
+        }
+      ],
+      "services": []
+    },
+    {
+      "id": "f628",
+      "name": "Москва",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        },
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        },
+        {
+          "id": "6",
+          "first_name": "Морозова",
+          "second_name": "Ольга",
+          "last_name": "Сергеевна"
+        }
+      ],
+      "services": []
     }
   ]
 }

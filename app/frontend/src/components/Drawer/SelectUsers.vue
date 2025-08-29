@@ -110,8 +110,12 @@ const aviaPassengers = computed(() => {
 
 // Выбор пользователя
 const selectUser = (user: any) => {
-  userStore.selectUser(user)
-  if (isAvia.value) isOpen.value = false
+  if (isAvia.value) {
+    userStore.selectedUsers = [user] // заменяем массив на выбранного юзера (для выбора пассажира)
+    isOpen.value = false
+  } else {
+    userStore.selectUser(user)
+  }
 }
 </script>
 
@@ -161,6 +165,8 @@ const selectUser = (user: any) => {
 .dropdownItem {
   padding: 10px;
   cursor: pointer;
+  width: 100%;
+  min-width: 250px;
   &:hover {
     background: #f3f3f3;
   }
