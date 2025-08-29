@@ -9,6 +9,7 @@
             :class="$style.input"
             type="text"
             placeholder="Город вылета"
+            @keyup.enter="searchAir"
         />
       </div>
 
@@ -20,6 +21,7 @@
             :class="$style.input"
             type="text"
             placeholder="Город прилёта"
+            @keyup.enter="searchAir"
         />
       </div>
 
@@ -34,6 +36,7 @@
             :locale="'ru'"
             :auto-apply="true"
             format="dd-MM-yyyy"
+            @keyup.enter="searchAir"
         />
       </div>
 
@@ -48,6 +51,7 @@
             :locale="'ru'"
             :auto-apply="true"
             format="dd-MM-yyyy"
+            @keyup.enter="searchAir"
         />
       </div>
     </div>
