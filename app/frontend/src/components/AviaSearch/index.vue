@@ -1,6 +1,9 @@
 <template>
  <div :class="$style.container">
-   <div :class="$style.title">
+   <div v-if="searchLength" :class="$style.title">
+     Найдено <span :class="$style.length"> {{searchLength}} </span> вариантов
+   </div>
+   <div v-else :class="$style.title">
      Поиск вариантов
    </div>
    <div :class="$style.options">
@@ -26,6 +29,7 @@ const tripType = ref('cheap')
 const onChange = () => {
   console.log('Выбрано', tripType.value)
 }
+const searchLength = ref(150)
 </script>/
 
 <style lang="scss" module>
@@ -38,6 +42,10 @@ const onChange = () => {
   margin-bottom: 20px;
   font-weight: 700;
   font-size: 26px;
+}
+
+.length {
+  color: #4361EE;
 }
 
 .options {

@@ -3,7 +3,7 @@
     <div :class="$style.wrapper">
       <div :class="$style.ticketInfo">
         <div :class="$style.name">
-          Перевозчик {{ }}
+          Перевозчик: {{ }}
         </div>
         <div :class="$style.dateTime">
           <div :class="$style.dateFrom">
