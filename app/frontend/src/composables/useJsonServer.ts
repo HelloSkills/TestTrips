@@ -25,8 +25,14 @@ export const getTrips = async () => {
     return trips.value = (await axios.get<Trip[]>(`${BACKEND_URL}/trips`)).data
 }
 
-// Добавляем новую поездку
-export const postTrip = async (tripData: Omit<Trip, 'id'>) => {
+// Добавляем новую поездку с полем status
+export const postTrip = async (tripData: Omit<Trip, 'id' | 'status'> & { status?: 'new' | 'ended' | null }) => {
     const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
+    return res.data
+}
+
+// composables/useJsonServer.ts
+export const updateTripStatus = async (id: number, status: 'new' | 'ended' | null) => {
+    const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${id}`, { status })
     return res.data
 }

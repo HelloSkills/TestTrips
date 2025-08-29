@@ -61,7 +61,8 @@ const createTrip = async () => {
     name: nameTrip.value,
     price: 0,
     passengers: selectedUsers.value,
-    services: []
+    services: [],
+    status: 'new'
   })
 
   close()

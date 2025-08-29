@@ -34,6 +34,7 @@ export interface Trip {
     price: number,
     passengers: User[],
     services: Service[],
+    status?: 'new' | 'ended' | null
 }
 
 export type Passenger = {

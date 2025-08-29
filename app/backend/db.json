@@ -1460,7 +1460,8 @@
           "last_name": "Андреевич"
         }
       ],
-      "services": []
+      "services": [],
+      "status": "ended"
     },
     {
       "id": "1",
@@ -1523,7 +1524,8 @@
             "price": 8900
           }
         }
-      ]
+      ],
+      "status": "ended"
     },
     {
       "id": "2",
@@ -1562,127 +1564,8 @@
       ]
     },
     {
-      "id": "662c",
-      "name": "321",
-      "price": 0,
-      "passengers": [],
-      "services": []
-    },
-    {
-      "id": "1b59",
-      "name": "333",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "a520",
-      "name": "2",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "b4c7",
-      "name": "Едем в Тайланд",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "2",
-          "first_name": "Кузнецова",
-          "second_name": "Анна",
-          "last_name": "Дмитриевна"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        },
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "22ce",
-      "name": "222",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "2",
-          "first_name": "Кузнецова",
-          "second_name": "Анна",
-          "last_name": "Дмитриевна"
-        },
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
-        },
-        {
-          "id": "7",
-          "first_name": "Новиков",
-          "second_name": "Дмитрий",
-          "last_name": "Игоревич"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "d1f7",
-      "name": "Едем в Тай",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        },
-        {
-          "id": "6",
-          "first_name": "Морозова",
-          "second_name": "Ольга",
-          "last_name": "Сергеевна"
-        },
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "f628",
-      "name": "Москва",
+      "id": "abb9",
+      "name": "Новая",
       "price": 0,
       "passengers": [
         {
@@ -1690,160 +1573,6 @@
           "first_name": "Попов",
           "second_name": "Михаил",
           "last_name": "Андреевич"
-        },
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        },
-        {
-          "id": "6",
-          "first_name": "Морозова",
-          "second_name": "Ольга",
-          "last_name": "Сергеевна"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "92b6",
-      "name": "222",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "2",
-          "first_name": "Кузнецова",
-          "second_name": "Анна",
-          "last_name": "Дмитриевна"
-        },
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "8be8",
-      "name": "321",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        },
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "0ea4",
-      "name": "222",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        },
-        {
-          "id": "2",
-          "first_name": "Кузнецова",
-          "second_name": "Анна",
-          "last_name": "Дмитриевна"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "25ef",
-      "name": "Грузия",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "2",
-          "first_name": "Кузнецова",
-          "second_name": "Анна",
-          "last_name": "Дмитриевна"
-        },
-        {
-          "id": "6",
-          "first_name": "Морозова",
-          "second_name": "Ольга",
-          "last_name": "Сергеевна"
-        },
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        },
-        {
-          "id": "9",
-          "first_name": "Михайлов",
-          "second_name": "Владимир",
-          "last_name": "Петрович"
-        },
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        },
-        {
-          "id": "10",
-          "first_name": "Алексеева",
-          "second_name": "Марина",
-          "last_name": "Александровна"
-        }
-      ],
-      "services": []
-    },
-    {
-      "id": "be78",
-      "name": "222",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
         },
         {
           "id": "2",
@@ -1858,7 +1587,29 @@
           "last_name": "Сергеевич"
         }
       ],
-      "services": []
+      "services": [],
+      "status": "ended"
+    },
+    {
+      "id": "b334",
+      "name": "Лофт",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        },
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        }
+      ],
+      "services": [],
+      "status": "ended"
     }
   ]
 }

@@ -1,6 +1,6 @@
 <template>
-<div :class="$style.container">
-  <Drawer v-model="modalStore.drawerOpen" />
+  <div :class="$style.container">
+    <Drawer v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
       <router-link to="/" :class="$style.logo">
         <img src="/images/logo.svg" @click="goToPage('trips')" width="40" height="40" alt="logo">
@@ -26,14 +26,32 @@
     </div>
 
     <div :class="$style.wrapper">
-      <div v-if="isSelected && !isAviaPage" :class="$style.endTrip" @click="endTrip">
-        завершить поездку
-      </div>
+      <!-- Если поездка выбрана -->
+      <template v-if="isSelected && !isAviaPage && route.name === 'SelectedTrip'">
+        <!-- Если поездка завершена -->
+        <router-link
+            v-if="showBackLink"
+            to="/"
+            :class="$style.backTrip"
+        >
+          Вернуться к списку поездок
+        </router-link>
+
+        <!-- Если поездка новая -->
+        <div
+            v-else
+            :class="$style.endTrip"
+            @click="endTrip"
+        >
+          завершить поездку
+        </div>
+      </template>
+
       <router-link to="/" :class="$style.user">
         <span :class="$style.name">AA</span>
       </router-link>
     </div>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -44,10 +62,13 @@ import Drawer from '@/components/Drawer/index.vue'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 const tripStore = useTripStore()
 
+import { useTripsStore } from "@/stores/tripsStore.ts"
+const tripsStore = useTripsStore()
+
 import { useModalStore } from '@/stores/modal'
 const modalStore = useModalStore()
 
-import {useRoute, useRouter} from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
@@ -59,27 +80,28 @@ const props = defineProps<{
 
 const isSelected = computed(() => !!props.selectedTrip)
 
-const goToPage = (page) => {
+const goToPage = (page: string) => {
   tripStore.clearTrip()
 
-  if (page === 'avia') {
-    router.push(`/avia`)
-  }
-
-  if (page === 'trips') {
-    router.push(`/`)
-  }
-
+  if (page === 'avia') router.push(`/avia`)
+  if (page === 'trips') router.push(`/`)
 }
 
-const endTrip = () => {
-  console.log('Завершаем поездку - надо обработать и добавлять лейбл')
+const endTrip = async () => {
+  if (!tripStore.selectedTrip) return
+  await tripsStore.setTripStatus(tripStore.selectedTrip.id, 'ended')
+  alert(`Поездка #${tripStore.selectedTrip.id} завершена`)
 }
 
 const createTrip = () => {
   modalStore.toggleDrawer()
 }
+
+const showBackLink = computed(() => {
+  return tripStore.selectedTrip?.status === 'ended' && route.name === 'SelectedTrip'
+})
 </script>
+
 
 <style lang="scss" module>
 .container {
@@ -153,6 +175,7 @@ const createTrip = () => {
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .user {
