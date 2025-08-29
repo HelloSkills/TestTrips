@@ -1833,6 +1833,32 @@
         }
       ],
       "services": []
+    },
+    {
+      "id": "be78",
+      "name": "222",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "4",
+          "first_name": "Соколова",
+          "second_name": "Екатерина",
+          "last_name": "Владимировна"
+        },
+        {
+          "id": "2",
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        },
+        {
+          "id": "1",
+          "first_name": "Смирнов",
+          "second_name": "Алексей",
+          "last_name": "Сергеевич"
+        }
+      ],
+      "services": []
     }
   ]
 }

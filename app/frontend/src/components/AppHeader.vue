@@ -51,7 +51,7 @@ import {useRoute, useRouter} from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
-const isAviaPage = computed(() => route.name === 'Avia')
+const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
 
 const props = defineProps<{
   selectedTrip: Trip | null

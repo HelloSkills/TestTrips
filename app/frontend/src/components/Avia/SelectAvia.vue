@@ -66,10 +66,16 @@
 <script setup lang="ts">
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ref, onUnmounted } from 'vue'
+import { useRouter } from "vue-router"
+import { ref } from 'vue'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 import { getAviaVariants } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/date.ts'
+import { useUserStore } from "@/stores/userStore.ts"
+
+
+const userStore = useUserStore()
+const router = useRouter()
 
 // Реактивные поля
 const placeFrom = ref('')
@@ -93,12 +99,16 @@ const searchAir = async () => {
     dateFrom: dateFromStr,
     dateTo: dateToStr
   })
-}
 
-// Сбрасываем поиск при уходе со страницы
-onUnmounted(() => {
-  aviaSearchStore.clearSearch()
-})
+  console.log('userStore', userStore.selectedUsers.length)
+  if (!userStore.selectedUsers.length) {
+    alert('Необходимо выбрать хотя бы 1 пассажира')
+  } else if (aviaSearchStore.filteredVariants.length > 0) {
+    router.push(`/services`)
+  } else {
+    alert('Нет подходящих вариантов')
+  }
+}
 </script>
 
 <style lang="scss" module>

@@ -44,6 +44,7 @@ const onChange = () => {
 onMounted(async () => {
   const items = await getAviaVariants()
   aviaSearchStore.setVariants(items)
+  aviaSearchStore.applyFilters()
 })
 </script>
 
@@ -51,6 +52,9 @@ onMounted(async () => {
 <style lang="scss" module>
 .container {
   width: 840px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .title {

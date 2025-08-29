@@ -17,7 +17,6 @@ export const useAviaSearchStore = defineStore('aviaSearch', {
     actions: {
         setVariants(items: AviaVariant[]) {
             this.variants = items
-            this.applyFilters()
         },
 
         clearSearch() {
