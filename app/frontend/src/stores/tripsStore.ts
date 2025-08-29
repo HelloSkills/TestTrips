@@ -31,6 +31,7 @@ export const useTripsStore = defineStore('trips', {
             const createdTrip = await postTrip(newTrip)
             this.trips.push(createdTrip)
             this.filteredTrips.push(createdTrip)
+            return createdTrip
         },
 
         // Получить пользователей конкретной поездки по id

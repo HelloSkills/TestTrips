@@ -40,10 +40,14 @@ const tripStore = useTripsStore()
 import { storeToRefs } from 'pinia'
 
 import { useUserStore } from "@/stores/userStore.ts"
+import { useRouter } from "vue-router"
+const router = useRouter()
 const userStore = useUserStore()
 const { selectedUsers } = storeToRefs(userStore)
 
-const createTrip = () => {
+import { useTripStore } from '@/stores/selectedTripStore'
+const selectedTripStore = useTripStore()
+const createTrip = async () => {
   if (nameTrip.value.length === 0) {
     alert('Необходимо указать название поездки')
     return
@@ -52,14 +56,19 @@ const createTrip = () => {
     alert('Необходимо указать хотя бы 1 участника поездки')
     return
   }
-  tripStore.createTrip({
+
+  const trip = await tripStore.createTrip({
     name: nameTrip.value,
     price: 0,
     passengers: selectedUsers.value,
-    services: [],
+    services: []
   })
-close()
+
+  close()
+  selectedTripStore.selectTrip(trip)
+  router.push(`/trip/${trip.id}`) // selectedTrip уже установлен в сторе
 }
+
 const props = defineProps({
   modelValue: Boolean
 })
@@ -180,7 +189,7 @@ const close = () => {
   height: 100%;
   background-color: #F6F8FC;
   transform: translateX(100%); // уезжает полностью вправо за экран
-  transition: transform 0.3s ease;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1010;
 }
 
