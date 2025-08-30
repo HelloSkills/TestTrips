@@ -4,39 +4,72 @@
 
       <!-- Заголовок -->
       <div :class="$style.ticketInfo">
-        <div :class="[$style.skeleton, $style.name]"></div>
+        <div
+            :class="[$style.skeleton, $style.name]"
+            style="--delay: 0.1s"
+        ></div>
 
         <div :class="$style.dateTime">
           <!-- Левая дата -->
           <div :class="$style.dateFrom">
-            <div :class="[$style.skeleton, $style.time]"></div>
-            <div :class="[$style.skeleton, $style.date]"></div>
+            <div
+                :class="[$style.skeleton, $style.time]"
+                style="--delay: 0.2s"
+            ></div>
+            <div
+                :class="[$style.skeleton, $style.date]"
+                style="--delay: 0.3s"
+            ></div>
           </div>
 
           <!-- Центральный блок -->
           <div :class="$style.cityInfo">
             <div :class="$style.cities">
-              <div :class="[$style.skeleton, $style.cityFrom]"></div>
-              <div :class="[$style.skeleton, $style.cityTo]"></div>
+              <div
+                  :class="[$style.skeleton, $style.cityFrom]"
+                  style="--delay: 0.4s"
+              ></div>
+              <div
+                  :class="[$style.skeleton, $style.cityTo]"
+                  style="--delay: 0.5s"
+              ></div>
             </div>
-            <div :class="[$style.skeleton, $style.line]"></div>
+            <div
+                :class="[$style.skeleton, $style.line]"
+                style="--delay: 0.6s"
+            ></div>
             <div :class="$style.iata">
-              <div :class="[$style.skeleton, $style.iataFrom]"></div>
-              <div :class="[$style.skeleton, $style.iataTo]"></div>
+              <div
+                  :class="[$style.skeleton, $style.iataFrom]"
+                  style="--delay: 0.7s"
+              ></div>
+              <div
+                  :class="[$style.skeleton, $style.iataTo]"
+                  style="--delay: 0.8s"
+              ></div>
             </div>
           </div>
 
           <!-- Правая дата -->
           <div :class="$style.dateTo">
-            <div :class="[$style.skeleton, $style.time]"></div>
-            <div :class="[$style.skeleton, $style.date]"></div>
+            <div
+                :class="[$style.skeleton, $style.time]"
+                style="--delay: 0.9s"
+            ></div>
+            <div
+                :class="[$style.skeleton, $style.date]"
+                style="--delay: 1.0s"
+            ></div>
           </div>
         </div>
       </div>
 
       <!-- Бронь -->
       <div :class="$style.booking">
-        <div :class="[$style.skeleton, $style.bookBtn]"></div>
+        <div
+            :class="[$style.skeleton, $style.bookBtn]"
+            style="--delay: 1.1s"
+        ></div>
       </div>
     </div>
   </div>
@@ -88,13 +121,25 @@
   gap: 5px;
 }
 
+.cities {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.iata {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .booking {
   display: flex;
   justify-content: end;
   margin-top: 20px;
 }
 
-/* размеры под реальные блоки */
+/* Размеры под реальные блоки */
 .name {
   width: 200px;
   height: 16px;
@@ -131,39 +176,25 @@
   border-radius: 5px;
 }
 
-/* Анимация скелетона с серым градиентом */
 .skeleton {
   background: linear-gradient(
           90deg,
-          #dcdcdc 25%,
-          #c7c6c6 50%,
-          #dcdcdc 75%
+          #e0e0e0 20%,
+          #ffffff 50%,
+          #e0e0e0 80%
   );
   background-size: 200% 100%;
-  animation: shimmer 1.5s linear infinite, pulse 2.5s infinite ease-in-out;
+  animation: shimmer 1.2s infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
   border-radius: 4px;
 }
 
-/* Градиент «циркулирует» */
 @keyframes shimmer {
   0% {
-    background-position: -200% 0;
-  }
-  50% {
     background-position: 200% 0;
   }
   100% {
     background-position: -200% 0;
-  }
-}
-
-/* Пульсация слабее */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.9;
-  }
-  50% {
-    opacity: 1;
   }
 }
 </style>
