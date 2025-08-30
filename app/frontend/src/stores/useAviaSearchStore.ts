@@ -7,6 +7,7 @@ export const useAviaSearchStore = defineStore('aviaSearch', {
         filteredVariants: [] as AviaVariant[],
         tripType: 'cheap' as 'cheap' | 'expensive',
         searchCompleted: false,
+        isLoading: false, // <-- добавляем флаг загрузки
         filters: {
             placeFrom: '',
             placeTo: '',
@@ -24,6 +25,11 @@ export const useAviaSearchStore = defineStore('aviaSearch', {
             this.filteredVariants = []
             this.searchCompleted = false
             this.filters = { placeFrom: '', placeTo: '', dateFrom: null, dateTo: null }
+            this.isLoading = false
+        },
+
+        setLoading(val: boolean) {
+            this.isLoading = val
         },
 
         sortVariants(type: 'cheap' | 'expensive') {
@@ -50,18 +56,16 @@ export const useAviaSearchStore = defineStore('aviaSearch', {
                     ? v.placeTo.toLowerCase().trim() === this.filters.placeTo.toLowerCase().trim()
                     : true
 
-                // Фильтр по датам (пока делаем простое строчное сравнение целиком)
+                // Фильтр по датам (строчное сравнение)
                 let matchDateFrom = true
                 let matchDateTo = true
 
                 if (this.filters.dateFrom) {
                     matchDateFrom = v.dateFrom.trim() === this.filters.dateFrom.trim()
-                    console.log('Сравнение From:', v.dateFrom.trim(), '===', this.filters.dateFrom.trim(), '->', matchDateFrom)
                 }
 
                 if (this.filters.dateTo) {
                     matchDateTo = v.dateTo.trim() === this.filters.dateTo.trim()
-                    console.log('Сравнение To:', v.dateTo.trim(), '===', this.filters.dateTo.trim(), '->', matchDateTo)
                 }
 
                 return matchFrom && matchTo && matchDateFrom && matchDateTo
@@ -73,9 +77,5 @@ export const useAviaSearchStore = defineStore('aviaSearch', {
             // Флаг завершённого поиска
             this.searchCompleted = this.filteredVariants.length > 0
         }
-
-
-
-
     }
 })

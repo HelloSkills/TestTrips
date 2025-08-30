@@ -73,7 +73,6 @@ import { getAviaVariants } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/date.ts'
 import { useUserStore } from "@/stores/userStore.ts"
 
-
 const userStore = useUserStore()
 const router = useRouter()
 
@@ -87,29 +86,40 @@ const aviaSearchStore = useAviaSearchStore()
 
 // Функция поиска
 const searchAir = async () => {
-  const items = await getAviaVariants()
-  aviaSearchStore.setVariants(items)
-
-  const dateFromStr = dateFrom.value ? formatDateForFilter(dateFrom.value) : null
-  const dateToStr = dateTo.value ? formatDateForFilter(dateTo.value) : null
-
-  aviaSearchStore.setFilters({
-    placeFrom: placeFrom.value.trim().toLowerCase(),
-    placeTo: placeTo.value.trim().toLowerCase(),
-    dateFrom: dateFromStr,
-    dateTo: dateToStr
-  })
-
-  console.log('userStore', userStore.selectedUsers.length)
   if (!userStore.selectedUsers.length) {
     alert('Необходимо выбрать хотя бы 1 пассажира')
-  } else if (aviaSearchStore.filteredVariants.length > 0) {
-    router.push(`/services`)
-  } else {
-    alert('Нет подходящих вариантов')
+    return
+  }
+
+  // включаем скелетон
+  aviaSearchStore.setLoading(true)
+
+  // сразу переходим на страницу услуг
+  router.push(`/services`)
+
+  // запускаем загрузку в фоне
+  try {
+    const items = await getAviaVariants()
+    aviaSearchStore.setVariants(items)
+
+    const dateFromStr = dateFrom.value ? formatDateForFilter(dateFrom.value) : null
+    const dateToStr = dateTo.value ? formatDateForFilter(dateTo.value) : null
+
+    aviaSearchStore.setFilters({
+      placeFrom: placeFrom.value.trim().toLowerCase(),
+      placeTo: placeTo.value.trim().toLowerCase(),
+      dateFrom: dateFromStr,
+      dateTo: dateToStr
+    })
+  } catch (err) {
+    console.error('Ошибка загрузки вариантов:', err)
+  } finally {
+    // выключаем скелетон после загрузки
+    aviaSearchStore.setLoading(false)
   }
 }
 </script>
+
 
 <style lang="scss" module>
 .container {

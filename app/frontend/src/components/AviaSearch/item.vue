@@ -1,5 +1,9 @@
 <template>
-  <div v-for="item in variants" :key="item.id" :class="$style.container">
+  <!-- Скелетоны -->
+  <Skeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
+
+  <!-- Список билетов -->
+  <div v-else-if="variants.length > 0" v-for="item in variants" :key="item.id" :class="$style.container">
     <div :class="$style.wrapper">
 
       <!-- Информация о билете -->
@@ -41,6 +45,11 @@
 
     </div>
   </div>
+
+  <!-- Нет результатов -->
+  <div v-else>
+    Нет подходящих вариантов
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -51,10 +60,13 @@ import { useUserStore } from '@/stores/userStore'
 import { useTripStore } from '@/stores/SelectedTripStore'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
+import Skeleton from '@/components/Avia/Skeleton.vue'
 
 const props = defineProps<{ variants: AviaVariant[] }>()
 const userStore = useUserStore()
 const tripStore = useTripStore()
+const aviaSearchStore = useAviaSearchStore()
 const router = useRouter()
 
 const selectedUser = computed(() => userStore.selectedUsers[0] || null)
@@ -73,9 +85,6 @@ const bookTicket = async (ticket: AviaVariant) => {
   // Асинхронно добавляем сервис и пушим на бэк
   await tripStore.addService(selectedUser.value, ticket)
 
-  console.log('Выбранный пользователь:', selectedUser.value)
-  console.log('Добавленный сервис:', service)
-
   // Редирект обратно на страницу выбранной поездки
   if (tripStore.selectedTrip) {
     router.push(`/trip/${tripStore.selectedTrip.id}`)
@@ -84,6 +93,7 @@ const bookTicket = async (ticket: AviaVariant) => {
 </script>
 
 <style lang="scss" module>
+/* оставляем твои стили без изменений */
 .container {
   width: 840px;
   height: 200px;
