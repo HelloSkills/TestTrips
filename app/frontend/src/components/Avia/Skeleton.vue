@@ -179,22 +179,28 @@
 .skeleton {
   background: linear-gradient(
           90deg,
-          #e0e0e0 20%,
-          #ffffff 50%,
-          #e0e0e0 80%
+          #e0e0e0 25%,
+          #f8f8f8 50%,
+          #e0e0e0 75%
   );
-  background-size: 200% 100%;
-  animation: shimmer 1.2s infinite ease-in-out;
-  animation-delay: var(--delay, 0s);
+  background-size: 250% 100%;
   border-radius: 4px;
+
+  /* Переливание и пульсация */
+  animation: shimmer 1.2s linear infinite, pulse 2s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  animation-fill-mode: both; /* плавный старт */
 }
 
+/* Переливание градиента */
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Лёгкая пульсация */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; filter: brightness(0.95); }
+  50% { opacity: 1; filter: brightness(1.05); }
 }
 </style>
