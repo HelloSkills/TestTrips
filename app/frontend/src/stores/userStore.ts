@@ -36,8 +36,11 @@ export const useUserStore = defineStore('user', () => {
         selectedUsers.value = []
     }
 
-    router.afterEach(() => {
-        clearSelectedUsers()
+    router.afterEach((to) => {
+        // Если не переходим на /services, очищаем выбор
+        if (to.path !== '/services') {
+            clearSelectedUsers()
+        }
     })
 
     // Список доступных (не выбранных) пользователей

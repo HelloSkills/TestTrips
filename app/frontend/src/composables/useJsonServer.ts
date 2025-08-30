@@ -36,3 +36,9 @@ export const updateTripStatus = async (id: number, status: 'new' | 'ended' | nul
     const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${id}`, { status })
     return res.data
 }
+
+// Обновляем services поездки (добавляем билет + юзера)
+export const patchTripServices = async (tripId: number | string, services: { user: User; ticket: AviaVariant }[]) => {
+    const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${tripId}`, { services })
+    return res.data
+}

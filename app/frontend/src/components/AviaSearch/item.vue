@@ -1,32 +1,30 @@
 <template>
   <div v-for="item in variants" :key="item.id" :class="$style.container">
     <div :class="$style.wrapper">
+
       <!-- Информация о билете -->
       <div :class="$style.ticketInfo">
         <div :class="$style.name">
           Перевозчик: {{ item.provider }}
         </div>
         <div :class="$style.dateTime">
-          <!-- Вылет -->
           <div :class="$style.dateFrom">
             <div :class="$style.time">{{ item.timeFrom }}</div>
             <div :class="$style.date">{{ formatDayMonth(item.dateFrom) }}</div>
           </div>
-          <!-- Города и IATA -->
+
           <div :class="$style.cityInfo">
             <div :class="$style.cities">
               <div :class="$style.cityFrom">{{ item.placeFrom }}</div>
               <div :class="$style.cityTo">{{ item.placeTo }}</div>
             </div>
-
             <div :class="$style.line"></div>
-
             <div :class="$style.iata">
               <div :class="$style.iataFrom">{{ item.iataFrom }}</div>
               <div :class="$style.iataTo">{{ item.iataTo }}</div>
             </div>
           </div>
-          <!-- Прилет -->
+
           <div :class="$style.dateTo">
             <div :class="$style.time">{{ item.timerTo }}</div>
             <div :class="$style.date">{{ formatDayMonth(item.dateTo) }}</div>
@@ -36,7 +34,7 @@
 
       <!-- Бронь -->
       <div :class="$style.booking">
-        <div :class="$style.bookBtn">
+        <div :class="$style.bookBtn" @click="bookTicket(item)">
           Забронировать от {{ formatPrice(item.price) }}
         </div>
       </div>
@@ -46,15 +44,29 @@
 </template>
 
 <script setup lang="ts">
-
-import type { AviaVariant } from "@/types/types.ts";
+import type { AviaVariant } from "@/types/types.ts"
 import { formatPrice } from '@/utils/price.ts'
 import { formatDayMonth } from '@/utils/date.ts'
-const props = defineProps<{
-  variants: AviaVariant[]
-  tripType: string
-}>()
+import { useUserStore } from '@/stores/userStore'
+import { computed } from 'vue'
+const props = defineProps<{ variants: AviaVariant[] }>()
+const userStore = useUserStore()
+const selectedUser = computed(() => userStore.selectedUsers[0] || null)
 
+const bookTicket = (ticket: AviaVariant) => {
+  if (!selectedUser.value) {
+    console.warn('Пользователь не выбран!')
+    return
+  }
+
+  const service = {
+    user: selectedUser.value,
+    ticket
+  }
+  console.log('item', ticket)
+  console.log('service :', service)
+
+}
 </script>
 
 <style lang="scss" module>
