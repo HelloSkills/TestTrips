@@ -48,12 +48,18 @@ import type { AviaVariant } from "@/types/types.ts"
 import { formatPrice } from '@/utils/price.ts'
 import { formatDayMonth } from '@/utils/date.ts'
 import { useUserStore } from '@/stores/userStore'
+import { useTripStore } from '@/stores/SelectedTripStore'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
 const props = defineProps<{ variants: AviaVariant[] }>()
 const userStore = useUserStore()
+const tripStore = useTripStore()
+const router = useRouter()
+
 const selectedUser = computed(() => userStore.selectedUsers[0] || null)
 
-const bookTicket = (ticket: AviaVariant) => {
+const bookTicket = async (ticket: AviaVariant) => {
   if (!selectedUser.value) {
     console.warn('Пользователь не выбран!')
     return
@@ -63,9 +69,17 @@ const bookTicket = (ticket: AviaVariant) => {
     user: selectedUser.value,
     ticket
   }
-  console.log('item', ticket)
-  console.log('service :', service)
 
+  // Асинхронно добавляем сервис и пушим на бэк
+  await tripStore.addService(selectedUser.value, ticket)
+
+  console.log('Выбранный пользователь:', selectedUser.value)
+  console.log('Добавленный сервис:', service)
+
+  // Редирект обратно на страницу выбранной поездки
+  if (tripStore.selectedTrip) {
+    router.push(`/trip/${tripStore.selectedTrip.id}`)
+  }
 }
 </script>
 

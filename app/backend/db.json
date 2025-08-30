@@ -1587,7 +1587,29 @@
           "last_name": "Сергеевич"
         }
       ],
-      "services": [],
+      "services": [
+        {
+          "user": {
+            "id": "1",
+            "first_name": "Смирнов",
+            "second_name": "Алексей",
+            "last_name": "Сергеевич"
+          },
+          "ticket": {
+            "id": "3",
+            "provider": "Pobeda",
+            "placeFrom": "Казань",
+            "placeTo": "Москва",
+            "dateFrom": "27-08-2025",
+            "dateTo": "27-08-2025",
+            "timeFrom": "07:12",
+            "timerTo": "09:05",
+            "iataFrom": "KZN",
+            "iataTo": "DME",
+            "price": 5100
+          }
+        }
+      ],
       "status": "ended"
     },
     {
@@ -1610,6 +1632,55 @@
       ],
       "services": [],
       "status": "ended"
+    },
+    {
+      "id": "e0f9",
+      "name": "2223",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "5",
+          "first_name": "Лебедев",
+          "second_name": "Никита",
+          "last_name": "Александрович"
+        },
+        {
+          "id": "4",
+          "first_name": "Соколова",
+          "second_name": "Екатерина",
+          "last_name": "Владимировна"
+        },
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        }
+      ],
+      "services": [
+        {
+          "user": {
+            "id": "3",
+            "first_name": "Попов",
+            "second_name": "Михаил",
+            "last_name": "Андреевич"
+          },
+          "ticket": {
+            "id": "71",
+            "provider": "Rossiya",
+            "placeFrom": "Москва",
+            "placeTo": "Ростов-на-Дону",
+            "dateFrom": "04-11-2025",
+            "dateTo": "04-11-2025",
+            "timeFrom": "10:00",
+            "timerTo": "12:20",
+            "iataFrom": "DME",
+            "iataTo": "ROV",
+            "price": 6100
+          }
+        }
+      ],
+      "status": "new"
     }
   ]
 }
