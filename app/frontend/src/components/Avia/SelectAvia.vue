@@ -76,6 +76,9 @@ import { useUserStore } from "@/stores/userStore.ts"
 const userStore = useUserStore()
 const router = useRouter()
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 // Реактивные поля
 const placeFrom = ref('')
 const placeTo = ref('')
@@ -87,7 +90,7 @@ const aviaSearchStore = useAviaSearchStore()
 // Функция поиска
 const searchAir = async () => {
   if (!userStore.selectedUsers.length) {
-    alert('Необходимо выбрать хотя бы 1 пассажира')
+    toast.info('Необходимо выбрать хотя бы 1 пассажира')
     return
   }
 

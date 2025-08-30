@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import type { User } from '@/types/types'
 import { getUsers } from '@/composables/useJsonServer'
 import { useRouter } from "vue-router"
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 
 export const useUserStore = defineStore('user', () => {
     const users = ref<User[]>([])
@@ -17,7 +19,7 @@ export const useUserStore = defineStore('user', () => {
     // Выбираем пользователя
     const selectUser = (user: User) => {
         if (selectedUsers.value.length >= 10) {
-            window.alert('Нельзя выбрать более 10 сотрудников')
+            toast.info('Нельзя выбрать более 10 сотрудников')
             return
         }
 

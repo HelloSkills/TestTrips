@@ -72,6 +72,9 @@ import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
 
 const props = defineProps<{
@@ -90,7 +93,7 @@ const goToPage = (page: string) => {
 const endTrip = async () => {
   if (!tripStore.selectedTrip) return
   await tripsStore.setTripStatus(tripStore.selectedTrip.id, 'ended')
-  alert(`Поездка #${tripStore.selectedTrip.id} завершена`)
+  toast.success(`Поездка успешно завершена`)
 }
 
 const createTrip = () => {

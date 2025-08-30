@@ -19,6 +19,13 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+// Изменяем стили Toast оповещений
+
+.Vue-Toastification__toast {
+  padding: 16px;
+  min-height: revert;
+}
+
 //Можно убрать скролл при выезде модалки (опционально оставляю)
 //.no-scroll {
 //  overflow: hidden;

@@ -69,6 +69,9 @@ const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()
 const router = useRouter()
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 const selectedUser = computed(() => userStore.selectedUsers[0] || null)
 
 const bookTicket = async (ticket: AviaVariant) => {
@@ -77,20 +80,18 @@ const bookTicket = async (ticket: AviaVariant) => {
     return
   }
 
-  const service = {
-    user: selectedUser.value,
-    ticket
-  }
+  const confirmBooking = window.confirm('Вы уверены, что хотите забронировать билет?')
+  if (!confirmBooking) return
 
-  // Асинхронно добавляем сервис и пушим на бэк
   await tripStore.addService(selectedUser.value, ticket)
 
-  // Редирект обратно на страницу выбранной поездки
   if (tripStore.selectedTrip) {
     router.push(`/trip/${tripStore.selectedTrip.id}`)
   }
+  toast.success('Поездка успешно завершена')
 }
 </script>
+
 
 <style lang="scss" module>
 /* оставляем твои стили без изменений */

@@ -122,8 +122,4 @@ onMounted(async () => {
   font-size: 14px;
 }
 
-//.skeleton {
-//  margin-top: 170px;
-//}
-
 </style>

@@ -45,15 +45,20 @@ const router = useRouter()
 const userStore = useUserStore()
 const { selectedUsers } = storeToRefs(userStore)
 
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+
 import { useTripStore } from '@/stores/selectedTripStore'
 const selectedTripStore = useTripStore()
 const createTrip = async () => {
   if (nameTrip.value.length === 0) {
-    alert('Необходимо указать название поездки')
+    toast.info('Необходимо указать название поездки')
+    // alert('Необходимо указать название поездки')
     return
   }
   if (selectedUsers.value.length === 0) {
-    alert('Необходимо указать хотя бы 1 участника поездки')
+
+    toast.info('Необходимо указать хотя бы 1 участника поездки')
     return
   }
 
@@ -68,6 +73,7 @@ const createTrip = async () => {
   close()
   selectedTripStore.selectTrip(trip)
   router.push(`/trip/${trip.id}`) // selectedTrip уже установлен в сторе
+  toast.success(`Поездка успешно создана`)
 }
 
 const props = defineProps({
