@@ -29,13 +29,13 @@
       <!-- Если поездка выбрана -->
       <template v-if="isSelected && !isAviaPage && route.name === 'SelectedTrip'">
         <!-- Если поездка завершена -->
-        <router-link
+        <div
             v-if="showBackLink"
-            to="/"
             :class="$style.backTrip"
+            @click="goToPage('trips')"
         >
           Вернуться к списку поездок
-        </router-link>
+        </div>
 
         <!-- Если поездка новая -->
         <div
