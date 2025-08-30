@@ -15,12 +15,12 @@
 
           <!-- Центральный блок -->
           <div :class="$style.cityInfo">
-            <div class="$style.cities">
+            <div :class="$style.cities">
               <div :class="[$style.skeleton, $style.cityFrom]"></div>
               <div :class="[$style.skeleton, $style.cityTo]"></div>
             </div>
             <div :class="[$style.skeleton, $style.line]"></div>
-            <div class="$style.iata">
+            <div :class="$style.iata">
               <div :class="[$style.skeleton, $style.iataFrom]"></div>
               <div :class="[$style.skeleton, $style.iataTo]"></div>
             </div>
@@ -94,13 +94,6 @@
   margin-top: 20px;
 }
 
-.skeleton {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 4px;
-}
-
 /* размеры под реальные блоки */
 .name {
   width: 200px;
@@ -138,8 +131,39 @@
   border-radius: 5px;
 }
 
+/* Анимация скелетона с серым градиентом */
+.skeleton {
+  background: linear-gradient(
+          90deg,
+          #dcdcdc 25%,
+          #c7c6c6 50%,
+          #dcdcdc 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite, pulse 2.5s infinite ease-in-out;
+  border-radius: 4px;
+}
+
+/* Градиент «циркулирует» */
 @keyframes shimmer {
-  0% { background-position: -200% 0 }
-  100% { background-position: 200% 0 }
+  0% {
+    background-position: -200% 0;
+  }
+  50% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Пульсация слабее */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 </style>
