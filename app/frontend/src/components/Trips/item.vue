@@ -105,6 +105,7 @@ function goToTrip(trip: Trip) {
 
 .label {
   position: absolute;
+  width: max-content;
   height: 20px;
   padding: 4px 30px;
   color: #FFFFFF;
@@ -117,7 +118,6 @@ function goToTrip(trip: Trip) {
   align-items: center;
   top: 0;
   right: -20px;
-  width: max-content;
 }
 
 .new {
