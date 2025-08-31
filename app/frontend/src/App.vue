@@ -1,6 +1,6 @@
 <template>
   <Header :selectedTrip="selectedTrip"/>
-  <router-view />
+  <router-view :class="$style.content"/>
 </template>
 
 <script setup lang="ts">
@@ -21,3 +21,8 @@ onMounted(() => {
 })
 </script>
 
+<style lang="scss" module>
+.content {
+  margin-top: 110px;
+}
+</style>

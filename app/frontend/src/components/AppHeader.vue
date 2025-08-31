@@ -124,6 +124,11 @@ const showBackLink = computed(() => {
   align-items: center;
   background: #FFFFFF;
   color: #4361EE;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .wrap {
