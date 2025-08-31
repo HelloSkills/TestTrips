@@ -110,7 +110,6 @@ const showBackLink = computed(() => {
 .container {
   width: 100%;
   min-width: 840px;
-  max-width: 1440px;
   margin: 0 auto;
   height: 60px;
   padding: 10px 94px;
