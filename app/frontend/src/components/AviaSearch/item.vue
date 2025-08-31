@@ -47,8 +47,9 @@
   </div>
 
   <!-- Нет результатов -->
-  <div v-else :class="$style.noVariant">
-    Нет подходящих вариантов
+  <div v-else>
+    <span :class="$style.noVariant">Нет подходящих вариантов</span>
+    <div :class="$style.searchBack" @click="searchBack">назад к поиску</div>
   </div>
 </template>
 
@@ -89,6 +90,10 @@ const bookTicket = async (ticket: AviaVariant) => {
     router.push(`/trip/${tripStore.selectedTrip.id}`)
   }
   toast.success('Поездка успешно завершена')
+}
+
+const searchBack = () => {
+  router.push(`/trip/${tripStore.selectedTrip.id}/services`)
 }
 </script>
 
@@ -202,5 +207,18 @@ const bookTicket = async (ticket: AviaVariant) => {
 
 .noVariant {
   color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.searchBack {
+  color: #4361EE;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
 }
 </style>
