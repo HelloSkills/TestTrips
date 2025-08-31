@@ -78,7 +78,7 @@ function goToTrip(trip: Trip) {
 }
 
 .wrap {
-  padding: 0 20px 20px;
+  padding: 30px 20px 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid #DDE2EB;
 }
@@ -98,7 +98,6 @@ function goToTrip(trip: Trip) {
 }
 
 .info {
-  padding-top: 30px;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -117,7 +116,7 @@ function goToTrip(trip: Trip) {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: -30px;
   right: -20px;
 }
 

@@ -51,7 +51,6 @@ onBeforeUnmount(() => {
 .trips {
   font-weight: 700;
   font-size: 26px;
-  margin-top: 50px;
   margin-bottom: 20px;
 }
 
