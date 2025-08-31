@@ -2,25 +2,29 @@
   <div :class="$style.container">
     <div :class="$style.inputsAll">
       <!-- Город вылета -->
-      <div :class="$style.placeFrom">
+      <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
         <input
             v-model="placeFrom"
-            :class="$style.input"
+            :class="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
             type="text"
             placeholder="Город вылета"
+            @focus="onFocus('placeFrom')"
+            @blur="onBlur('placeFrom', placeFrom)"
             @keyup.enter="searchAir"
         />
       </div>
 
       <!-- Город прилёта -->
-      <div :class="$style.placeTo">
+      <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
         <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
         <input
             v-model="placeTo"
-            :class="$style.input"
+            :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
             type="text"
             placeholder="Город прилёта"
+            @focus="onFocus('placeTo')"
+            @blur="onBlur('placeTo', placeTo)"
             @keyup.enter="searchAir"
         />
       </div>
@@ -66,58 +70,85 @@
 <script setup lang="ts">
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import { useRouter } from "vue-router"
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 import { getAviaVariants } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/date.ts'
-import { useUserStore } from "@/stores/userStore.ts"
+import { useUserStore } from '@/stores/userStore.ts'
+import { useToast } from 'vue-toastification'
 
 const userStore = useUserStore()
 const router = useRouter()
-
-import { useToast } from 'vue-toastification'
+const aviaSearchStore = useAviaSearchStore()
 const toast = useToast()
 
-// Реактивные поля
 const placeFrom = ref('')
 const placeTo = ref('')
 const dateFrom = ref<Date | null>(null)
 const dateTo = ref<Date | null>(null)
 
-const aviaSearchStore = useAviaSearchStore()
+interface IError {
+  show: boolean
+  shake: boolean
+}
 
-// Функция поиска
+const errors = ref<{ placeFrom: IError, placeTo: IError }>({
+  placeFrom: { show: false, shake: false },
+  placeTo: { show: false, shake: false }
+})
+
+const onFocus = (field: 'placeFrom' | 'placeTo') => {
+  errors.value[field].show = false
+  errors.value[field].shake = false
+}
+
+const onBlur = (field: 'placeFrom' | 'placeTo', value: string) => {
+  if (!value.trim()) {
+    errors.value[field].show = true
+    errors.value[field].shake = false
+  }
+}
+
 const searchAir = async () => {
+  // Проверка выбора пассажиров
   if (!userStore.selectedUsers.length) {
     toast.info('Необходимо выбрать хотя бы 1 пассажира')
     return
   }
 
-  // хотя бы один город обязателен
-  if (!placeFrom.value && !placeTo.value) {
+  let hasError = false
+
+  // Проверка городов
+  if (!placeFrom.value.trim()) {
+    errors.value.placeFrom.show = true
+    errors.value.placeFrom.shake = true
+    hasError = true
+  }
+
+  if (!placeTo.value.trim()) {
+    errors.value.placeTo.show = true
+    errors.value.placeTo.shake = true
+    hasError = true
+  }
+
+  if (hasError) {
     toast.warning('Необходимо указать город')
     return
   }
 
-  // если указана дата туда, то город должен быть
-  if (dateFrom.value && (!placeFrom.value && !placeTo.value)) {
-    toast.warning('Необходимо указать город')
-    return
-  }
-
-  // проверка дат
+  // Проверка дат
   if (dateFrom.value && dateTo.value && dateFrom.value > dateTo.value) {
     toast.warning('Дата прилёта не может быть ранее даты вылета')
     dateTo.value = null
     return
   }
 
-  // включаем скелетон
+  // Включаем скелетон
   aviaSearchStore.setLoading(true)
 
-  // сразу переходим на страницу услуг
-  router.push(`/services`)
+  // Переход на страницу услуг
+  router.push('/services')
 
   try {
     const items = await getAviaVariants()
@@ -134,12 +165,12 @@ const searchAir = async () => {
     })
   } catch (err) {
     console.error('Ошибка загрузки вариантов:', err)
+    toast.error('Ошибка загрузки данных')
   } finally {
     aviaSearchStore.setLoading(false)
   }
 }
 </script>
-
 
 <style lang="scss" module>
 .container {
@@ -163,6 +194,7 @@ const searchAir = async () => {
   all: unset;
   height: 40px;
   cursor: pointer;
+  flex: 1;
 }
 
 .placeFrom, .placeTo, .timeFrom, .timerTo {
@@ -173,6 +205,7 @@ const searchAir = async () => {
   background-color: #F6F8FC;
   border-radius: 5px;
   padding: 10px;
+  border: 1px solid transparent;
 }
 
 .searchBtn {
@@ -195,5 +228,21 @@ const searchAir = async () => {
   all: unset;
   height: 40px;
   cursor: pointer;
+}
+
+/* Ошибка */
+.error {
+  border: 1px solid red !important;
+}
+
+/* Шейк */
+@keyframes shake {
+  0%, 100% { transform: translateX(0) }
+  20%, 60% { transform: translateX(-4px) }
+  40%, 80% { transform: translateX(4px) }
+}
+
+.shake {
+  animation: shake 0.3s ease;
 }
 </style>
