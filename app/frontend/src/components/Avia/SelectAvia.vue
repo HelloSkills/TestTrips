@@ -3,7 +3,7 @@
     <div :class="$style.inputsAll">
       <!-- Город вылета -->
       <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
-        <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
+        <Svg name="air" :class="$style.icon"/>
         <input
             v-model="placeFrom"
             :class="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
@@ -17,7 +17,7 @@
 
       <!-- Город прилёта -->
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
-        <img src="/icons/air.svg" alt="air_icon" width="20" height="20">
+        <Svg name="air" :class="$style.icon"/>
         <input
             v-model="placeTo"
             :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
@@ -31,7 +31,7 @@
 
       <!-- Дата туда -->
       <div :class="$style.timeFrom">
-        <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
+        <Svg name="calendar" :class="$style.icon"/>
         <Datepicker
             v-model="dateFrom"
             placeholder="Туда"
@@ -46,7 +46,7 @@
 
       <!-- Дата обратно -->
       <div :class="$style.timerTo">
-        <img src="/icons/calendar.svg" alt="calendar_icon" width="20" height="20">
+        <Svg name="calendar" :class="$style.icon"/>
         <Datepicker
             v-model="dateTo"
             placeholder="Обратно"
@@ -70,6 +70,7 @@
 <script setup lang="ts">
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import Svg from '@/components/Ui/svg.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
@@ -206,6 +207,14 @@ const searchAir = async () => {
   border-radius: 5px;
   padding: 10px;
   border: 1px solid transparent;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .searchBtn {

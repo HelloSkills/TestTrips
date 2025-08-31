@@ -6,7 +6,7 @@
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
-        <img :class="[isOpen ? $style.open : '']" src="/icons/arrow_down.svg" alt="arrow_down_icon" width="20" height="20" />
+        <Svg name="arrow_down" :class="[isOpen ? $style.open : '']"/>
       </div>
 
       <div v-if="isOpen" :class="[$style.dropdown, isAvia ? $style.aviadropdown : '']">
@@ -30,14 +30,7 @@
           :class="$style.selectedUsers"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <img
-            :class="$style.icon"
-            @click="userStore.deleteUser(user.id)"
-            src="/icons/delete.svg"
-            alt="delete_icon"
-            width="16"
-            height="16"
-        />
+        <Svg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
       </div>
     </div>
 
@@ -49,14 +42,7 @@
           :class="$style.aviaUserItem"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <img
-            :class="$style.icon"
-            @click="userStore.deleteUser(user.id)"
-            src="/icons/delete.svg"
-            alt="delete_icon"
-            width="16"
-            height="16"
-        />
+        <Svg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
       </div>
     </div>
   </div>
@@ -67,6 +53,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
+import Svg from '@/components/Ui/svg.vue'
 
 const route = useRoute()
 const tripId = route.params.id as string
@@ -115,6 +102,8 @@ const selectUser = (user: any) => {
     userStore.selectUser(user)
   }
 }
+
+onMounted(() => userStore.loadUsers()) // необходимо для списка юзеров (только в модалке)
 </script>
 
 <style lang="scss" module>

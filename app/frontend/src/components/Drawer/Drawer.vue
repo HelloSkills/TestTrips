@@ -5,7 +5,7 @@
         <div :class="$style.wrap">
           <div :class="$style.title">
             <div :class="$style.create">Создание поездки</div>
-            <img :class="$style.close" src="/icons/close.svg" alt="close_icon" @click="close">
+            <Svg name="close" @click="close" :class="$style.close"/>
           </div>
           <div :class="$style.name">
             <input
@@ -29,6 +29,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import SelectUsers from "@/components/Drawer/SelectUsers.vue"
+import Svg from '@/components/Ui/svg.vue'
 
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 

@@ -3,7 +3,6 @@
     <div :class="$style.ticketInfo">
       <div :class="$style.infoAir">
         <div :class="$style.ticketWrap">
-          <img src="/icons/air.svg" alt="avia_icon" width="16" height="16">
           <div :class="$style.fromTo">{{ service.ticket.placeFrom }} ➝ {{ service.ticket.placeTo }}</div>
         </div>
         <div :class="$style.provider">

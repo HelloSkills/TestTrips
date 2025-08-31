@@ -3,7 +3,7 @@
     <div :class="$style.trips">Поездки</div>
     <div :class="$style.search">
       <div :class="$style.wrap">
-        <img src="/icons/search.svg" alt="search_icon" width="20" height="20" />
+        <Svg name="search"/>
         <input
             v-model="searchQuery"
             type="text"
@@ -26,6 +26,7 @@ import { ref, computed } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'
+import Svg from '@/components/Ui/svg.vue'
 
 const tripsStore = useTripsStore()
 const modalStore = useModalStore()

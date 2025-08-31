@@ -17,7 +17,7 @@
       <div :class="$style.wrapItem" v-for="services in trip.services" :key="services.user.id">
         <div :class="$style.ticketInfo">
           <div :class="$style.ticketWrap">
-            <img src="/icons/air.svg" alt="avia_icon" width="14" height="14">
+            <Svg name="air"/>
             <div :class="$style.price">{{ formatPrice(services.ticket.price) }}</div>
             <div :class="$style.fromTo">{{ services.ticket.placeFrom }} ➝ {{ services.ticket.placeTo }}</div>
           </div>
@@ -56,6 +56,7 @@ import { formatPrice } from "@/utils/price.ts"
 import { useRouter } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useTripStore } from '@/stores/selectedTripStore'
+import Svg from "@/components/UI/svg.vue"
 
 const router = useRouter()
 const tripsStore = useTripsStore()
@@ -152,6 +153,7 @@ function goToTrip(trip: Trip) {
 
 .ticketWrap {
   display: flex;
+  align-items: center;
   gap: 5px;
   height: 14px;
   line-height: 14px;

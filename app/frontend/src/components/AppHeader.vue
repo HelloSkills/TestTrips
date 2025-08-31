@@ -3,7 +3,7 @@
     <Drawer v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
       <div :class="$style.logo">
-        <img src="/images/logo.svg" @click="goToPage('trips')" width="40" height="40" alt="logo">
+        <Svg name="logo" @click="goToPage('trips')" />
       </div>
       <div v-if="isAviaPage">
         <router-link v-if="selectedTrip" :to="`/trip/${selectedTrip.id}`" :class="$style.backTrip">
@@ -13,13 +13,13 @@
 
       <div v-else-if="isSelected" :class="$style.avia">
         <div @click="goToPage('services')">
-          <img src="/icons/air.svg" alt="air_logo" width="20" height="20" :class="$style.icon">
+          <Svg name="air" :class="$style.icon"/>
         </div>
       </div>
 
       <div v-else :class="$style.travel">
         <router-link to="/" :class="$style.logo">
-          <img src="/icons/suitcase.svg" alt="suitcase_logo" width="20" height="20">
+          <Svg name="suitcase" :class="$style.icon"/>
         </router-link>
         <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>
@@ -58,6 +58,7 @@
 import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
 import Drawer from '@/components/Drawer/Drawer.vue'
+import Svg from '@/components/UI/svg.vue'
 
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 const tripStore = useTripStore()
