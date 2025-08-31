@@ -22,23 +22,26 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
+import { ref, computed } from 'vue'
+import { onBeforeRouteLeave } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
-const tripsStore = useTripsStore()
-
 import { useModalStore } from '@/stores/modal.ts'
+
+const tripsStore = useTripsStore()
 const modalStore = useModalStore()
+const searchQuery = ref('')
 
 const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
-const searchQuery = ref('')
-const search = () => {
-  tripsStore.filterTrips(searchQuery.value)
-}
 
-const createTrip = () => {
-  modalStore.toggleDrawer()
-}
+const search = () => tripsStore.filterTrips(searchQuery.value)
+const createTrip = () => modalStore.toggleDrawer()
+
+// <-- Сбрасываем поиск при уходе со страницы
+onBeforeRouteLeave((to, from, next) => {
+  tripsStore.clearSearch()
+  searchQuery.value = ''
+  next()
+})
 </script>
 
 <style lang="scss" module>
