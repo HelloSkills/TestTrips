@@ -38,7 +38,7 @@
 
       <!-- Бронь -->
       <div :class="$style.booking">
-        <div :class="$style.bookBtn" @click="bookTicket(item)">
+        <div :class="$style.bookBtn" @click="openConfirmModal(item)">
           Забронировать от {{ formatPrice(item.price) }}
         </div>
       </div>
@@ -51,6 +51,14 @@
     <span :class="$style.noVariant">Нет подходящих вариантов</span>
     <div :class="$style.searchBack" @click="searchBack">назад к поиску</div>
   </div>
+
+  <!-- Модалка подтверждения -->
+  <UiModalConfirm
+      :isOpen="isModalOpen"
+      message="Вы точно хотите забронировать?"
+      @confirm="handleConfirm"
+      @cancel="handleCancel"
+  />
 </template>
 
 <script setup lang="ts">
@@ -59,32 +67,38 @@ import { formatPrice } from '@/utils/price.ts'
 import { formatDayMonth } from '@/utils/date.ts'
 import { useUserStore } from '@/stores/userStore'
 import { useTripStore } from '@/stores/SelectedTripStore'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
+import UiModalConfirm from '@/components/UI/UiModalConfirm.vue'
+import { useToast } from 'vue-toastification'
 
 const props = defineProps<{ variants: AviaVariant[] }>()
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()
 const router = useRouter()
-
-import { useToast } from 'vue-toastification'
 const toast = useToast()
 
 const selectedUser = computed(() => userStore.selectedUsers[0] || null)
 
-const bookTicket = async (ticket: AviaVariant) => {
-  if (!selectedUser.value) {
-    console.warn('Пользователь не выбран!')
+const isModalOpen = ref(false)
+const ticketToBook = ref<AviaVariant | null>(null)
+
+const openConfirmModal = (ticket: AviaVariant) => {
+  ticketToBook.value = ticket
+  isModalOpen.value = true
+}
+
+const handleConfirm = async () => {
+  isModalOpen.value = false
+  if (!selectedUser.value || !ticketToBook.value) {
+    console.warn('Пользователь не выбран или билет не задан!')
     return
   }
 
-  const confirmBooking = window.confirm('Вы уверены, что хотите забронировать билет?')
-  if (!confirmBooking) return
-
-  await tripStore.addService(selectedUser.value, ticket)
+  await tripStore.addService(selectedUser.value, ticketToBook.value)
 
   if (tripStore.selectedTrip) {
     router.push(`/trip/${tripStore.selectedTrip.id}`)
@@ -92,14 +106,16 @@ const bookTicket = async (ticket: AviaVariant) => {
   toast.success('Поездка успешно завершена')
 }
 
+const handleCancel = () => {
+  isModalOpen.value = false
+}
+
 const searchBack = () => {
   router.push(`/trip/${tripStore.selectedTrip.id}/services`)
 }
 </script>
 
-
 <style lang="scss" module>
-/* оставляем твои стили без изменений */
 .container {
   width: 840px;
   height: 200px;
