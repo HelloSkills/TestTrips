@@ -1,6 +1,8 @@
 <template>
   <Header :selectedTrip="selectedTrip"/>
-  <router-view :class="$style.content"/>
+  <main :class="$style.content">
+    <router-view />
+  </main>
 </template>
 
 <script setup lang="ts">
