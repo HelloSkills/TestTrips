@@ -94,6 +94,12 @@ const searchAir = async () => {
     return
   }
 
+  if (dateFrom.value > dateTo.value) {
+    toast.warning('Дата прилёта не может быть ранее даты вылета')
+    dateTo.value = null
+    return
+  }
+
   // включаем скелетон
   aviaSearchStore.setLoading(true)
 

@@ -47,7 +47,7 @@
   </div>
 
   <!-- Нет результатов -->
-  <div v-else>
+  <div v-else :class="$style.noVariant">
     Нет подходящих вариантов
   </div>
 </template>
@@ -198,5 +198,9 @@ const bookTicket = async (ticket: AviaVariant) => {
   font-size: 14px;
   display: flex;
   justify-content: center;
+}
+
+.noVariant {
+  color: #9ca3af;
 }
 </style>

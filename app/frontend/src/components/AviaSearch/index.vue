@@ -11,7 +11,7 @@
     </div>
 
     <!-- Опции сортировки -->
-    <div :class="[$style.options, !aviaSearchStore.isLoading ? '' : $style.loading]">
+    <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.filteredVariants.length > 0" :class="[$style.options, !aviaSearchStore.isLoading ? '' : $style.loading]">
       <label :class="$style.labels">
         <input
             type="radio"

@@ -40,7 +40,7 @@ import { useRoute } from 'vue-router'
 import { computed } from "vue";
 const route = useRoute()
 
-const props = defineProps<{
+defineProps<{
   price: number
   passengers: Passenger[]
   services: Services[]
