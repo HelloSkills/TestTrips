@@ -74,8 +74,6 @@ const tripId = route.params.id as string
 const userStore = useUserStore()
 const tripsStore = useTripsStore()
 
-onMounted(() => userStore.loadUsers())
-
 const props = defineProps({ isAvia: Boolean })
 const isAvia = computed(() => props.isAvia)
 
