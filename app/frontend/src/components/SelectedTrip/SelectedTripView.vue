@@ -63,5 +63,6 @@ const goToPage = () => {
 .createTravel {
   color: #4361EE;
   cursor: pointer;
+  border-bottom: 1px dashed #4361EE;
 }
 </style>
