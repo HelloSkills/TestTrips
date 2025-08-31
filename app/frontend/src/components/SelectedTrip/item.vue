@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.container" v-for="service in services" :key="service.id">
+  <div v-if="!isServicesPage" :class="$style.container" v-for="service in services" :key="service.id">
     <div :class="$style.ticketInfo">
       <div :class="$style.infoAir">
         <div :class="$style.ticketWrap">
@@ -36,13 +36,20 @@
 import type { Passenger, Services } from "@/types/types.ts"
 import { formatPrice } from "@/utils/price.ts"
 import { formatDate } from "@/utils/date.ts"
+import { useRoute } from 'vue-router'
+import { computed } from "vue";
+const route = useRoute()
 
 const props = defineProps<{
   price: number
   passengers: Passenger[]
   services: Services[]
 }>()
-console.log('props', props.services)
+
+
+const isServicesPage = computed(() => {
+  return route.path.endsWith('/services')
+})
 </script>
 
 <style lang="scss" module>
