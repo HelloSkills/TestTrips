@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import 'normalize.css'
-import '@/assets/main.scss'
+import '@/assets/main.css'
 import router from './router'
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"

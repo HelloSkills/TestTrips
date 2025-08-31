@@ -103,7 +103,11 @@ const selectUser = (user: any) => {
   }
 }
 
-onMounted(() => userStore.loadUsers()) // необходимо для списка юзеров (только в модалке)
+onMounted(() => {
+  if (route.path === '/') {
+    userStore.loadUsers()
+  }
+}) // необходимо для списка юзеров (только в модалке)
 </script>
 
 <style lang="scss" module>

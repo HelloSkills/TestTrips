@@ -54,7 +54,6 @@ const selectedTripStore = useTripStore()
 const createTrip = async () => {
   if (nameTrip.value.length === 0) {
     toast.info('Необходимо указать название поездки')
-    // alert('Необходимо указать название поездки')
     return
   }
   if (selectedUsers.value.length === 0) {

@@ -22,8 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
+import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'
 import UiSvg from '@/components/Ui/UiSvg.vue'
@@ -38,10 +37,9 @@ const search = () => tripsStore.filterTrips(searchQuery.value)
 const createTrip = () => modalStore.toggleDrawer()
 
 // <-- Сбрасываем поиск при уходе со страницы
-onBeforeRouteLeave((to, from, next) => {
+onBeforeUnmount(() => {
   tripsStore.clearSearch()
   searchQuery.value = ''
-  next()
 })
 </script>
 
