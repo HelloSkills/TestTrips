@@ -24,5 +24,6 @@ onMounted(() => {
 <style lang="scss" module>
 .content {
   margin-top: 110px;
+  margin-bottom: 50px;
 }
 </style>
