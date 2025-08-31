@@ -2,9 +2,9 @@
   <div :class="$style.container">
     <Drawer v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
-      <router-link to="/" :class="$style.logo">
+      <div :class="$style.logo">
         <img src="/images/logo.svg" @click="goToPage('trips')" width="40" height="40" alt="logo">
-      </router-link>
+      </div>
       <div v-if="isAviaPage">
         <router-link v-if="selectedTrip" :to="`/trip/${selectedTrip.id}`" :class="$style.backTrip">
           вернуться в поездку
@@ -12,14 +12,14 @@
       </div>
 
       <div v-else-if="isSelected" :class="$style.avia">
-        <div @click="goToPage('trips')">
+        <div @click="goToPage('services')">
           <img src="/icons/air.svg" alt="air_logo" width="20" height="20" :class="$style.icon">
         </div>
       </div>
 
       <div v-else :class="$style.travel">
         <router-link to="/" :class="$style.logo">
-          <img src="/icons/suitcase.svg" alt="suitcase_logo">
+          <img src="/icons/suitcase.svg" alt="suitcase_logo" width="20" height="20">
         </router-link>
         <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>
@@ -47,9 +47,9 @@
         </div>
       </template>
 
-      <router-link to="/" :class="$style.user">
+      <div :class="$style.user">
         <span :class="$style.name">AA</span>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -84,10 +84,14 @@ const props = defineProps<{
 const isSelected = computed(() => !!props.selectedTrip)
 
 const goToPage = (page: string) => {
-  tripStore.clearTrip()
+  if (page === 'services' && tripStore.selectedTrip) {
+    router.push(`/trip/${tripStore.selectedTrip.id}/services`)
+  }
 
-  if (page === 'avia') router.push(`/avia`)
-  if (page === 'trips') router.push(`/`)
+  if (page === 'trips') {
+    tripStore.clearTrip()
+    router.push(`/`)
+  }
 }
 
 const endTrip = async () => {
@@ -190,6 +194,7 @@ const showBackLink = computed(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .name {
@@ -205,5 +210,6 @@ const showBackLink = computed(() => {
   border-radius: 5px;
   background-color: #F6F8FC;
   color: #050505;
+  cursor: pointer;
 }
 </style>
