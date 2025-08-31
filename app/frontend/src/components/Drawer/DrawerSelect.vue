@@ -100,6 +100,7 @@ const selectUser = (user: any) => {
     isOpen.value = false
   } else {
     userStore.selectUser(user)
+    isOpen.value = false
   }
 }
 
