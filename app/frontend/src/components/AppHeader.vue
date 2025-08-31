@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
-import Drawer from '@/components/Drawer/index.vue'
+import Drawer from '@/components/Drawer/Drawer.vue'
 
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 const tripStore = useTripStore()

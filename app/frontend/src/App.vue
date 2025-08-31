@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import Header from "@/components/AppHeader.vue"
-import Trips from "@/components/Trips/index.vue"
+import Trips from "@/components/Trips/Trips.vue"
 import { onMounted, ref } from 'vue'
 import { getUsers, getAviaVariants, getTrips, postTrip, users, aviaVariants, trips } from "@/composables/useJsonServer.ts"
 import { useTripsStore } from '@/stores/tripsStore'

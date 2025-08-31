@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Trips from "@/components/Trips/index.vue"
-import SelectedTrip from '@/components/SelectedTrip/index.vue'
-import Drawer from '@/components/Drawer/index.vue'
-import Avia from '@/components/Avia/index.vue'
-import AviaSearch from '@/components/AviaSearch/index.vue'
+import Trips from "@/components/Trips/Trips.vue"
+import SelectedTrip from '@/components/SelectedTrip/SelectedTrip.vue'
+import Drawer from '@/components/Drawer/Drawer.vue'
+import Avia from '@/components/Avia/Avia.vue'
+import AviaSearch from '@/components/AviaSearch/AviaSearch.vue'
 
 const routes = [
     { path: '/', name: 'Trips', component: Trips },
