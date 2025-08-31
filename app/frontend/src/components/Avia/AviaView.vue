@@ -1,13 +1,13 @@
 <template>
   <div :class="$style.container">
-    <SelectUsers :isAvia="true"/>
-    <SelectAvia/>
+    <DrawerSelect :isAvia="true"/>
+    <AviaSelect/>
   </div>
 </template>
 
 <script setup lang="ts">
-import SelectUsers from "@/components/Drawer/SelectUsers.vue"
-import SelectAvia from "@/components/Avia/SelectAvia.vue"
+import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
+import AviaSelect from "@/components/Avia/AviaSelect.vue"
 </script>
 
 <style lang="scss" module>

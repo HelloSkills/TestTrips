@@ -17,7 +17,7 @@
       <div :class="$style.wrapItem" v-for="services in trip.services" :key="services.user.id">
         <div :class="$style.ticketInfo">
           <div :class="$style.ticketWrap">
-            <Svg name="air"/>
+            <UiSvg name="air"/>
             <div :class="$style.price">{{ formatPrice(services.ticket.price) }}</div>
             <div :class="$style.fromTo">{{ services.ticket.placeFrom }} ➝ {{ services.ticket.placeTo }}</div>
           </div>
@@ -56,7 +56,7 @@ import { formatPrice } from "@/utils/price.ts"
 import { useRouter } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useTripStore } from '@/stores/selectedTripStore'
-import Svg from "@/components/UI/svg.vue"
+import UiSvg from "@/components/UI/UiSvg.vue"
 
 const router = useRouter()
 const tripsStore = useTripsStore()

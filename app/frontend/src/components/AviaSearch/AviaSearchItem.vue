@@ -1,6 +1,6 @@
 <template>
   <!-- Скелетоны -->
-  <Skeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
+  <AviaSkeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
 
   <!-- Список билетов -->
   <div v-else-if="variants.length > 0" v-for="item in variants" :key="item.id" :class="$style.container">
@@ -62,7 +62,7 @@ import { useTripStore } from '@/stores/SelectedTripStore'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
-import Skeleton from '@/components/Avia/Skeleton.vue'
+import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 
 const props = defineProps<{ variants: AviaVariant[] }>()
 const userStore = useUserStore()

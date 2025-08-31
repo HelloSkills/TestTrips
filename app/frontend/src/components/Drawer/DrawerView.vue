@@ -5,7 +5,7 @@
         <div :class="$style.wrap">
           <div :class="$style.title">
             <div :class="$style.create">Создание поездки</div>
-            <Svg name="close" @click="close" :class="$style.close"/>
+            <UiSvg name="close" @click="close" :class="$style.close"/>
           </div>
           <div :class="$style.name">
             <input
@@ -16,7 +16,7 @@
                 @keyup.enter="createTrip"
             >
           </div>
-          <SelectUsers ref="selectUsersRef"/>
+          <DrawerSelect ref="selectUsersRef"/>
         </div>
         <div :class="$style.createTrip">
           <div :class="$style.createBtn" @click="createTrip">Создать</div>
@@ -28,8 +28,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import SelectUsers from "@/components/Drawer/SelectUsers.vue"
-import Svg from '@/components/Ui/svg.vue'
+import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
+import UiSvg from '@/components/Ui/UiSvg.vue'
 
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 

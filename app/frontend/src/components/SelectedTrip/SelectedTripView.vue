@@ -1,7 +1,7 @@
 <template>
   <div v-if="selectedTrip">
     <div v-if="showSearch" :class="$style.title">{{ selectedTrip.name }}</div>
-    <Item
+    <SelectedTripItem
         :passengers="passengers"
         :services="services"
         :price="price"
@@ -19,7 +19,7 @@
 import { computed } from "vue"
 import { storeToRefs } from 'pinia'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
-import Item from "@/components/SelectedTrip/item.vue"
+import SelectedTripItem from "@/components/SelectedTrip/SelectedTripItem.vue"
 const isServices = computed(() => tripStore.getServices().length > 0)
 const showSearch = computed(() => !route.path.endsWith('/services'))
 

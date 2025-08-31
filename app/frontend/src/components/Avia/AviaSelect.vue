@@ -3,7 +3,7 @@
     <div :class="$style.inputsAll">
       <!-- Город вылета -->
       <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
-        <Svg name="air" :class="$style.icon"/>
+        <UiSvg name="air" :class="$style.icon"/>
         <input
             v-model="placeFrom"
             :class="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
@@ -16,7 +16,7 @@
 
       <!-- Город прилёта -->
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
-        <Svg name="air" :class="$style.icon"/>
+        <UiSvg name="air" :class="$style.icon"/>
         <input
             v-model="placeTo"
             :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
@@ -29,7 +29,7 @@
 
       <!-- Дата туда -->
       <div :class="$style.timeFrom">
-        <Svg name="calendar" :class="$style.icon"/>
+        <UiSvg name="calendar" :class="$style.icon"/>
         <Datepicker
             v-model="dateFrom"
             placeholder="Туда"
@@ -44,7 +44,7 @@
 
       <!-- Дата обратно -->
       <div :class="$style.timerTo">
-        <Svg name="calendar" :class="$style.icon"/>
+        <UiSvg name="calendar" :class="$style.icon"/>
         <Datepicker
             v-model="dateTo"
             placeholder="Обратно"
@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
-import Svg from '@/components/Ui/svg.vue'
+import UiSvg from '@/components/Ui/UiSvg.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'

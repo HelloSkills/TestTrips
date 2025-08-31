@@ -1,26 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Trips from "@/components/Trips/Trips.vue"
-import SelectedTrip from '@/components/SelectedTrip/SelectedTrip.vue'
-import Drawer from '@/components/Drawer/Drawer.vue'
-import Avia from '@/components/Avia/Avia.vue'
-import AviaSearch from '@/components/AviaSearch/AviaSearch.vue'
+import TripsView from "@/components/Trips/TripsView.vue"
+import SelectedTripView from '@/components/SelectedTrip/SelectedTripView.vue'
+import DrawerView from '@/components/Drawer/DrawerView.vue'
+import AviaView from '@/components/Avia/AviaView.vue'
+import AviaSearchView from '@/components/AviaSearch/AviaSearchView.vue'
 
 const routes = [
-    { path: '/', name: 'Trips', component: Trips },
-    { path: '/drawer', name: 'Drawer', component: Drawer },
+    { path: '/', name: 'Trips', component: TripsView },
+    { path: '/drawer', name: 'Drawer', component: DrawerView },
     {
         path: '/trip/:id',
         name: 'SelectedTrip',
-        component: SelectedTrip,
+        component: SelectedTripView,
         children: [
             {
                 path: 'services',
                 name: 'Avia',
-                component: Avia
+                component: AviaView
             }
         ]
     },
-    { path: '/services', name: 'Services', component: AviaSearch}
+    { path: '/services', name: 'Services', component: AviaSearchView}
 ]
 
 // TODO надо сделать асинхронный компонент (лейзи загрузку)

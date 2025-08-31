@@ -1,9 +1,9 @@
 <template>
   <div :class="$style.container">
-    <Drawer v-model="modalStore.drawerOpen" />
+    <DrawerView v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
       <div :class="$style.logo">
-        <Svg name="logo" @click="goToPage('trips')" />
+        <UiSvg name="logo" @click="goToPage('trips')" />
       </div>
       <div v-if="isAviaPage">
         <router-link v-if="selectedTrip" :to="`/trip/${selectedTrip.id}`" :class="$style.backTrip">
@@ -13,13 +13,13 @@
 
       <div v-else-if="isSelected" :class="$style.avia">
         <div @click="goToPage('services')">
-          <Svg name="air" :class="$style.icon"/>
+          <UiSvg name="air" :class="$style.icon"/>
         </div>
       </div>
 
       <div v-else :class="$style.travel">
         <router-link to="/" :class="$style.logo">
-          <Svg name="suitcase" :class="$style.icon"/>
+          <UiSvg name="suitcase" :class="$style.icon"/>
         </router-link>
         <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>
@@ -57,8 +57,8 @@
 <script setup lang="ts">
 import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
-import Drawer from '@/components/Drawer/Drawer.vue'
-import Svg from '@/components/UI/svg.vue'
+import DrawerView from '@/components/Drawer/DrawerView.vue'
+import UiSvg from '@/components/UI/UiSvg.vue'
 
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 const tripStore = useTripStore()

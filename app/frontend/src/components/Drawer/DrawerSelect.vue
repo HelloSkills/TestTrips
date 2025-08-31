@@ -6,7 +6,7 @@
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
-        <Svg name="arrow_down" :class="[isOpen ? $style.open : '']"/>
+        <UiSvg name="arrow_down" :class="[isOpen ? $style.open : '']"/>
       </div>
 
       <div v-if="isOpen" :class="[$style.dropdown, isAvia ? $style.aviadropdown : '']">
@@ -30,7 +30,7 @@
           :class="$style.selectedUsers"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <Svg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
+        <UiSvg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
       </div>
     </div>
 
@@ -42,7 +42,7 @@
           :class="$style.aviaUserItem"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <Svg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
+        <UiSvg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
-import Svg from '@/components/Ui/svg.vue'
+import UiSvg from '@/components/Ui/UiSvg.vue'
 
 const route = useRoute()
 const tripId = route.params.id as string

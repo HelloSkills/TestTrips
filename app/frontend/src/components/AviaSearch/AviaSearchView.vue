@@ -44,20 +44,20 @@
 
     <!-- Скелетоны списка билетов -->
     <div v-if="aviaSearchStore.isLoading" :class="$style.skeletonList">
-      <Skeleton v-for="n in 5" :key="'skeleton-' + n"/>
+      <AviaSkeleton v-for="n in 5" :key="'skeleton-' + n"/>
     </div>
 
     <!-- Список билетов -->
     <div v-else>
-      <Item :variants="aviaSearchStore.filteredVariants"/>
+      <AviaSearchItem :variants="aviaSearchStore.filteredVariants"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import Item from '@/components/AviaSearch/item.vue'
-import Skeleton from '@/components/Avia/Skeleton.vue'
+import AviaSearchItem from '@/components/AviaSearch/AviaSearchItem.vue'
+import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 import { getAviaVariants } from '@/composables/useJsonServer.ts'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 

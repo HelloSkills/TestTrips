@@ -6761,7 +6761,51 @@
             "price": 5100
           }
         }
-      ]
+      ],
+      "status": "ended"
+    },
+    {
+      "id": "c926",
+      "name": "123",
+      "price": 29800,
+      "passengers": [
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        },
+        {
+          "id": "7",
+          "first_name": "Новиков",
+          "second_name": "Дмитрий",
+          "last_name": "Игоревич"
+        }
+      ],
+      "services": [
+        {
+          "user": {
+            "id": "3",
+            "first_name": "Попов",
+            "second_name": "Михаил",
+            "last_name": "Андреевич"
+          },
+          "ticket": {
+            "id": "311",
+            "provider": "S7",
+            "placeFrom": "Москва",
+            "placeTo": "Санкт-Петербург",
+            "dateFrom": "02-03-2025",
+            "dateTo": "02-03-2025",
+            "timeFrom": "13:43",
+            "timerTo": "21:33",
+            "iataFrom": "DME",
+            "iataTo": "LED",
+            "price": 29800
+          }
+        }
+      ],
+      "status": "ended"
     }
   ]
 }

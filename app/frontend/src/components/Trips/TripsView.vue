@@ -1,13 +1,13 @@
 <template>
   <div :class="$style.container" >
-    <Search/>
-    <Item/>
+    <TripsSearch/>
+    <TripsItem/>
   </div>
 </template>
 
 <script setup lang="ts">
-import Search from "@/components/Trips/search.vue"
-import Item from "@/components/Trips/item.vue"
+import TripsSearch from "@/components/Trips/TripsSearch.vue"
+import TripsItem from "@/components/Trips/TripsItem.vue"
 </script>
 
 <style lang="scss" module>
