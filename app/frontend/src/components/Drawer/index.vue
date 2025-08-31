@@ -91,7 +91,6 @@ const close = () => {
 </script>
 
 <style lang="scss" module>
-
 .container {
   width: 400px;
   height: 100%;
@@ -169,38 +168,44 @@ const close = () => {
   cursor: pointer;
 }
 
-// Стили overlay
+// --- overlay + drawer ---
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.4);
+  inset: 0;
   z-index: 1000;
-  opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
 }
 
 .overlay.open {
-  opacity: 1;
   pointer-events: all;
 }
 
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.open::before {
+  opacity: 1;
+}
+
 .drawer {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   width: 400px;
   height: 100%;
   background-color: #F6F8FC;
-  transform: translateX(100%); // уезжает полностью вправо за экран
+  transform: translateX(100%);
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: 1010;
+  z-index: 1;
 }
 
 .drawer.open {
-  transform: translateX(0); // выезжает на экран
+  transform: translateX(0);
 }
 </style>
