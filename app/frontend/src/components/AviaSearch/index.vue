@@ -1,17 +1,20 @@
 <template>
   <div :class="$style.container">
     <!-- Заголовок -->
-    <div v-if="!aviaSearchStore.isLoading && !aviaSearchStore.isLoading" :class="$style.title">
-      <span v-if="aviaSearchStore.searchCompleted">
-        Найдено <span :class="$style.length">{{ aviaSearchStore.filteredVariants.length }}</span> вариантов
-      </span>
-      <span v-else>
-        Поиск вариантов
-      </span>
+    <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.searchCompleted" :class="$style.title">
+      Найдено <span :class="$style.length">{{ aviaSearchStore.filteredVariants.length }}</span> вариантов
+    </div>
+    <!-- Заголовок скелетон -->
+    <div v-else-if="aviaSearchStore.isLoading" :class="$style.titleSkeleton">
+      <div :class="[$style.skeleton, $style.titleBlock]"></div>
+    </div>
+    <!-- Поиск идет -->
+    <div v-else :class="$style.title">
+      Поиск вариантов
     </div>
 
     <!-- Опции сортировки -->
-    <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.filteredVariants.length > 0" :class="[$style.options, !aviaSearchStore.isLoading ? '' : $style.loading]">
+    <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.filteredVariants.length > 0" :class="$style.options">
       <label :class="$style.labels">
         <input
             type="radio"
@@ -34,18 +37,19 @@
         Сначала дорогие
       </label>
     </div>
+    <!-- Опции сортировки скелетон -->
+    <div v-else-if="aviaSearchStore.isLoading" :class="$style.optionsSkeleton">
+      <div :class="[$style.skeleton, $style.optionsBlock]"></div>
+    </div>
 
-    <!-- Скелетоны при загрузке -->
-    <div v-if="aviaSearchStore.isLoading" :class="$style.skeleton">
-      <Skeleton v-for="n in 5" :key="'skeleton-' + n" />
+    <!-- Скелетоны списка билетов -->
+    <div v-if="aviaSearchStore.isLoading" :class="$style.skeletonList">
+      <Skeleton v-for="n in 5" :key="'skeleton-' + n"/>
     </div>
 
     <!-- Список билетов -->
     <div v-else>
-      <Item
-          :variants="aviaSearchStore.filteredVariants"
-          :tripType="aviaSearchStore.tripType"
-      />
+      <Item :variants="aviaSearchStore.filteredVariants"/>
     </div>
   </div>
 </template>
@@ -59,18 +63,13 @@ import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 
 const aviaSearchStore = useAviaSearchStore()
 
-// Сортировка с показом скелетонов
 const onChange = async () => {
   aviaSearchStore.setLoading(true)
-
-  // имитация асинхронной сортировки, если сортировка мгновенная, можно убрать setTimeout
   await new Promise(resolve => setTimeout(resolve, 300))
-
   aviaSearchStore.sortVariants(aviaSearchStore.tripType)
   aviaSearchStore.setLoading(false)
 }
 
-// Загрузка данных при монтировании
 onMounted(async () => {
   aviaSearchStore.setLoading(true)
   const items = await getAviaVariants()
@@ -88,7 +87,7 @@ onMounted(async () => {
   margin: auto;
 }
 
-.title {
+.title, .titleSkeleton {
   margin-top: 50px;
   margin-bottom: 20px;
   font-weight: 700;
@@ -99,7 +98,7 @@ onMounted(async () => {
   color: #4361EE;
 }
 
-.options {
+.options, .optionsSkeleton {
   width: 420px;
   height: 40px;
   background-color: #FFFFFF;
@@ -111,8 +110,8 @@ onMounted(async () => {
   margin-bottom: 30px;
 }
 
-.loading {
-  margin-top: 100px;
+.optionsSkeleton {
+  padding: 0;
 }
 
 .labels {
@@ -122,4 +121,39 @@ onMounted(async () => {
   font-size: 14px;
 }
 
+.skeleton {
+  background: linear-gradient(
+          90deg,
+          #e0e0e0 25%,
+          #f8f8f8 50%,
+          #e0e0e0 75%
+  );
+  background-size: 250% 100%;
+  border-radius: 4px;
+  animation: shimmer 1.2s linear infinite, pulse 2s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  animation-fill-mode: both;
+}
+
+/* Скелетоны для заголовка и фильтров */
+.titleBlock {
+  width: 300px;
+  height: 30px;
+}
+
+.optionsBlock {
+  width: 420px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; filter: brightness(0.95); }
+  50% { opacity: 1; filter: brightness(1.05); }
+}
 </style>

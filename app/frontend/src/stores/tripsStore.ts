@@ -67,7 +67,6 @@ export const useTripsStore = defineStore('trips', {
         getUsersForTrip(id: string | number) {
             const trip = this.trips.find(trip => trip.id.toString() === id.toString())
             const users = trip ? trip.passengers : []
-            console.log(`Участники поездки ${id}:`, users)
             return users
         },
 
