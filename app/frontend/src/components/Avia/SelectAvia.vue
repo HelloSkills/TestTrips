@@ -94,7 +94,20 @@ const searchAir = async () => {
     return
   }
 
-  if (dateFrom.value > dateTo.value) {
+  // хотя бы один город обязателен
+  if (!placeFrom.value && !placeTo.value) {
+    toast.warning('Необходимо указать город')
+    return
+  }
+
+  // если указана дата туда, то город должен быть
+  if (dateFrom.value && (!placeFrom.value && !placeTo.value)) {
+    toast.warning('Необходимо указать город')
+    return
+  }
+
+  // проверка дат
+  if (dateFrom.value && dateTo.value && dateFrom.value > dateTo.value) {
     toast.warning('Дата прилёта не может быть ранее даты вылета')
     dateTo.value = null
     return
@@ -106,7 +119,6 @@ const searchAir = async () => {
   // сразу переходим на страницу услуг
   router.push(`/services`)
 
-  // запускаем загрузку в фоне
   try {
     const items = await getAviaVariants()
     aviaSearchStore.setVariants(items)
@@ -123,7 +135,6 @@ const searchAir = async () => {
   } catch (err) {
     console.error('Ошибка загрузки вариантов:', err)
   } finally {
-    // выключаем скелетон после загрузки
     aviaSearchStore.setLoading(false)
   }
 }
