@@ -10,7 +10,6 @@
             type="text"
             placeholder="Город вылета"
             @focus="onFocus('placeFrom')"
-            @blur="onBlur('placeFrom', placeFrom)"
             @keyup.enter="searchAir"
         />
       </div>
@@ -24,7 +23,6 @@
             type="text"
             placeholder="Город прилёта"
             @focus="onFocus('placeTo')"
-            @blur="onBlur('placeTo', placeTo)"
             @keyup.enter="searchAir"
         />
       </div>
@@ -94,21 +92,15 @@ interface IError {
   shake: boolean
 }
 
-const errors = ref<{ placeFrom: IError, placeTo: IError }>({
+const errors = ref<{ placeFrom: IError; placeTo: IError }>({
   placeFrom: { show: false, shake: false },
   placeTo: { show: false, shake: false }
 })
 
 const onFocus = (field: 'placeFrom' | 'placeTo') => {
+  // При фокусе снимаем рамку и шейк
   errors.value[field].show = false
   errors.value[field].shake = false
-}
-
-const onBlur = (field: 'placeFrom' | 'placeTo', value: string) => {
-  if (!value.trim()) {
-    errors.value[field].show = true
-    errors.value[field].shake = false
-  }
 }
 
 const searchAir = async () => {
@@ -134,7 +126,7 @@ const searchAir = async () => {
   }
 
   if (hasError) {
-    toast.warning('Необходимо указать город')
+    toast.warning('Необходимо указать город вылета и прилёта')
     return
   }
 
@@ -198,7 +190,10 @@ const searchAir = async () => {
   flex: 1;
 }
 
-.placeFrom, .placeTo, .timeFrom, .timerTo {
+.placeFrom,
+.placeTo,
+.timeFrom,
+.timerTo {
   display: flex;
   flex-direction: row;
   align-items: center;
