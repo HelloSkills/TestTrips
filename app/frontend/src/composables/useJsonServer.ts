@@ -4,45 +4,93 @@ import axios from "axios"
 
 const BACKEND_URL = "http://localhost:3000"
 
-export const users = ref<User[]>([])
-export const aviaVariants = ref<AviaVariant[]>([])
-export const trips = ref<Trip[]>([])
+export function useJsonServer() {
+    const users = ref<User[]>([])
+    const aviaVariants = ref<AviaVariant[]>([])
+    const trips = ref<Trip[]>([])
 
-// Юзеры
-export const getUsers = async () => {
-    return users.value = (await axios.get<User[]>(`${BACKEND_URL}/users`)).data
-}
+    // Юзеры
+    const getUsers = async () => {
+        try {
+            const res = await axios.get<User[]>(`${BACKEND_URL}/users`)
+            users.value = res.data
+            return users.value
+        } catch (error) {
+            console.error('Ошибка при загрузке пользователей:', error)
+            return []
+        }
+    }
 
-// Услуги
-export const getAviaVariants = async () => {
-    return aviaVariants.value = (await axios.get<AviaVariant[]>(`${BACKEND_URL}/aviaVariants`)).data
-}
+    // Услуги
+    const getAviaVariants = async () => {
+        try {
+            const res = await axios.get<AviaVariant[]>(`${BACKEND_URL}/aviaVariants`)
+            aviaVariants.value = res.data
+            return aviaVariants.value
+        } catch (error) {
+            console.error('Ошибка при загрузке авиа-услуг:', error)
+            return []
+        }
+    }
 
-// Поездки
+    // Поездки
+    const getTrips = async () => {
+        try {
+            const res = await axios.get<Trip[]>(`${BACKEND_URL}/trips`)
+            trips.value = res.data
+            return trips.value
+        } catch (error) {
+            console.error('Ошибка при загрузке поездок:', error)
+            return []
+        }
+    }
 
-// Получаем все поездки
-export const getTrips = async () => {
-    return trips.value = (await axios.get<Trip[]>(`${BACKEND_URL}/trips`)).data
-}
+    // Добавляем новую поездку
+    const postTrip = async (tripData: Omit<Trip, 'id' | 'status'> & { status?: 'new' | 'ended' | null }) => {
+        try {
+            const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
+            return res.data
+        } catch (error) {
+            console.error('Ошибка при создании поездки:', error)
+            return null
+        }
+    }
 
-// Добавляем новую поездку с полем status
-export const postTrip = async (tripData: Omit<Trip, 'id' | 'status'> & { status?: 'new' | 'ended' | null }) => {
-    const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
-    return res.data
-}
+    // Обновляем статус поездки
+    const updateTripStatus = async (id: number, status: 'new' | 'ended' | null) => {
+        try {
+            const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${id}`, { status })
+            return res.data
+        } catch (error) {
+            console.error(`Ошибка при обновлении статуса поездки ${id}:`, error)
+            return null
+        }
+    }
 
-// composables/useJsonServer.ts
-export const updateTripStatus = async (id: number, status: 'new' | 'ended' | null) => {
-    const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${id}`, { status })
-    return res.data
-}
+    // Обновляем услуги поездки (добавляем билет + юзера, обновляем price)
+    const patchTripServices = async (
+        tripId: number | string,
+        services: { user: User; ticket: AviaVariant }[],
+        price: number
+    ) => {
+        try {
+            const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${tripId}`, { services, price })
+            return res.data
+        } catch (error) {
+            console.error(`Ошибка при обновлении услуг поездки ${tripId}:`, error)
+            return null
+        }
+    }
 
-// Обновляем services поездки (добавляем билет + юзера и обновляем price)
-export const patchTripServices = async (
-    tripId: number | string,
-    services: { user: User; ticket: AviaVariant }[],
-    price: number
-) => {
-    const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${tripId}`, { services, price })
-    return res.data
+    return {
+        users,
+        aviaVariants,
+        trips,
+        getUsers,
+        getAviaVariants,
+        getTrips,
+        postTrip,
+        updateTripStatus,
+        patchTripServices
+    }
 }

@@ -103,7 +103,7 @@ const handleConfirm = async () => {
   if (tripStore.selectedTrip) {
     router.push(`/trip/${tripStore.selectedTrip.id}`)
   }
-  toast.success('Поездка успешно завершена')
+  toast.success('Поездка успешно забронирована')
 }
 
 const handleCancel = () => {

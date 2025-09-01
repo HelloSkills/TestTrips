@@ -58,10 +58,11 @@
 import { onMounted } from 'vue'
 import AviaSearchItem from '@/components/AviaSearch/AviaSearchItem.vue'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
-import { getAviaVariants } from '@/composables/useJsonServer.ts'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
+import { useJsonServer } from '@/composables/useJsonServer'
 
 const aviaSearchStore = useAviaSearchStore()
+const { getAviaVariants } = useJsonServer()
 
 const onChange = async () => {
   aviaSearchStore.setLoading(true)
@@ -72,10 +73,15 @@ const onChange = async () => {
 
 onMounted(async () => {
   aviaSearchStore.setLoading(true)
-  const items = await getAviaVariants()
-  aviaSearchStore.setVariants(items)
-  aviaSearchStore.applyFilters()
-  aviaSearchStore.setLoading(false)
+  try {
+    const items = await getAviaVariants()
+    aviaSearchStore.setVariants(items)
+    aviaSearchStore.applyFilters()
+  } catch (err) {
+    console.error('Ошибка загрузки вариантов:', err)
+  } finally {
+    aviaSearchStore.setLoading(false)
+  }
 })
 </script>
 

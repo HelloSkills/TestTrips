@@ -1,7 +1,6 @@
-// stores/tripsStore.ts
 import { defineStore } from 'pinia'
 import type { Trip } from '@/types/types.ts'
-import { getTrips, postTrip, updateTripStatus } from '@/composables/useJsonServer.ts'
+import { useJsonServer } from '@/composables/useJsonServer.ts'
 
 export const useTripsStore = defineStore('trips', {
     state: () => ({
@@ -12,6 +11,7 @@ export const useTripsStore = defineStore('trips', {
 
     actions: {
         async loadTrips() {
+            const { getTrips } = useJsonServer()
             const trips = await getTrips()
             this.trips = trips.map(t => ({ ...t, status: t.status ?? null }))
             this.filteredTrips = [...this.trips]
@@ -29,6 +29,7 @@ export const useTripsStore = defineStore('trips', {
         },
 
         async createTrip(newTrip: Omit<Trip, 'id'>) {
+            const { postTrip } = useJsonServer()
             const createdTrip = await postTrip({ ...newTrip, status: 'new' })
             this.trips.push(createdTrip)
             this.filteredTrips.push(createdTrip)
@@ -36,10 +37,11 @@ export const useTripsStore = defineStore('trips', {
         },
 
         async setTripStatus(id: number, status: 'new' | 'ended' | null) {
+            const { updateTripStatus } = useJsonServer()
             const updatedTrip = await updateTripStatus(id, status)
             const trip = this.trips.find(t => t.id === id)
-            if (trip) trip.status = updatedTrip.status
-            if (this.selectedTrip?.id === id) this.selectedTrip.status = updatedTrip.status
+            if (trip && updatedTrip) trip.status = updatedTrip.status
+            if (this.selectedTrip?.id === id && updatedTrip) this.selectedTrip.status = updatedTrip.status
         },
 
         getUsersForTrip(id: string | number) {

@@ -72,7 +72,7 @@ import UiSvg from '@/components/Ui/UiSvg.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
-import { getAviaVariants } from '@/composables/useJsonServer.ts'
+import { useJsonServer } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/date.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useToast } from 'vue-toastification'
@@ -81,6 +81,8 @@ const userStore = useUserStore()
 const router = useRouter()
 const aviaSearchStore = useAviaSearchStore()
 const toast = useToast()
+
+const { getAviaVariants } = useJsonServer()
 
 const placeFrom = ref('')
 const placeTo = ref('')
@@ -98,49 +100,39 @@ const errors = ref<{ placeFrom: IError; placeTo: IError }>({
 })
 
 const onFocus = (field: 'placeFrom' | 'placeTo') => {
-  // При фокусе снимаем рамку и шейк
   errors.value[field].show = false
   errors.value[field].shake = false
 }
 
 const searchAir = async () => {
-  // Проверка выбора пассажиров
   if (!userStore.selectedUsers.length) {
     toast.info('Необходимо выбрать хотя бы 1 пассажира')
     return
   }
 
   let hasError = false
-
-  // Проверка городов
   if (!placeFrom.value.trim()) {
     errors.value.placeFrom.show = true
     errors.value.placeFrom.shake = true
     hasError = true
   }
-
   if (!placeTo.value.trim()) {
     errors.value.placeTo.show = true
     errors.value.placeTo.shake = true
     hasError = true
   }
-
   if (hasError) {
     toast.warning('Необходимо указать город вылета и прилёта')
     return
   }
 
-  // Проверка дат
   if (dateFrom.value && dateTo.value && dateFrom.value > dateTo.value) {
     toast.warning('Дата прилёта не может быть ранее даты вылета')
     dateTo.value = null
     return
   }
 
-  // Включаем скелетон
   aviaSearchStore.setLoading(true)
-
-  // Переход на страницу услуг
   router.push('/services')
 
   try {

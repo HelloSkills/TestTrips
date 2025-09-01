@@ -1,19 +1,26 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { User } from '@/types/types'
-import { getUsers } from '@/composables/useJsonServer'
-import { useRouter } from "vue-router"
+import { useJsonServer } from '@/composables/useJsonServer'
+import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-const toast = useToast()
 
 export const useUserStore = defineStore('user', () => {
     const users = ref<User[]>([])
     const selectedUsers = ref<User[]>([])
     const router = useRouter()
+    const toast = useToast()
 
-    // Получаем юзеров из useJsonServer
+    const { getUsers } = useJsonServer()
+
+    // Получаем юзеров через composable
     const loadUsers = async () => {
-        users.value = await getUsers()
+        try {
+            users.value = await getUsers()
+        } catch (err) {
+            console.error('Ошибка загрузки пользователей:', err)
+            toast.error('Не удалось загрузить список пользователей')
+        }
     }
 
     // Выбираем пользователя
@@ -22,7 +29,6 @@ export const useUserStore = defineStore('user', () => {
             toast.info('Нельзя выбрать более 10 сотрудников')
             return
         }
-
         if (!selectedUsers.value.find(u => u.id === user.id)) {
             selectedUsers.value.push(user)
         }
@@ -33,23 +39,21 @@ export const useUserStore = defineStore('user', () => {
         selectedUsers.value = selectedUsers.value.filter(u => u.id !== id)
     }
 
-    // Удаляем выбранных пользователей при закрытии
+    // Очищаем выбранных пользователей
     const clearSelectedUsers = () => {
         selectedUsers.value = []
     }
 
+    // Очистка при переходе на другую страницу
     router.afterEach((to) => {
-        // Если не переходим на /services, очищаем выбор
         if (to.path !== '/services') {
             clearSelectedUsers()
         }
     })
 
-    // Список доступных (не выбранных) пользователей
+    // Доступные пользователи (не выбранные)
     const availableUsers = computed(() => {
-        return users.value.filter(
-            u => !selectedUsers.value.some(sel => sel.id === u.id)
-        )
+        return users.value.filter(u => !selectedUsers.value.some(sel => sel.id === u.id))
     })
 
     return {
