@@ -2,13 +2,14 @@
   <!-- Скелетоны -->
   <AviaSkeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
 
-  <!-- Список билетов с виртуальным скроллом и стандартным скроллом браузера -->
+  <!-- Список билетов с виртуальным скроллом -->
   <div v-else-if="variants.length > 0" :class="$style.listContainer">
     <DynamicScroller
         :items="variants"
         :min-item-size="220"
         key-field="id"
         :page-mode="true"
+        :buffer="100"
     >
       <template #default="{ item, active }">
         <DynamicScrollerItem
@@ -17,8 +18,7 @@
             :size-dependencies="[]"
             :class="$style.container"
         >
-          <!-- Добавлен обертывающий элемент для отступов -->
-          <div :class="$style.spacer">
+          <div>
             <div :class="$style.wrapper">
 
               <!-- Информация о билете -->
@@ -148,19 +148,19 @@ const searchBack = () => {
 
 .container {
   width: 100%;
-  height: 220px; /* Увеличена на 20px для отступа */
+  height: 220px; // отвечает за отступ
 }
 
 /* Новый класс для создания отступа */
-.spacer {
-  height: 200px; /* Реальная высота элемента */
-  margin-bottom: 20px; /* Теперь отступ работает корректно */
-  width: 100%;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
+//.spacer {
+//  height: 200px; /* Реальная высота элемента */
+//  margin-bottom: 20px; /* Теперь отступ работает корректно */
+//  width: 100%;
+//
+//  &:last-child {
+//    margin-bottom: 0;
+//  }
+//}
 
 .wrapper {
   display: flex;
@@ -169,6 +169,7 @@ const searchBack = () => {
   height: 100%;
   background-color: var(--color-white);
   border-radius: 10px;
+  //box-sizing: border-box;
 }
 
 .ticketInfo {
@@ -247,7 +248,6 @@ const searchBack = () => {
   display: flex;
   justify-content: end;
   margin-top: 20px;
-  cursor: pointer;
 }
 
 .bookBtn {
@@ -261,6 +261,7 @@ const searchBack = () => {
   font-size: 14px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .noVariant {
