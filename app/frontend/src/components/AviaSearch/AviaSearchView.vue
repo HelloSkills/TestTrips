@@ -100,13 +100,13 @@ onMounted(async () => {
 }
 
 .length {
-  color: #4361EE;
+  color: var(--color-blue);
 }
 
 .options, .optionsSkeleton {
   width: 420px;
   height: 40px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 10px;
   display: flex;
   align-items: center;

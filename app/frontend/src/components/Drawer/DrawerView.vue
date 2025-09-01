@@ -99,7 +99,7 @@ const close = () => {
 .container {
   width: 400px;
   height: 100%;
-  background-color: #F6F8FC;
+  background-color: var(--color-gray);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -112,7 +112,7 @@ const close = () => {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: #FFFFFF;
+  background: var(--color-white);
   border-bottom: 1px solid #B3C1D1;
 }
 
@@ -144,7 +144,7 @@ const close = () => {
   }
 
   &:focus {
-    border-bottom: 1px solid #4361EE;
+    border-bottom: 1px solid var(--color-blue);
   }
 }
 
@@ -155,7 +155,7 @@ const close = () => {
 .createTrip {
   border-top: 1px solid #B3C1D1;
   height: 60px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   display: flex;
   align-items: center;
 }
@@ -165,8 +165,8 @@ const close = () => {
   height: 40px;
   margin-left: 20px;
   padding: 12px 47px;
-  background-color: #4361EE;
-  color: #FFFFFF;
+  background-color: var(--color-blue);
+  color: var(--color-white);
   font-size: 14px;
   line-height: 14px;
   border-radius: 5px;
@@ -204,7 +204,7 @@ const close = () => {
   right: 0;
   width: 400px;
   height: 100%;
-  background-color: #F6F8FC;
+  background-color: var(--color-gray);
   transform: translateX(100%);
   transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1;

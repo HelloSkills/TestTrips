@@ -80,7 +80,7 @@ const cancel = () => emit('cancel')
 }
 
 .confirmBtn {
-  background-color: #4361EE;
+  background-color: var(--color-blue);
   width: 80px;
 }
 

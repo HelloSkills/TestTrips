@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
   justify-content: start;
   padding-left: 20px;
   border-radius: 5px;
-  background: #FFFFFF;
+  background: var(--color-white);
 }
 
 .inputSearch {
@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
   }
 
   &:focus {
-    border-bottom: 1px solid #4361EE;
+    border-bottom: 1px solid var(--color-blue);
     width: 265px;
   }
 }
@@ -94,8 +94,8 @@ onBeforeUnmount(() => {
   all: unset;
   width: 137px;
   height: 54px;
-  background: #4361EE;
-  color: #FFFFFF;
+  background: var(--color-blue);
+  color: var(--color-white);
   font-size: 14px;
   border-radius: 5px;
   display: flex;
@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
 }
 
 .createTravel {
-  color: #4361EE;
+  color: var(--color-blue);
   cursor: pointer;
 }
 </style>

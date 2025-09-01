@@ -105,7 +105,7 @@ const isServicesPage = computed(() => {
   height: 50px;
   width: 800px;
   padding: 10px;
-  background: #F6F8FC;
+  background: var(--color-gray);
   margin: 20px auto 0;
   border-radius: 5px;
 }
@@ -115,7 +115,7 @@ const isServicesPage = computed(() => {
   font-size: 12px;
   font-weight: 400;
   border-radius: 5px;
-  background: #FFFFFF;
+  background: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;

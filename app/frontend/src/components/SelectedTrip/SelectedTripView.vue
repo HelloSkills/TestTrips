@@ -46,7 +46,7 @@ const goToPage = () => {
   min-width: 840px;
   font-weight: 700;
   font-size: 26px;
-  color: #4361EE;
+  color: var(--color-blue);
 }
 
 .list {
@@ -61,8 +61,8 @@ const goToPage = () => {
 }
 
 .createTravel {
-  color: #4361EE;
+  color: var(--color-blue);
   cursor: pointer;
-  border-bottom: 1px dashed #4361EE;
+  border-bottom: 1px dashed var(--color-blue);
 }
 </style>

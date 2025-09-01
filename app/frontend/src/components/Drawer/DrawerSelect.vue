@@ -137,13 +137,18 @@ onMounted(() => {
   cursor: pointer;
 }
 
+.users {
+  color: #d7d7d7;
+}
+
 .dropdown {
   max-height: 288px;
   overflow-y: auto;
   margin: 0 20px;
-  background: #ffffff;
+  background: var(--color-white);
   border-radius: 5px;
   border: 1px solid #dddddd;
+  color: var(--color-black);
 }
 
 .aviadropdown {
@@ -174,7 +179,8 @@ onMounted(() => {
   align-items: center;
   margin: 20px;
   padding-left: 15px;
-  background-color: #ffffff;
+  background-color: var(--color-white);
+  color: var(--color-black);
   position: relative;
   border-radius: 5px;
 }
@@ -193,7 +199,7 @@ onMounted(() => {
 .aviaUserItem {
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   padding: 5px 10px;
   border-radius: 5px;
   position: relative;

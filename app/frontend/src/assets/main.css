@@ -1,3 +1,11 @@
+/* Объявляем глобальные CSS-переменные */
+:root {
+  --color-white: #FFFFFF;
+  --color-gray: #F6F8FC;
+  --color-blue: #4361EE;
+  --color-black: #050505;
+}
+
 /* Глобальный сброс box-sizing */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -5,29 +13,22 @@
   padding: 0;
 }
 
+body {
+  background-color: var(--color-gray);
+  color: var(--color-black);
+  font-family: 'Roboto', sans-serif;
+}
+
 a {
   all: unset;
   cursor: pointer;
   display: inline-block;
   text-decoration: none;
-  color: #4361EE;
+  color: var(--color-blue);
 }
 
-body {
-  background-color: #F6F8FC;
-  color: #050505;
-  font-family: 'Roboto', sans-serif;
-}
-
-/*Изменяем стили Toast оповещений*/
-
+/* Изменяем стили Toast оповещений */
 .Vue-Toastification__toast {
   padding: 16px;
   min-height: revert;
 }
-
-/*Можно убрать скролл - опционально*/
-
-/*.no-scroll {*/
-/*  overflow: hidden;*/
-/*}*/

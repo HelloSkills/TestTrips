@@ -163,7 +163,7 @@ const searchAir = async () => {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   height: 140px;
   padding: 20px;
 }
@@ -190,7 +190,7 @@ const searchAir = async () => {
   flex-direction: row;
   align-items: center;
   gap: 5px;
-  background-color: #F6F8FC;
+  background-color: var(--color-gray);
   border-radius: 5px;
   padding: 10px;
   border: 1px solid transparent;
@@ -210,9 +210,9 @@ const searchAir = async () => {
 }
 
 .search {
-  background-color: #4361EE;
+  background-color: var(--color-blue);
   height: 40px;
-  color: #FFFFFF;
+  color: var(--color-white);
   font-size: 14px;
   line-height: 14px;
   padding: 12px 70px;

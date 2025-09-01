@@ -122,8 +122,8 @@ const showBackLink = computed(() => {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: #FFFFFF;
-  color: #4361EE;
+  background: var(--color-white);
+  color: var(--color-blue);
   position: fixed;
   top: 0;
   left: 0;
@@ -152,7 +152,7 @@ const showBackLink = computed(() => {
 .avia {
   width: 30px;
   height: 30px;
-  background: #F6F8FC;
+  background: var(--color-gray);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -180,8 +180,8 @@ const showBackLink = computed(() => {
 
 .endTrip {
   height: 30px;
-  background: #4361EE;
-  color: #FFFFFF;
+  background: var(--color-blue);
+  color: var(--color-white);
   padding: 7px 30px;
   border-radius: 5px;
   font-size: 14px;
@@ -195,7 +195,7 @@ const showBackLink = computed(() => {
   height: 36px;
   min-width: 36px;
   min-height: 36px;
-  background: #4361EE;
+  background: var(--color-blue);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@ const showBackLink = computed(() => {
 }
 
 .name {
-  color: #FFFFFF;
+  color: var(--color-white);
 }
 
 .backTrip {
@@ -214,8 +214,8 @@ const showBackLink = computed(() => {
   display: flex;
   align-items: center;
   border-radius: 5px;
-  background-color: #F6F8FC;
-  color: #050505;
+  background-color: var(--color-gray);
+  color: var(--color-black);
   cursor: pointer;
 }
 </style>

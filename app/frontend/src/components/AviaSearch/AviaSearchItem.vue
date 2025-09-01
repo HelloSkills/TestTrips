@@ -123,7 +123,7 @@ const searchBack = () => {
 .container {
   width: 840px;
   height: 200px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -182,7 +182,7 @@ const searchBack = () => {
 }
 
 .iata {
-  color: #4361EE;
+  color: var(--color-blue);
   font-weight: 700;
 }
 
@@ -213,8 +213,8 @@ const searchBack = () => {
 }
 
 .bookBtn {
-  color: #FFFFFF;
-  background-color: #4361EE;
+  color: var(--color-white);
+  background-color: var(--color-blue);
   width: 250px;
   height: 40px;
   border-radius: 5px;
@@ -234,7 +234,7 @@ const searchBack = () => {
 }
 
 .searchBack {
-  color: #4361EE;
+  color: var(--color-blue);
   cursor: pointer;
   display: flex;
   align-items: center;

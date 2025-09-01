@@ -73,7 +73,7 @@ function goToTrip(trip: Trip) {
   width: 840px;
   height: max-content;
   margin-top: 20px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 10px;
 }
 
@@ -91,7 +91,7 @@ function goToTrip(trip: Trip) {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #F6F8FC;
+  background: var(--color-gray);
   margin: 10px 20px;
   padding: 10px;
   border-radius: 5px;
@@ -109,7 +109,7 @@ function goToTrip(trip: Trip) {
   width: max-content;
   height: 20px;
   padding: 4px 30px;
-  color: #FFFFFF;
+  color: var(--color-white);
   font-size: 12px;
   line-height: 12px;
   border-top-right-radius: 10px;
@@ -122,7 +122,7 @@ function goToTrip(trip: Trip) {
 }
 
 .new {
-  background-color: #4361EE;
+  background-color: var(--color-blue);
 }
 
 .ended {
@@ -134,7 +134,7 @@ function goToTrip(trip: Trip) {
 }
 
 .price {
-  color: #4361EE;
+  color: var(--color-blue);
 }
 
 .name {
@@ -165,7 +165,7 @@ function goToTrip(trip: Trip) {
   padding: 20px;
   margin-top: 20px;
   border-top: 1px solid #DDE2EB;
-  color: #4361EE;
+  color: var(--color-blue);
   cursor: pointer;
 }
 </style>

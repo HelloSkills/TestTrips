@@ -79,7 +79,7 @@
 .container {
   width: 840px;
   height: 200px;
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   border-radius: 10px;
   margin-bottom: 20px;
   overflow: hidden;
