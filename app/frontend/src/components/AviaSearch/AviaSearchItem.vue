@@ -2,48 +2,67 @@
   <!-- Скелетоны -->
   <AviaSkeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
 
-  <!-- Список билетов -->
-  <div v-else-if="variants.length > 0" v-for="item in variants" :key="item.id" :class="$style.container">
-    <div :class="$style.wrapper">
+  <!-- Список билетов с виртуальным скроллом и стандартным скроллом браузера -->
+  <div v-else-if="variants.length > 0" :class="$style.listContainer">
+    <DynamicScroller
+        :items="variants"
+        :min-item-size="220"
+        key-field="id"
+        :page-mode="true"
+    >
+      <template #default="{ item, active }">
+        <DynamicScrollerItem
+            :item="item"
+            :active="active"
+            :size-dependencies="[]"
+            :class="$style.container"
+        >
+          <!-- Добавлен обертывающий элемент для отступов -->
+          <div :class="$style.spacer">
+            <div :class="$style.wrapper">
 
-      <!-- Информация о билете -->
-      <div :class="$style.ticketInfo">
-        <div :class="$style.name">
-          Перевозчик: {{ item.provider }}
-        </div>
-        <div :class="$style.dateTime">
-          <div :class="$style.dateFrom">
-            <div :class="$style.time">{{ item.timeFrom }}</div>
-            <div :class="$style.date">{{ formatDayMonth(item.dateFrom) }}</div>
-          </div>
+              <!-- Информация о билете -->
+              <div :class="$style.ticketInfo">
+                <div :class="$style.name">
+                  Перевозчик: {{ item.provider }}
+                </div>
+                <div :class="$style.dateTime">
+                  <div :class="$style.dateFrom">
+                    <div :class="$style.time">{{ item.timeFrom }}</div>
+                    <div :class="$style.date">{{ formatDayMonth(item.dateFrom) }}</div>
+                  </div>
 
-          <div :class="$style.cityInfo">
-            <div :class="$style.cities">
-              <div :class="$style.cityFrom">{{ item.placeFrom }}</div>
-              <div :class="$style.cityTo">{{ item.placeTo }}</div>
+                  <div :class="$style.cityInfo">
+                    <div :class="$style.cities">
+                      <div :class="$style.cityFrom">{{ item.placeFrom }}</div>
+                      <div :class="$style.cityTo">{{ item.placeTo }}</div>
+                    </div>
+                    <div :class="$style.line"></div>
+                    <div :class="$style.iata">
+                      <div :class="$style.iataFrom">{{ item.iataFrom }}</div>
+                      <div :class="$style.iataTo">{{ item.iataTo }}</div>
+                    </div>
+                  </div>
+
+                  <div :class="$style.dateTo">
+                    <div :class="$style.time">{{ item.timerTo }}</div>
+                    <div :class="$style.date">{{ formatDayMonth(item.dateTo) }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Бронь -->
+              <div :class="$style.booking">
+                <div :class="$style.bookBtn" @click="openConfirmModal(item)">
+                  Забронировать от {{ formatPrice(item.price) }}
+                </div>
+              </div>
+
             </div>
-            <div :class="$style.line"></div>
-            <div :class="$style.iata">
-              <div :class="$style.iataFrom">{{ item.iataFrom }}</div>
-              <div :class="$style.iataTo">{{ item.iataTo }}</div>
-            </div>
           </div>
-
-          <div :class="$style.dateTo">
-            <div :class="$style.time">{{ item.timerTo }}</div>
-            <div :class="$style.date">{{ formatDayMonth(item.dateTo) }}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Бронь -->
-      <div :class="$style.booking">
-        <div :class="$style.bookBtn" @click="openConfirmModal(item)">
-          Забронировать от {{ formatPrice(item.price) }}
-        </div>
-      </div>
-
-    </div>
+        </DynamicScrollerItem>
+      </template>
+    </DynamicScroller>
   </div>
 
   <!-- Нет результатов -->
@@ -73,6 +92,8 @@ import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 import UiModalConfirm from '@/components/UI/UiModalConfirm.vue'
 import { useToast } from 'vue-toastification'
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 interface IProps {
   variants: AviaVariant[]
@@ -120,18 +141,34 @@ const searchBack = () => {
 </script>
 
 <style lang="scss" module>
-.container {
+.listContainer {
   width: 840px;
-  height: 200px;
-  background-color: var(--color-white);
-  border-radius: 10px;
-  margin-bottom: 20px;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  height: 220px; /* Увеличена на 20px для отступа */
+}
+
+/* Новый класс для создания отступа */
+.spacer {
+  height: 200px; /* Реальная высота элемента */
+  margin-bottom: 20px; /* Теперь отступ работает корректно */
+  width: 100%;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .wrapper {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  height: 100%;
+  background-color: var(--color-white);
+  border-radius: 10px;
 }
 
 .ticketInfo {
@@ -142,6 +179,7 @@ const searchBack = () => {
   margin-right: -20px;
   padding-left: 20px;
   padding-right: 20px;
+  flex: 1;
 }
 
 .name {
