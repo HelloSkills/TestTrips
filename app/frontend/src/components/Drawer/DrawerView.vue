@@ -16,7 +16,7 @@
                 @keyup.enter="createTrip"
             >
           </div>
-          <DrawerSelect ref="selectUsersRef"/>
+          <DrawerSelect ref="selectUsersRef" :isAvia="false"/>
         </div>
         <div :class="$style.createTrip">
           <div :class="$style.createBtn" @click="createTrip">Создать</div>
