@@ -39,12 +39,12 @@ import { useRoute } from 'vue-router'
 import { computed } from "vue";
 const route = useRoute()
 
-defineProps<{
+interface IProps {
   price: number
   passengers: Passenger[]
   services: Services[]
-}>()
-
+}
+const props = defineProps<IProps>()
 
 const isServicesPage = computed(() => {
   return route.path.endsWith('/services')

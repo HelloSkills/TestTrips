@@ -2,7 +2,10 @@
 import { defineProps, computed } from 'vue'
 
 // Пропс name определяет, какой SVG показывать
-const props = defineProps<{ name: string }>()
+interface IProps {
+  name: string
+}
+const props = defineProps<IProps>()
 
 // Импорт всех SVG через ?raw
 import LogoSvg from '@/images/logo.svg?raw'

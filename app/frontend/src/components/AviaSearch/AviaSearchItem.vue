@@ -74,7 +74,11 @@ import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 import UiModalConfirm from '@/components/UI/UiModalConfirm.vue'
 import { useToast } from 'vue-toastification'
 
-const props = defineProps<{ variants: AviaVariant[] }>()
+interface IProps {
+  variants: AviaVariant[]
+}
+const props = defineProps<IProps>()
+
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()

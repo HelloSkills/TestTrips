@@ -76,11 +76,16 @@ const createTrip = async () => {
   toast.success(`Поездка успешно создана`)
 }
 
-const props = defineProps({
-  modelValue: Boolean
-})
+interface IProps {
+  modelValue: boolean
+}
+const props = defineProps<IProps>()
 
-const emit = defineEmits(['update:modelValue'])
+interface IEmits {
+  (event: 'update:modelValue', value: boolean): void
+}
+const emit = defineEmits<IEmits>()
+
 const close = () => {
   emit('update:modelValue', false)
   userStore.clearSelectedUsers()

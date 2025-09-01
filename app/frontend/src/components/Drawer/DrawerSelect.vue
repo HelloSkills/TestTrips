@@ -61,7 +61,11 @@ const tripId = route.params.id as string
 const userStore = useUserStore()
 const tripsStore = useTripsStore()
 
-const props = defineProps({ isAvia: Boolean })
+interface IProps {
+  isAvia: boolean
+}
+
+const props = defineProps<IProps>()
 const isAvia = computed(() => props.isAvia)
 
 const isOpen = ref(false)

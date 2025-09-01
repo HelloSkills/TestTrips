@@ -17,15 +17,18 @@
 import { defineProps, defineEmits } from 'vue'
 import UiSvg from "@/components/UI/UiSvg.vue";
 
-const props = defineProps<{
+interface IProps {
   message: string
   isOpen: boolean
-}>()
+}
 
-const emit = defineEmits<{
-  (e: 'confirm'): void
-  (e: 'cancel'): void
-}>()
+interface IEmits {
+  (event: 'confirm'): void
+  (event: 'cancel'): void
+}
+
+const props = defineProps<IProps>()
+const emit = defineEmits<IEmits>()
 
 const confirm = () => emit('confirm')
 const cancel = () => emit('cancel')
