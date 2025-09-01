@@ -42,7 +42,7 @@ const goToPage = () => {
 <style lang="scss" module>
 .title {
   text-align: center;
-  margin: 0 auto 30px;
+  margin: 50px auto 30px;
   min-width: 840px;
   font-weight: 700;
   font-size: 26px;
