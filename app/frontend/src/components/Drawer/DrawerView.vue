@@ -19,7 +19,12 @@
           <DrawerSelect ref="selectUsersRef" :isAvia="false"/>
         </div>
         <div :class="$style.createTrip">
-          <div :class="$style.createBtn" @click="createTrip">Создать</div>
+          <UiButton
+              text="Создать"
+              size="large"
+              color="blue"
+              @click="createTrip"
+          />
         </div>
       </div>
     </div>
@@ -28,6 +33,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import UiButton from "@/components/UI/UiButton.vue"
 import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
 import UiSvg from '@/components/Ui/UiSvg.vue'
 
@@ -153,8 +159,9 @@ const close = () => {
 }
 
 .createTrip {
-  border-top: 1px solid #B3C1D1;
+  border-top: 2px solid #f3f3f3;
   height: 60px;
+  padding: 11px 20px;
   background-color: var(--color-white);
   display: flex;
   align-items: center;

@@ -12,7 +12,7 @@
             @keyup.enter="search"
         >
       </div>
-      <button @click="search" :class="$style.btnSearch">Найти</button>
+      <UiButton text="Найти" size="medium" color="blue" @click="search" />
     </div>
     <div v-if="!isTrips" :class="$style.list">
       <div>Список поездок пуст</div>
@@ -26,6 +26,7 @@ import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'
 import UiSvg from '@/components/Ui/UiSvg.vue'
+import UiButton from '@/components/Ui/UiButton.vue'
 
 const tripsStore = useTripsStore()
 const modalStore = useModalStore()

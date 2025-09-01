@@ -60,7 +60,12 @@
 
     <!-- Кнопка поиска -->
     <div :class="$style.searchBtn">
-      <div :class="$style.search" @click="searchAir">Найти</div>
+      <UiButton
+          text="Найти"
+          size="xxl"
+          color="blue"
+          @click="searchAir"
+      />
     </div>
   </div>
 </template>
@@ -69,6 +74,7 @@
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import UiSvg from '@/components/Ui/UiSvg.vue'
+import UiButton from '@/components/Ui/UiButton.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
