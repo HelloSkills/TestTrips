@@ -5,14 +5,17 @@
       <div :class="$style.logo">
         <UiSvg name="logo" @click="goToPage('trips')" />
       </div>
+
       <div v-if="isAviaPage">
         <router-link v-if="selectedTrip" :to="`/trip/${selectedTrip.id}`" :class="$style.backTrip">
           вернуться в поездку
         </router-link>
       </div>
 
-      <div v-else-if="isSelected" :class="$style.avia">
-        <div @click="goToPage('services')">
+      <div v-else-if="isSelected" :class="[$style.avia, tripStore.selectedTrip?.status === 'ended' ? $style.disabled : '']">
+        <div
+            @click="handleAviaClick"
+        >
           <UiSvg name="air" :class="$style.icon"/>
         </div>
       </div>
@@ -95,6 +98,15 @@ const goToPage = (page: string) => {
   }
 }
 
+// Обработка клика по авиа-ссылке
+const handleAviaClick = () => {
+  if (tripStore.selectedTrip?.status === 'ended') {
+    toast.info('Поездка завершена, услуги недоступны')
+    return
+  }
+  goToPage('services')
+}
+
 const endTrip = async () => {
   if (!tripStore.selectedTrip) return
   await tripsStore.setTripStatus(tripStore.selectedTrip.id, 'ended')
@@ -109,7 +121,6 @@ const showBackLink = computed(() => {
   return tripStore.selectedTrip?.status === 'ended' && route.name === 'SelectedTrip'
 })
 </script>
-
 
 <style lang="scss" module>
 .container {
@@ -158,6 +169,12 @@ const showBackLink = computed(() => {
   justify-content: center;
   align-items: center;
   line-height: 0;
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.3;
 }
 
 .icon {
