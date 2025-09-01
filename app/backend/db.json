@@ -6625,45 +6625,6 @@
   ],
   "trips": [
     {
-      "id": "eb3f",
-      "name": "Такая вот поездка",
-      "price": 0,
-      "passengers": [
-        {
-          "id": "1",
-          "first_name": "Смирнов",
-          "second_name": "Алексей",
-          "last_name": "Сергеевич"
-        },
-        {
-          "id": "4",
-          "first_name": "Соколова",
-          "second_name": "Екатерина",
-          "last_name": "Владимировна"
-        },
-        {
-          "id": "7",
-          "first_name": "Новиков",
-          "second_name": "Дмитрий",
-          "last_name": "Игоревич"
-        },
-        {
-          "id": "5",
-          "first_name": "Лебедев",
-          "second_name": "Никита",
-          "last_name": "Александрович"
-        },
-        {
-          "id": "3",
-          "first_name": "Попов",
-          "second_name": "Михаил",
-          "last_name": "Андреевич"
-        }
-      ],
-      "services": [],
-      "status": "ended"
-    },
-    {
       "id": "1",
       "name": "Поездка в Сочи",
       "price": 101233,
@@ -6766,7 +6727,7 @@
     },
     {
       "id": "c926",
-      "name": "123",
+      "name": "Поездка в Санкт-Петербург",
       "price": 29800,
       "passengers": [
         {
@@ -6806,6 +6767,33 @@
         }
       ],
       "status": "ended"
+    },
+    {
+      "id": "8866",
+      "name": "Поездка в Казань",
+      "price": 0,
+      "passengers": [
+        {
+          "id": "2",
+          "first_name": "Кузнецова",
+          "second_name": "Анна",
+          "last_name": "Дмитриевна"
+        },
+        {
+          "id": "6",
+          "first_name": "Морозова",
+          "second_name": "Ольга",
+          "last_name": "Сергеевна"
+        },
+        {
+          "id": "3",
+          "first_name": "Попов",
+          "second_name": "Михаил",
+          "last_name": "Андреевич"
+        }
+      ],
+      "services": [],
+      "status": "new"
     }
   ]
 }
