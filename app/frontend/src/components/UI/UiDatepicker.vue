@@ -36,7 +36,7 @@ const emit = defineEmits<{
   (e: 'enter'): void
 }>()
 
-//  Реактивный внутренний v-model
+// Необходимо для изменения инпута в родителе
 const selectedDate  = computed({
   get: () => props.modelValue,
   set: (value: Date | null) => emit('update:modelValue', value)
@@ -45,7 +45,6 @@ const selectedDate  = computed({
 const placeholder = props.placeholder || ''
 const format = props.format || 'dd-MM-yyyy'
 const locale = props.locale || 'ru'
-const showIcon = props.showIcon ?? true
 </script>
 
 <style lang="scss" module>
