@@ -3,7 +3,7 @@
     <div :class="$style.inputsAll">
       <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
         <div :class="$style.icon">
-          <UiSvg name="air" />
+          <UiSvg name="air" size="14"/>
         </div>
         <input
             v-model="placeFrom"
@@ -17,7 +17,7 @@
 
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
         <div :class="$style.icon">
-          <UiSvg name="air" />
+          <UiSvg name="air" size="14"/>
         </div>
         <input
             v-model="placeTo"
