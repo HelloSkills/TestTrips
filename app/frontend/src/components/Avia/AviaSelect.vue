@@ -3,7 +3,9 @@
     <div :class="$style.inputsAll">
       <!-- Город вылета -->
       <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
-        <UiSvg name="air" :class="$style.icon"/>
+        <div :class="$style.icon">
+          <UiSvg name="air" />
+        </div>
         <input
             v-model="placeFrom"
             :class="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
@@ -16,7 +18,9 @@
 
       <!-- Город прилёта -->
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
-        <UiSvg name="air" :class="$style.icon"/>
+       <div :class="$style.icon">
+         <UiSvg name="air" />
+       </div>
         <input
             v-model="placeTo"
             :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
@@ -29,7 +33,9 @@
 
       <!-- Дата туда -->
       <div :class="$style.timeFrom">
-        <UiSvg name="calendar" :class="$style.icon"/>
+        <div  :class="$style.icon">
+          <UiSvg name="calendar" />
+        </div>
         <Datepicker
             v-model="dateFrom"
             placeholder="Туда"
@@ -44,7 +50,9 @@
 
       <!-- Дата обратно -->
       <div :class="$style.timerTo">
-        <UiSvg name="calendar" :class="$style.icon"/>
+        <div :class="$style.icon">
+          <UiSvg name="calendar" />
+        </div>
         <Datepicker
             v-model="dateTo"
             placeholder="Обратно"

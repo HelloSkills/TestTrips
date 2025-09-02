@@ -3,7 +3,9 @@
     <div :class="$style.modal">
       <div :class="$style.question">
         <span :class="$style.text">{{ message }}</span>
-        <UiSvg name="close" @click="cancel" :class="$style.close"/>
+        <div @click="cancel" :class="$style.close">
+          <UiSvg name="close" />
+        </div>
       </div>
       <div :class="$style.buttons">
         <div @click="cancel" :class="$style.cancelBtn"><span>Нет</span></div>
@@ -15,7 +17,7 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-import UiSvg from "@/components/UI/UiSvg.vue";
+import UiSvg from "@/components/UI/UiSvg.vue"
 
 interface IProps {
   message: string

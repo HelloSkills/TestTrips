@@ -17,7 +17,9 @@
       <div :class="$style.wrapItem" v-for="services in trip.services" :key="services.user.id">
         <div :class="$style.ticketInfo">
           <div :class="$style.ticketWrap">
-            <UiSvg name="air"/>
+            <div :class="$style.uiSvg">
+              <UiSvg name="air"/>
+            </div>
             <div :class="$style.price">{{ formatPrice(services.ticket.price) }}</div>
             <div :class="$style.fromTo">{{ services.ticket.placeFrom }} ➝ {{ services.ticket.placeTo }}</div>
           </div>

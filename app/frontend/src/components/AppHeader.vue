@@ -2,8 +2,8 @@
   <div :class="$style.container">
     <DrawerView v-model="modalStore.drawerOpen" />
     <div :class="$style.wrap">
-      <div :class="$style.logo">
-        <UiSvg name="logo" @click="goToPage('trips')" />
+      <div :class="$style.logo" @click="goToPage('trips')">
+        <UiSvg name="logo" size="40"/>
       </div>
 
       <div v-if="isAviaPage">
@@ -16,13 +16,17 @@
         <div
             @click="handleAviaClick"
         >
-          <UiSvg name="air" :class="$style.icon"/>
+         <div :class="$style.icon">
+           <UiSvg name="air" />
+         </div>
         </div>
       </div>
 
       <div v-else :class="$style.travel">
         <router-link to="/" :class="$style.logo">
-          <UiSvg name="suitcase" :class="$style.icon"/>
+          <div :class="$style.icon">
+            <UiSvg name="suitcase" />
+          </div>
         </router-link>
         <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
       </div>

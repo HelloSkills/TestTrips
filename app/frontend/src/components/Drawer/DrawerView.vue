@@ -5,7 +5,9 @@
         <div :class="$style.wrap">
           <div :class="$style.title">
             <div :class="$style.create">Создание поездки</div>
-            <UiSvg name="close" @click="close" :class="$style.close"/>
+            <div @click="close" :class="$style.close">
+              <UiSvg name="close" />
+            </div>
           </div>
           <div :class="$style.name">
             <input

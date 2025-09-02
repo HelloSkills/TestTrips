@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     { path: '/', name: 'Trips', component: () => import("@/components/Trips/TripsView.vue") },
-    { path: '/drawer', name: 'Drawer', component: () => import('@/components/Drawer/DrawerView.vue') },
     {
         path: '/trip/:id',
         name: 'SelectedTrip',

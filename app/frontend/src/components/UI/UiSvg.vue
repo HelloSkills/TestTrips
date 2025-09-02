@@ -1,38 +1,35 @@
+<template>
+  <div
+      v-html="icons[name]"
+      :class="$style.icon"
+      :style="`--size: ${size}px`"
+  />
+</template>
+
 <script setup lang="ts">
-import { defineProps, computed } from 'vue'
+import { icons } from '@/images/icons/icons.ts'
 
-// Пропс name определяет, какой SVG показывать
-interface IProps {
-  name: string
-}
-const props = defineProps<IProps>()
-
-// Импорт всех SVG через ?raw
-import LogoSvg from '@/images/logo.svg?raw'
-import AirSvg from '@/images/icons/air.svg?raw'
-import ArrowDownSvg from '@/images/icons/arrow_down.svg?raw'
-import CalendarSvg from '@/images/icons/calendar.svg?raw'
-import CloseSvg from '@/images/icons/close.svg?raw'
-import DeleteSvg from '@/images/icons/delete.svg?raw'
-import SearchSvg from '@/images/icons/search.svg?raw'
-import SuitcaseSvg from '@/images/icons/suitcase.svg?raw'
-
-// Объект "имя -> SVG как строка"
-const iconsMap: Record<string, string> = {
-  logo: LogoSvg,
-  air: AirSvg,
-  arrow_down: ArrowDownSvg,
-  calendar: CalendarSvg,
-  close: CloseSvg,
-  delete: DeleteSvg,
-  search: SearchSvg,
-  suitcase: SuitcaseSvg
+interface Props {
+  name: keyof typeof icons
+  size?: number
 }
 
-// Выбираем нужный SVG
-const svgContent = computed(() => iconsMap[props.name] || '')
+withDefaults(defineProps<Props>(), {
+  size: 20
+})
 </script>
 
-<template>
-  <div v-html="svgContent"></div>
-</template>
+<style module>
+.icon {
+  --size: 20px;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon svg {
+  width: var(--size);
+  height: var(--size);
+}
+</style>

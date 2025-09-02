@@ -16,21 +16,14 @@ git clone https://github.com/HelloSkills/TestTrips.git
 cd TestTrips/app
 ```
 
-### 2. Установи зависимости (backend)
+### 2. Установи зависимости (frontend)
 ```bash
-cd backend
+cd /frontend
 ```
 ```bash
 npm install
 ```
-### 3. Установи зависимости (frontend)
-```bash
-cd ../frontend
-```
-```bash
-npm install
-```
-### 4. Запусти бэкенд (API через json-server)
+### 3. Запусти бэкенд (API через json-server)
 Открой отдельный терминал или вкладку, вернись в папку backend и запусти сервер:
 ```bash
 cd ../backend
@@ -38,7 +31,7 @@ cd ../backend
 ```bash
 npx json-server db.json
 ```
-### 5. Запусти фронтенд
+### 4. Запусти фронтенд
 В основном терминале (или в новой вкладке) убедись, что ты в папке frontend, и запусти dev-сервер:
 ```bash
 cd frontend

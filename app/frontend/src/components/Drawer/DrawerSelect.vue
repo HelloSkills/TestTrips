@@ -6,7 +6,9 @@
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
-        <UiSvg name="arrow_down" :class="[isOpen ? $style.open : '']"/>
+       <div :class="[isOpen ? $style.open : '']">
+         <UiSvg name="arrow_down" />
+       </div>
       </div>
 
       <div v-if="isOpen" :class="[$style.dropdown, isAvia ? $style.aviadropdown : '']">
@@ -30,7 +32,9 @@
           :class="$style.selectedUsers"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <UiSvg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
+       <div :class="$style.icon" @click="userStore.deleteUser(user.id)">
+         <UiSvg name="delete" />
+       </div>
       </div>
     </div>
 
@@ -42,7 +46,9 @@
           :class="$style.aviaUserItem"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <UiSvg name="delete" :class="$style.icon" @click="userStore.deleteUser(user.id)"/>
+        <div :class="$style.icon" @click="userStore.deleteUser(user.id)">
+          <UiSvg name="delete" />
+        </div>
       </div>
     </div>
   </div>

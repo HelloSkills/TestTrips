@@ -3,7 +3,9 @@
     <div :class="$style.trips">Поездки</div>
     <div :class="$style.search">
       <div :class="$style.wrap">
-        <UiSvg name="search"/>
+        <div :class="$style.uiSvg">
+          <UiSvg name="search"/>
+        </div>
         <input
             v-model="searchQuery"
             type="text"
