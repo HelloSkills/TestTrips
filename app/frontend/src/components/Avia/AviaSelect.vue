@@ -16,9 +16,9 @@
       </div>
 
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
-       <div :class="$style.icon">
-         <UiSvg name="air" />
-       </div>
+        <div :class="$style.icon">
+          <UiSvg name="air" />
+        </div>
         <input
             v-model="placeTo"
             :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
@@ -28,36 +28,19 @@
             @keyup.enter="searchAir"
         />
       </div>
-
-      <div :class="[$style.timeFrom, $style.datepicker]">
-        <div  :class="$style.icon">
-          <UiSvg name="calendar" />
-        </div>
-        <Datepicker
+      <div :class="$style.datepicker">
+        <UiDatepicker
             v-model="dateFrom"
             placeholder="Туда"
-            :enable-time-picker="false"
-            :hide-input-icon="true"
-            :locale="'ru'"
-            :auto-apply="true"
-            format="dd-MM-yyyy"
-            @keyup.enter="searchAir"
+            @enter="searchAir"
         />
       </div>
 
-      <div :class="[$style.timeFrom, $style.datepicker]">
-        <div :class="$style.icon">
-          <UiSvg name="calendar" />
-        </div>
-        <Datepicker
+      <div :class="$style.datepicker">
+        <UiDatepicker
             v-model="dateTo"
             placeholder="Обратно"
-            :enable-time-picker="false"
-            :hide-input-icon="true"
-            :locale="'ru'"
-            :auto-apply="true"
-            format="dd-MM-yyyy"
-            @keyup.enter="searchAir"
+            @enter="searchAir"
         />
       </div>
     </div>
@@ -74,10 +57,10 @@
 </template>
 
 <script setup lang="ts">
-import '@vuepic/vue-datepicker/dist/main.css'
-import Datepicker from '@vuepic/vue-datepicker'
 import UiSvg from '@/components/Ui/UiSvg.vue'
 import UiButton from '@/components/Ui/UiButton.vue'
+import UiDatepicker from '@/components/Ui/UiDatepicker.vue'
+
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
@@ -202,9 +185,7 @@ const searchAir = async () => {
 }
 
 .placeFrom,
-.placeTo,
-.timeFrom,
-.timerTo {
+.placeTo {
   max-width: 205px;
   display: flex;
   flex-direction: row;
@@ -218,8 +199,8 @@ const searchAir = async () => {
 
 .datepicker {
   max-width: 180px;
+  caret-color: transparent;
 }
-
 
 .icon {
   width: 20px;
@@ -234,32 +215,6 @@ const searchAir = async () => {
   justify-content: flex-end;
 }
 
-.search {
-  background-color: var(--color-blue);
-  height: 40px;
-  color: var(--color-white);
-  font-size: 14px;
-  line-height: 14px;
-  padding: 12px 70px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-:global(.dp__input) {
-  all: unset;
-  width: 100%;
-  height: 40px;
-  cursor: pointer;
-  caret-color: transparent;
-  font-size: 14px;
-  line-height: 14px;
-}
-
-:global(.dp__input::placeholder) {
-  color: rgb(162, 170, 190);
-}
-
-/* Ошибка */
 .error {
   border: 1px solid red !important;
 }
@@ -274,5 +229,4 @@ const searchAir = async () => {
 .shake {
   animation: shake 0.3s ease;
 }
-
 </style>
