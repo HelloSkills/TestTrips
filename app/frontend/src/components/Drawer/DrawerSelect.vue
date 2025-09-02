@@ -61,18 +61,18 @@ import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
 import UiSvg from '@/components/Ui/UiSvg.vue'
 
-const route = useRoute()
-const tripId = route.params.id as string
-
-const userStore = useUserStore()
-const tripsStore = useTripsStore()
-
 interface IProps {
   isAvia: boolean
 }
 
 const props = defineProps<IProps>()
 const isAvia = computed(() => props.isAvia)
+
+const route = useRoute()
+const tripId = route.params.id as string
+
+const userStore = useUserStore()
+const tripsStore = useTripsStore()
 
 const isOpen = ref(false)
 const toggleDropdown = () => isOpen.value = !isOpen.value
@@ -83,30 +83,25 @@ const selectRef = ref<HTMLElement | null>(null)
 
 const textPassengers = computed(() => isAvia.value ? 'Выберите пассажира' : 'Выберите сотрудников')
 
-// Список доступных пользователей для дропдауна
 const availableUsers = computed(() => {
   const users = isAvia.value && tripId
       ? tripsStore.getUsersForTrip(tripId)
       : userStore.users
-
-  // исключаем уже выбранных
   return users.filter(u => !userStore.selectedUsers.some(sel => sel.id.toString() === u.id.toString()))
 })
 
-// Выбранные пользователи для авиа
 const aviaPassengers = computed(() => {
   return isAvia.value
       ? userStore.selectedUsers.filter(u =>
-          availableUsers.value.some(a => a.id.toString() === u.id.toString()) || // если нужен полный список выбранных, можно убрать условие
+          availableUsers.value.some(a => a.id.toString() === u.id.toString()) ||
           tripsStore.getUsersForTrip(tripId).some(a => a.id.toString() === u.id.toString())
       )
       : []
 })
 
-// Выбор пользователя
 const selectUser = (user: any) => {
   if (isAvia.value) {
-    userStore.selectedUsers = [user] // заменяем массив на выбранного юзера (для выбора пассажира)
+    userStore.selectedUsers = [user]
     isOpen.value = false
   } else {
     userStore.selectUser(user)
@@ -118,7 +113,7 @@ onMounted(() => {
   if (route.path === '/') {
     userStore.loadUsers()
   }
-}) // необходимо для списка юзеров (только в модалке)
+})
 </script>
 
 <style lang="scss" module>

@@ -1,19 +1,15 @@
 <template>
   <div :class="$style.container">
-    <!-- Заголовок -->
     <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.searchCompleted" :class="$style.title">
       Найдено <span :class="$style.length">{{ aviaSearchStore.filteredVariants.length }}</span> вариантов
     </div>
-    <!-- Заголовок скелетон -->
     <div v-else-if="aviaSearchStore.isLoading" :class="$style.titleSkeleton">
       <div :class="[$style.skeleton, $style.titleBlock]"></div>
     </div>
-    <!-- Поиск идет -->
     <div v-else :class="$style.title">
       Поиск вариантов
     </div>
 
-    <!-- Опции сортировки -->
     <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.filteredVariants.length > 0" :class="$style.options">
       <label :class="$style.labels">
         <input
@@ -37,17 +33,14 @@
         Сначала дорогие
       </label>
     </div>
-    <!-- Опции сортировки скелетон -->
     <div v-else-if="aviaSearchStore.isLoading" :class="$style.optionsSkeleton">
       <div :class="[$style.skeleton, $style.optionsBlock]"></div>
     </div>
 
-    <!-- Скелетоны списка билетов -->
     <div v-if="aviaSearchStore.isLoading" :class="$style.skeletonList">
       <AviaSkeleton v-for="n in 5" :key="'skeleton-' + n"/>
     </div>
 
-    <!-- Список билетов -->
     <div v-else>
       <AviaSearchItem :variants="aviaSearchStore.filteredVariants"/>
     </div>

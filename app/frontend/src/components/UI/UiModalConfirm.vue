@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import UiSvg from "@/components/UI/UiSvg.vue"
 
 interface IProps {

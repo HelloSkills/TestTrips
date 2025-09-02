@@ -86,18 +86,19 @@ import { formatPrice } from '@/utils/price.ts'
 import { formatDayMonth } from '@/utils/date.ts'
 import { useUserStore } from '@/stores/userStore'
 import { useTripStore } from '@/stores/SelectedTripStore'
+import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
+import { useToast } from 'vue-toastification'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 import UiModalConfirm from '@/components/UI/UiModalConfirm.vue'
-import { useToast } from 'vue-toastification'
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 interface IProps {
   variants: AviaVariant[]
 }
+
 const props = defineProps<IProps>()
 
 const userStore = useUserStore()
@@ -148,19 +149,9 @@ const searchBack = () => {
 
 .container {
   width: 100%;
-  height: 220px; // отвечает за отступ
+  height: 220px;
 }
 
-/* Новый класс для создания отступа */
-//.spacer {
-//  height: 200px; /* Реальная высота элемента */
-//  margin-bottom: 20px; /* Теперь отступ работает корректно */
-//  width: 100%;
-//
-//  &:last-child {
-//    margin-bottom: 0;
-//  }
-//}
 
 .wrapper {
   display: flex;
@@ -169,7 +160,6 @@ const searchBack = () => {
   height: 100%;
   background-color: var(--color-white);
   border-radius: 10px;
-  //box-sizing: border-box;
 }
 
 .ticketInfo {

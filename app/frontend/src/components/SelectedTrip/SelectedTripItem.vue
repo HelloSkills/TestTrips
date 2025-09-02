@@ -36,8 +36,7 @@ import type { Passenger, Services } from "@/types/types.ts"
 import { formatPrice } from "@/utils/price.ts"
 import { formatDate } from "@/utils/date.ts"
 import { useRoute } from 'vue-router'
-import { computed } from "vue";
-const route = useRoute()
+import { computed } from "vue"
 
 interface IProps {
   price: number
@@ -45,6 +44,8 @@ interface IProps {
   services: Services[]
 }
 const props = defineProps<IProps>()
+
+const route = useRoute()
 
 const isServicesPage = computed(() => {
   return route.path.endsWith('/services')

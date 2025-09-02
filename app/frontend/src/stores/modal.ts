@@ -1,6 +1,6 @@
 // stores/modal.ts
 import { defineStore } from 'pinia'
-import {ref, watch} from 'vue'
+import { ref, watch } from 'vue'
 
 export const useModalStore = defineStore('modal', () => {
     const drawerOpen = ref(false)

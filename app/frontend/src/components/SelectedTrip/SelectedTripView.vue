@@ -16,12 +16,11 @@
 </template>
 
 <script setup lang="ts">
+import SelectedTripItem from "@/components/SelectedTrip/SelectedTripItem.vue"
 import { computed } from "vue"
 import { storeToRefs } from 'pinia'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
-import SelectedTripItem from "@/components/SelectedTrip/SelectedTripItem.vue"
-const isServices = computed(() => tripStore.getServices().length > 0)
-const showSearch = computed(() => !route.path.endsWith('/services'))
+import { useRoute, useRouter } from 'vue-router'
 
 const tripStore = useTripStore()
 const { selectedTrip } = storeToRefs(tripStore)
@@ -29,15 +28,16 @@ const price = selectedTrip.value.price
 const passengers = selectedTrip.value.passengers
 const services = selectedTrip.value.services
 
-import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
 const router = useRouter()
+
+const isServices = computed(() => tripStore.getServices().length > 0)
+const showSearch = computed(() => !route.path.endsWith('/services'))
 
 const goToPage = () => {
   router.push(route.fullPath + '/services')
 }
 </script>
-
 
 <style lang="scss" module>
 .title {

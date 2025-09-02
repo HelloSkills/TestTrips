@@ -34,38 +34,43 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import UiButton from "@/components/UI/UiButton.vue"
 import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
 import UiSvg from '@/components/Ui/UiSvg.vue'
+import { ref } from 'vue'
+import { useTripsStore } from "@/stores/tripsStore.ts"
+import { useUserStore } from "@/stores/userStore.ts"
+import { useTripStore } from '@/stores/selectedTripStore'
+import { storeToRefs } from 'pinia'
+import { useRouter } from "vue-router"
+import { useToast } from 'vue-toastification'
+
+interface IProps {
+  modelValue: boolean
+}
+const props = defineProps<IProps>()
+
+interface IEmits {
+  (event: 'update:modelValue', value: boolean): void
+}
+const emit = defineEmits<IEmits>()
 
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
-
 const nameTrip = ref('')
 
-import { useTripsStore } from "@/stores/tripsStore.ts"
 const tripStore = useTripsStore()
-
-import { storeToRefs } from 'pinia'
-
-import { useUserStore } from "@/stores/userStore.ts"
-import { useRouter } from "vue-router"
-const router = useRouter()
 const userStore = useUserStore()
+const selectedTripStore = useTripStore()
+const router = useRouter()
 const { selectedUsers } = storeToRefs(userStore)
-
-import { useToast } from 'vue-toastification'
 const toast = useToast()
 
-import { useTripStore } from '@/stores/selectedTripStore'
-const selectedTripStore = useTripStore()
 const createTrip = async () => {
   if (nameTrip.value.length === 0) {
     toast.info('Необходимо указать название поездки')
     return
   }
   if (selectedUsers.value.length === 0) {
-
     toast.info('Необходимо указать хотя бы 1 участника поездки')
     return
   }
@@ -80,19 +85,9 @@ const createTrip = async () => {
 
   close()
   selectedTripStore.selectTrip(trip)
-  router.push(`/trip/${trip.id}`) // selectedTrip уже установлен в сторе
+  router.push(`/trip/${trip.id}`)
   toast.success(`Поездка успешно создана`)
 }
-
-interface IProps {
-  modelValue: boolean
-}
-const props = defineProps<IProps>()
-
-interface IEmits {
-  (event: 'update:modelValue', value: boolean): void
-}
-const emit = defineEmits<IEmits>()
 
 const close = () => {
   emit('update:modelValue', false)
@@ -100,7 +95,6 @@ const close = () => {
   nameTrip.value = ''
   selectUsersRef.value?.closeDropdown()
 }
-
 </script>
 
 <style lang="scss" module>

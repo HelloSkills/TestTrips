@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import type { User } from '@/types/types'
 import { useJsonServer } from '@/composables/useJsonServer'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
+import type { User } from '@/types/types'
 
 export const useUserStore = defineStore('user', () => {
     const users = ref<User[]>([])

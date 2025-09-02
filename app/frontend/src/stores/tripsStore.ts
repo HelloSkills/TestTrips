@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import type { Trip } from '@/types/types.ts'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
+import type { Trip } from '@/types/types.ts'
 
 export const useTripsStore = defineStore('trips', {
     state: () => ({

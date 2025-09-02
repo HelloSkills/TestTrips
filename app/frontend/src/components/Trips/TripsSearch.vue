@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
+import UiSvg from '@/components/Ui/UiSvg.vue'
+import UiButton from '@/components/Ui/UiButton.vue'
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'
-import UiSvg from '@/components/Ui/UiSvg.vue'
-import UiButton from '@/components/Ui/UiButton.vue'
 
 const tripsStore = useTripsStore()
 const modalStore = useModalStore()
@@ -39,7 +39,6 @@ const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
 const search = () => tripsStore.filterTrips(searchQuery.value)
 const createTrip = () => modalStore.toggleDrawer()
 
-// <-- Сбрасываем поиск при уходе со страницы
 onBeforeUnmount(() => {
   tripsStore.clearSearch()
   searchQuery.value = ''

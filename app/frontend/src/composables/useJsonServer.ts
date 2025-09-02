@@ -1,6 +1,6 @@
+import axios from "axios"
 import { ref } from 'vue'
 import type { User, AviaVariant, Trip } from "@/types/types"
-import axios from "axios"
 
 const BACKEND_URL = "http://localhost:3000"
 

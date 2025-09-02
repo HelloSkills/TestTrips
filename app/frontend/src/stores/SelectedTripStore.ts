@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import type { Trip, User, AviaVariant } from '@/types/types.ts'
 import { ref } from 'vue'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
+import type { Trip, User, AviaVariant } from '@/types/types.ts'
 
 export const useTripStore = defineStore('trip', () => {
     const { patchTripServices } = useJsonServer()

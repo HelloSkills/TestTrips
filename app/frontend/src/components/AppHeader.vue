@@ -62,25 +62,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
-import type { Trip } from "@/types/types.ts"
 import DrawerView from '@/components/Drawer/DrawerView.vue'
 import UiSvg from '@/components/UI/UiSvg.vue'
-
+import { computed } from "vue"
+import type { Trip } from "@/types/types.ts"
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
-const tripStore = useTripStore()
-
 import { useTripsStore } from "@/stores/tripsStore.ts"
-const tripsStore = useTripsStore()
-
 import { useModalStore } from '@/stores/modal'
-const modalStore = useModalStore()
-
 import { useRoute, useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
+
+const tripStore = useTripStore()
+const tripsStore = useTripsStore()
+const modalStore = useModalStore()
 const route = useRoute()
 const router = useRouter()
-
-import { useToast } from 'vue-toastification'
 const toast = useToast()
 
 const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
@@ -102,7 +98,6 @@ const goToPage = (page: string) => {
   }
 }
 
-// Обработка клика по авиа-ссылке
 const handleAviaClick = () => {
   if (tripStore.selectedTrip?.status === 'ended') {
     toast.info('Поездка завершена, услуги недоступны')

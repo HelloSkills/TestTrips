@@ -2,7 +2,6 @@
   <div :class="$style.container">
     <div :class="$style.wrapper">
 
-      <!-- Заголовок -->
       <div :class="$style.ticketInfo">
         <div
             :class="[$style.skeleton, $style.name]"
@@ -10,7 +9,6 @@
         ></div>
 
         <div :class="$style.dateTime">
-          <!-- Левая дата -->
           <div :class="$style.dateFrom">
             <div
                 :class="[$style.skeleton, $style.time]"
@@ -22,7 +20,6 @@
             ></div>
           </div>
 
-          <!-- Центральный блок -->
           <div :class="$style.cityInfo">
             <div :class="$style.cities">
               <div
@@ -50,7 +47,6 @@
             </div>
           </div>
 
-          <!-- Правая дата -->
           <div :class="$style.dateTo">
             <div
                 :class="[$style.skeleton, $style.time]"

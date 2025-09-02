@@ -1,7 +1,6 @@
 <template>
   <div :class="$style.container">
     <div :class="$style.inputsAll">
-      <!-- Город вылета -->
       <div :class="[$style.placeFrom, errors.placeFrom.show ? $style.error : '']">
         <div :class="$style.icon">
           <UiSvg name="air" />
@@ -16,7 +15,6 @@
         />
       </div>
 
-      <!-- Город прилёта -->
       <div :class="[$style.placeTo, errors.placeTo.show ? $style.error : '']">
        <div :class="$style.icon">
          <UiSvg name="air" />
@@ -31,7 +29,6 @@
         />
       </div>
 
-      <!-- Дата туда -->
       <div :class="$style.timeFrom">
         <div  :class="$style.icon">
           <UiSvg name="calendar" />
@@ -48,7 +45,6 @@
         />
       </div>
 
-      <!-- Дата обратно -->
       <div :class="$style.timerTo">
         <div :class="$style.icon">
           <UiSvg name="calendar" />
@@ -66,7 +62,6 @@
       </div>
     </div>
 
-    <!-- Кнопка поиска -->
     <div :class="$style.searchBtn">
       <UiButton
           text="Найти"
@@ -79,8 +74,8 @@
 </template>
 
 <script setup lang="ts">
-import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import Datepicker from '@vuepic/vue-datepicker'
 import UiSvg from '@/components/Ui/UiSvg.vue'
 import UiButton from '@/components/Ui/UiButton.vue'
 import { ref } from 'vue'
@@ -91,22 +86,22 @@ import { formatDateForFilter } from '@/utils/date.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useToast } from 'vue-toastification'
 
+interface IError {
+  show: boolean
+  shake: boolean
+}
+
+const { getAviaVariants } = useJsonServer()
+
 const userStore = useUserStore()
 const router = useRouter()
 const aviaSearchStore = useAviaSearchStore()
 const toast = useToast()
 
-const { getAviaVariants } = useJsonServer()
-
 const placeFrom = ref('')
 const placeTo = ref('')
 const dateFrom = ref<Date | null>(null)
 const dateTo = ref<Date | null>(null)
-
-interface IError {
-  show: boolean
-  shake: boolean
-}
 
 const errors = ref<{ placeFrom: IError; placeTo: IError }>({
   placeFrom: { show: false, shake: false },

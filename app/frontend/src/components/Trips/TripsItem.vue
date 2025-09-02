@@ -64,7 +64,7 @@ const router = useRouter()
 const tripsStore = useTripsStore()
 const selectedTripStore = useTripStore()
 
-function goToTrip(trip: Trip) {
+const goToTrip = (trip: Trip) => {
   selectedTripStore.selectTrip(trip)
   router.push(`/trip/${trip.id}`)
 }
