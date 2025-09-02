@@ -18,7 +18,7 @@
         <div :class="$style.ticketInfo">
           <div :class="$style.ticketWrap">
             <div :class="$style.uiSvg">
-              <UiSvg name="air"/>
+              <UiSvg name="air" size="14"/>
             </div>
             <div :class="$style.price">{{ formatPrice(services.ticket.price) }}</div>
             <div :class="$style.fromTo">{{ services.ticket.placeFrom }} ➝ {{ services.ticket.placeTo }}</div>
@@ -137,6 +137,14 @@ const goToTrip = (trip: Trip) => {
 
 .price {
   color: var(--color-blue);
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.fromTo {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 600;
 }
 
 .name {
