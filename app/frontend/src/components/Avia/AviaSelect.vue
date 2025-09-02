@@ -57,9 +57,9 @@
 </template>
 
 <script setup lang="ts">
-import UiSvg from '@/components/Ui/UiSvg.vue'
-import UiButton from '@/components/Ui/UiButton.vue'
-import UiDatepicker from '@/components/Ui/UiDatepicker.vue'
+import UiSvg from '@/components/UI/UiSvg.vue'
+import UiButton from '@/components/UI/UiButton.vue'
+import UiDatepicker from '@/components/UI/UiDatepicker.vue'
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'

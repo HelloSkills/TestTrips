@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import UiSvg from '@/components/Ui/UiSvg.vue'
-import UiButton from '@/components/Ui/UiButton.vue'
+import UiSvg from '@/components/UI/UiSvg.vue'
+import UiButton from '@/components/UI/UiButton.vue'
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'

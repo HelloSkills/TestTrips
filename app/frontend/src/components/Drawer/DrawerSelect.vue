@@ -59,7 +59,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
-import UiSvg from '@/components/Ui/UiSvg.vue'
+import UiSvg from '@/components/UI/UiSvg.vue'
 
 interface Props {
   isAvia: boolean

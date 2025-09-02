@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import UiButton from "@/components/UI/UiButton.vue"
 import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
-import UiSvg from '@/components/Ui/UiSvg.vue'
+import UiSvg from '@/components/UI/UiSvg.vue'
 import { ref } from 'vue'
 import { useTripsStore } from "@/stores/tripsStore.ts"
 import { useUserStore } from "@/stores/userStore.ts"
