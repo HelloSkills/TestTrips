@@ -29,7 +29,7 @@
         />
       </div>
 
-      <div :class="$style.timeFrom">
+      <div :class="[$style.timeFrom, $style.datepicker]">
         <div  :class="$style.icon">
           <UiSvg name="calendar" />
         </div>
@@ -45,7 +45,7 @@
         />
       </div>
 
-      <div :class="$style.timerTo">
+      <div :class="[$style.timeFrom, $style.datepicker]">
         <div :class="$style.icon">
           <UiSvg name="calendar" />
         </div>
@@ -168,6 +168,7 @@ const searchAir = async () => {
 
 <style lang="scss" module>
 .container {
+  max-width: 840px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -188,13 +189,23 @@ const searchAir = async () => {
   all: unset;
   height: 40px;
   cursor: pointer;
-  flex: 1;
+  width: 100%;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.input::placeholder {
+  color: #B3C1D1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
 }
 
 .placeFrom,
 .placeTo,
 .timeFrom,
 .timerTo {
+  max-width: 205px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -204,6 +215,11 @@ const searchAir = async () => {
   padding: 10px;
   border: 1px solid transparent;
 }
+
+.datepicker {
+  max-width: 180px;
+}
+
 
 .icon {
   width: 20px;
@@ -231,8 +247,16 @@ const searchAir = async () => {
 
 :global(.dp__input) {
   all: unset;
+  width: 100%;
   height: 40px;
   cursor: pointer;
+  caret-color: transparent;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+:global(.dp__input::placeholder) {
+  color: rgb(162, 170, 190);
 }
 
 /* Ошибка */
@@ -250,4 +274,5 @@ const searchAir = async () => {
 .shake {
   animation: shake 0.3s ease;
 }
+
 </style>

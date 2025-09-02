@@ -18,7 +18,6 @@ const props = defineProps<{
 
 defineEmits(['click'])
 
-// теперь у нас есть $style
 const $style = useCssModule()
 
 const sizeClass = computed(() => {

@@ -98,9 +98,7 @@ import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 interface IProps {
   variants: AviaVariant[]
 }
-
-const props = defineProps<IProps>()
-
+defineProps<IProps>();
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()
