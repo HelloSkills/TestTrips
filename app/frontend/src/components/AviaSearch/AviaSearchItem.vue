@@ -82,8 +82,8 @@
 
 <script setup lang="ts">
 import type { AviaVariant } from "@/types/types.ts"
-import { formatPrice } from '@/utils/price.ts'
-import { formatDayMonth } from '@/utils/date.ts'
+import { formatPrice } from '@/utils/formatPrice.ts'
+import { formatDayMonth } from '@/utils/formatDate.ts'
 import { useUserStore } from '@/stores/userStore'
 import { useTripStore } from '@/stores/SelectedTripStore'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore'

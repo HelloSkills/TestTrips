@@ -65,7 +65,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
-import { formatDateForFilter } from '@/utils/date.ts'
+import { formatDateForFilter } from '@/utils/formatDate.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useToast } from 'vue-toastification'
 

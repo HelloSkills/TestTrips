@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 import type { Passenger, Services } from "@/types/types.ts"
-import { formatPrice } from "@/utils/price.ts"
-import { formatDate } from "@/utils/date.ts"
+import { formatPrice } from "@/utils/formatPrice.ts"
+import { formatDate } from "@/utils/formatDate.ts"
 import { useRoute } from 'vue-router'
 import { computed } from "vue"
 

@@ -11,7 +11,7 @@ import { icons } from '@/images/icons/icons.ts'
 
 interface Props {
   name: keyof typeof icons
-  size?: number
+  size?: string | number
 }
 
 withDefaults(defineProps<Props>(), {

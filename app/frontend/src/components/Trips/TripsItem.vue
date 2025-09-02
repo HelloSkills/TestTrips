@@ -53,8 +53,8 @@
 
 <script setup lang="ts">
 import type { Trip } from "@/types/types.ts"
-import { getEarliestDate } from "@/utils/date.ts"
-import { formatPrice } from "@/utils/price.ts"
+import { getEarliestDate } from "@/utils/formatDate.ts"
+import { formatPrice } from "@/utils/formatPrice.ts"
 import { useRouter } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useTripStore } from '@/stores/selectedTripStore'
