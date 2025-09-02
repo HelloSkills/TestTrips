@@ -1,12 +1,12 @@
 <template>
-  <Header :selectedTrip="selectedTrip"/>
+  <AppHeader :selectedTrip="selectedTrip"/>
   <main :class="$style.content">
     <router-view />
   </main>
 </template>
 
 <script setup lang="ts">
-import Header from "@/components/AppHeader.vue"
+import AppHeader from "@/components/AppHeader.vue"
 import { onMounted } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { storeToRefs } from 'pinia'
@@ -18,7 +18,7 @@ const { selectedTrip } = storeToRefs(tripStore)
 const tripsStore = useTripsStore()
 
 onMounted(() => {
-  tripsStore.loadTrips()  // загружаем все поездки через store
+  tripsStore.loadTrips()
 })
 </script>
 

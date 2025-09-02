@@ -14,10 +14,10 @@
 
       <div v-else-if="isSelected" :class="[$style.avia, tripStore.selectedTrip?.status === 'ended' ? $style.disabled : '']">
         <div
-            @click="handleAviaClick"
+            @click="handleAviaClick()"
         >
          <div :class="$style.icon">
-           <UiSvg name="air" />
+           <UiSvg name="air" size="14"/>
          </div>
         </div>
       </div>
@@ -28,14 +28,17 @@
             <UiSvg name="suitcase" />
           </div>
         </router-link>
-        <div :class="$style.createTravel" @click="createTrip">Создать поездку</div>
+        <div
+            :class="$style.createTravel"
+            @click="createTrip()"
+        >
+          Создать поездку
+        </div>
       </div>
     </div>
 
     <div :class="$style.wrapper">
-      <!-- Если поездка выбрана -->
       <template v-if="isSelected && !isAviaPage && route.name === 'SelectedTrip'">
-        <!-- Если поездка завершена -->
         <div
             v-if="showBackLink"
             :class="$style.backTrip"
@@ -44,11 +47,10 @@
           Вернуться к списку поездок
         </div>
 
-        <!-- Если поездка новая -->
         <div
             v-else
             :class="$style.endTrip"
-            @click="endTrip"
+            @click="endTrip()"
         >
           завершить поездку
         </div>

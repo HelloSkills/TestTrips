@@ -14,9 +14,12 @@ export function useJsonServer() {
         try {
             const res = await axios.get<User[]>(`${BACKEND_URL}/users`)
             users.value = res.data
+
             return users.value
+
         } catch (error) {
             console.error('Ошибка при загрузке пользователей:', error)
+
             return []
         }
     }
@@ -26,9 +29,12 @@ export function useJsonServer() {
         try {
             const res = await axios.get<AviaVariant[]>(`${BACKEND_URL}/aviaVariants`)
             aviaVariants.value = res.data
+
             return aviaVariants.value
+
         } catch (error) {
             console.error('Ошибка при загрузке авиа-услуг:', error)
+
             return []
         }
     }
@@ -38,9 +44,12 @@ export function useJsonServer() {
         try {
             const res = await axios.get<Trip[]>(`${BACKEND_URL}/trips`)
             trips.value = res.data
+
             return trips.value
+
         } catch (error) {
             console.error('Ошибка при загрузке поездок:', error)
+
             return []
         }
     }
@@ -49,9 +58,12 @@ export function useJsonServer() {
     const postTrip = async (tripData: Omit<Trip, 'id' | 'status'> & { status?: 'new' | 'ended' | null }) => {
         try {
             const res = await axios.post<Trip>(`${BACKEND_URL}/trips`, tripData)
+
             return res.data
+
         } catch (error) {
             console.error('Ошибка при создании поездки:', error)
+
             return null
         }
     }
@@ -60,9 +72,12 @@ export function useJsonServer() {
     const updateTripStatus = async (id: number, status: 'new' | 'ended' | null) => {
         try {
             const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${id}`, { status })
+
             return res.data
+
         } catch (error) {
             console.error(`Ошибка при обновлении статуса поездки ${id}:`, error)
+
             return null
         }
     }
@@ -75,9 +90,12 @@ export function useJsonServer() {
     ) => {
         try {
             const res = await axios.patch<Trip>(`${BACKEND_URL}/trips/${tripId}`, { services, price })
+
             return res.data
+
         } catch (error) {
             console.error(`Ошибка при обновлении услуг поездки ${tripId}:`, error)
+
             return null
         }
     }
