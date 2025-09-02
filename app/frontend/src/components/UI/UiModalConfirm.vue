@@ -18,21 +18,21 @@
 <script setup lang="ts">
 import UiSvg from "@/components/UI/UiSvg.vue"
 
-interface IProps {
+interface Props {
   message: string
   isOpen: boolean
 }
 
-interface IEmits {
+interface Emits {
   (event: 'confirm'): void
   (event: 'cancel'): void
 }
 
-const props = defineProps<IProps>()
-const emit = defineEmits<IEmits>()
+const props = defineProps<Props>()
+const emits = defineEmits<Emits>()
 
-const confirm = () => emit('confirm')
-const cancel = () => emit('cancel')
+const confirm = () => emits('confirm')
+const cancel = () => emits('cancel')
 </script>
 
 <style lang="scss" module>

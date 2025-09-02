@@ -69,7 +69,7 @@ import { formatDateForFilter } from '@/utils/formatDate.ts'
 import { useUserStore } from '@/stores/userStore.ts'
 import { useToast } from 'vue-toastification'
 
-interface IError {
+interface Error {
   show: boolean
   shake: boolean
 }
@@ -86,7 +86,7 @@ const placeTo = ref('')
 const dateFrom = ref<Date | null>(null)
 const dateTo = ref<Date | null>(null)
 
-const errors = ref<{ placeFrom: IError; placeTo: IError }>({
+const errors = ref<{ placeFrom: Error; placeTo: Error }>({
   placeFrom: { show: false, shake: false },
   placeTo: { show: false, shake: false }
 })

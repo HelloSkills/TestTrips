@@ -43,10 +43,12 @@ export type Passenger = {
     last_name: string
 }
 
+export interface TicketDates {
+    dateFrom: string
+    dateTo: string
+}
+
 export type Services = {
     id: string | number
-    ticket: {
-        dateFrom: string
-        dateTo: string
-    }
+    ticket: TicketDates
 }

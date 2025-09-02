@@ -1,8 +1,6 @@
 <template>
-  <!-- Скелетоны -->
   <AviaSkeleton v-if="aviaSearchStore.isLoading" v-for="n in 5" :key="'skeleton-' + n" />
 
-  <!-- Список билетов с виртуальным скроллом -->
   <div v-else-if="variants.length > 0" :class="$style.listContainer">
     <DynamicScroller
         :items="variants"
@@ -21,7 +19,6 @@
           <div>
             <div :class="$style.wrapper">
 
-              <!-- Информация о билете -->
               <div :class="$style.ticketInfo">
                 <div :class="$style.name">
                   Перевозчик: {{ item.provider }}
@@ -51,7 +48,6 @@
                 </div>
               </div>
 
-              <!-- Бронь -->
               <div :class="$style.booking">
                 <div :class="$style.bookBtn" @click="openConfirmModal(item)">
                   Забронировать от {{ formatPrice(item.price) }}
@@ -65,13 +61,11 @@
     </DynamicScroller>
   </div>
 
-  <!-- Нет результатов -->
   <div v-else>
     <span :class="$style.noVariant">Нет подходящих вариантов</span>
     <div :class="$style.searchBack" @click="searchBack">назад к поиску</div>
   </div>
 
-  <!-- Модалка подтверждения -->
   <UiModalConfirm
       :isOpen="isModalOpen"
       message="Вы точно хотите забронировать?"
@@ -95,10 +89,10 @@ import UiModalConfirm from '@/components/UI/UiModalConfirm.vue'
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
-interface IProps {
+interface Props {
   variants: AviaVariant[]
 }
-defineProps<IProps>();
+defineProps<Props>();
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()

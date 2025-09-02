@@ -38,12 +38,12 @@ import { formatDate } from "@/utils/formatDate.ts"
 import { useRoute } from 'vue-router'
 import { computed } from "vue"
 
-interface IProps {
+interface Props {
   price: number
   passengers: Passenger[]
   services: Services[]
 }
-const props = defineProps<IProps>()
+defineProps<Props>()
 
 const route = useRoute()
 

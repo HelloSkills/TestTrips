@@ -61,11 +61,12 @@ import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
 import UiSvg from '@/components/Ui/UiSvg.vue'
 
-interface IProps {
+interface Props {
   isAvia: boolean
 }
 
-const props = defineProps<IProps>()
+const props = defineProps<Props>()
+
 const isAvia = computed(() => props.isAvia)
 
 const route = useRoute()

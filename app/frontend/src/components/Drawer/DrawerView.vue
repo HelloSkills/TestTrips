@@ -45,15 +45,16 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'
 
-interface IProps {
+interface Props {
   modelValue: boolean
 }
-const props = defineProps<IProps>()
 
-interface IEmits {
+interface Emits {
   (event: 'update:modelValue', value: boolean): void
 }
-const emit = defineEmits<IEmits>()
+
+defineProps<Props>()
+const emits = defineEmits<Emits>()
 
 const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
 const nameTrip = ref('')
@@ -90,7 +91,7 @@ const createTrip = async () => {
 }
 
 const close = () => {
-  emit('update:modelValue', false)
+  emits('update:modelValue', false)
   userStore.clearSelectedUsers()
   nameTrip.value = ''
   selectUsersRef.value?.closeDropdown()

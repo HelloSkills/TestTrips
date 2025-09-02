@@ -79,12 +79,13 @@ const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 
-const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
-
-const props = defineProps<{
+interface Props {
   selectedTrip: Trip | null
-}>()
+}
 
+const props = defineProps<Props>()
+
+const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
 const isSelected = computed(() => !!props.selectedTrip)
 
 const goToPage = (page: string) => {

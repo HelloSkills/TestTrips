@@ -20,7 +20,7 @@
 import '@vuepic/vue-datepicker/dist/main.css'
 import Datepicker from '@vuepic/vue-datepicker'
 import UiSvg from '@/components/UI/UiSvg.vue'
-import { defineProps, defineEmits, computed } from 'vue'
+import { computed } from 'vue'
 
 interface Props {
   modelValue: Date | null
@@ -30,16 +30,19 @@ interface Props {
   showIcon?: boolean
 }
 
-const props = defineProps<Props>()
-const emit = defineEmits<{
+interface Emits {
   (e: 'update:modelValue', value: Date | null): void
   (e: 'enter'): void
-}>()
+}
+
+const props = defineProps<Props>()
+const emits = defineEmits<Emits>()
+
 
 // Необходимо для изменения инпута в родителе
 const selectedDate  = computed({
   get: () => props.modelValue,
-  set: (value: Date | null) => emit('update:modelValue', value)
+  set: (value: Date | null) => emits('update:modelValue', value)
 })
 
 const placeholder = props.placeholder || ''
