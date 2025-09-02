@@ -29,3 +29,6 @@ temp.txt
 *.sw?
 
 *.tsbuildinfo
+
+/temp
+checklist.md

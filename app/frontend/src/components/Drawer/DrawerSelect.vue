@@ -6,7 +6,7 @@
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
-       <div :class="[isOpen ? $style.open : '']">
+       <div :class="[$style.arrow, isOpen ? $style.open : '']">
          <UiSvg name="arrow_down" />
        </div>
       </div>
@@ -214,6 +214,11 @@ onMounted(() => {
   top: -7px;
   right: 5px;
   cursor: pointer;
+}
+
+.arrow,
+.open {
+  color: #B3C1D1;
 }
 
 .open {

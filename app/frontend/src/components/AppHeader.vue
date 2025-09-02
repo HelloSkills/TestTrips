@@ -151,6 +151,7 @@ const showBackLink = computed(() => {
 
 .logo {
   line-height: 0;
+  color: var(--lb-blue);
 }
 
 .travel {
@@ -179,6 +180,7 @@ const showBackLink = computed(() => {
 
 .icon {
   margin-left: 1px;
+  color: var(--lb-blue)
 }
 
 .createTravel {

@@ -155,6 +155,10 @@ const close = () => {
   cursor: pointer;
 }
 
+.close {
+  color: #B3C1D1;
+}
+
 .createTrip {
   border-top: 2px solid #f3f3f3;
   height: 60px;

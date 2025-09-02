@@ -208,6 +208,7 @@ const searchAir = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #4361EE;
 }
 
 .searchBtn {

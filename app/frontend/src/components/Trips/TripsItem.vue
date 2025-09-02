@@ -170,4 +170,8 @@ const goToTrip = (trip: Trip) => {
   color: var(--color-blue);
   cursor: pointer;
 }
+
+.uiSvg {
+  color: var(--color-blue);
+}
 </style>

@@ -70,6 +70,7 @@ const locale = props.locale || 'ru'
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-blue);
 }
 
 :global(.dp__input) {
