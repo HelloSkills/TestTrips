@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface UiInputProps {
+interface Props {
   modelValue?: string | number
   type?: string
   placeholder?: string
@@ -43,15 +43,15 @@ interface UiInputProps {
   labelClass?: string | string[]
 }
 
-interface UiInputEmits {
+interface Emits {
   (e: 'update:modelValue', value: string | number): void
   (e: 'enter'): void
   (e: 'focus'): void
   (e: 'change', value: string | number): void
 }
 
-const props = defineProps<UiInputProps>()
-const emit = defineEmits<UiInputEmits>()
+const props = defineProps<Props>()
+const emit = defineEmits<Emits>()
 
 const isChecked = computed(() => props.type === 'radio' && props.modelValue === props.value)
 
