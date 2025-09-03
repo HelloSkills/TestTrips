@@ -1,6 +1,6 @@
 <template>
-  <div :class="[$style.overlay, modelValue ? $style.open : '']" @click.self="close">
-    <div :class="[$style.drawer, modelValue ? $style.open : '']">
+  <div :class="[$style.overlay, isOpen ? $style.open : '']" @click.self="close">
+    <div :class="[$style.drawer, isOpen ? $style.open : '']">
       <div :class="$style.container">
         <div :class="$style.wrap">
           <div :class="$style.title">
@@ -38,7 +38,7 @@ import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
 import UiSvg from '@/components/UI/UiSvg.vue'
 import UiButton from "@/components/UI/UiButton.vue"
 import UiInput from "@/components/UI/UiInput.vue"
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useTripsStore } from "@/stores/tripsStore.ts"
 import { useUserStore } from "@/stores/userStore.ts"
 import { useTripStore } from '@/stores/selectedTripStore'
@@ -47,17 +47,20 @@ import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'
 
 interface Props {
-  modelValue: boolean
+  modelValue: boolean | Ref<boolean>
 }
 
 interface Emits {
   (event: 'update:modelValue', value: boolean): void
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
-const selectUsersRef = ref<InstanceType<typeof SelectUsers> | null>(null)
+const isOpen = ref(props.modelValue ?? false)
+watch(() => props.modelValue, val => isOpen.value = val)
+
+const selectUsersRef = ref<InstanceType<typeof DrawerSelect> | null>(null)
 const nameTrip = ref('')
 
 const tripStore = useTripsStore()
@@ -92,6 +95,7 @@ const createTrip = async () => {
 }
 
 const close = () => {
+  isOpen.value = false
   emits('update:modelValue', false)
   userStore.clearSelectedUsers()
   nameTrip.value = ''
@@ -150,13 +154,12 @@ const close = () => {
   &:focus {
     border-bottom: 1px solid var(--color-blue);
   }
-}
 
-.inputSearch, .close {
   cursor: pointer;
 }
 
 .close {
+  cursor: pointer;
   color: #B3C1D1;
 }
 
@@ -169,20 +172,6 @@ const close = () => {
   align-items: center;
 }
 
-.createBtn {
-  width: 150px;
-  height: 40px;
-  margin-left: 20px;
-  padding: 12px 47px;
-  background-color: var(--color-blue);
-  color: var(--color-white);
-  font-size: 14px;
-  line-height: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-// --- overlay + drawer ---
 .overlay {
   position: fixed;
   inset: 0;

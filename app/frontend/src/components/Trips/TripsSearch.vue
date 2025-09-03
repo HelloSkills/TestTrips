@@ -18,8 +18,10 @@
     </div>
     <div v-if="!isTrips" :class="$style.list">
       <div>Список поездок пуст</div>
-      <div :class="$style.createTravel" @click="createTrip()">создать поездку</div>
+      <div :class="$style.createTravel" @click="open()">создать поездку</div>
     </div>
+
+    <DrawerView v-model="isOpen" />
   </div>
 </template>
 
@@ -27,18 +29,18 @@
 import UiSvg from '@/components/UI/UiSvg.vue'
 import UiButton from '@/components/UI/UiButton.vue'
 import UiInput from "@/components/UI/UiInput.vue"
+import DrawerView from '@/components/Drawer/DrawerView.vue'
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
-import { useModalStore } from '@/stores/modal.ts'
+import { useDrawer } from '@/composables/useDrawer'
 
 const tripsStore = useTripsStore()
-const modalStore = useModalStore()
+const { isOpen, open, close } = useDrawer()
 const searchQuery = ref('')
 
 const isTrips = computed(() => tripsStore.trips && tripsStore.trips.length > 0)
 
 const search = () => tripsStore.filterTrips(searchQuery.value)
-const createTrip = () => modalStore.toggleDrawer()
 
 onBeforeUnmount(() => {
   tripsStore.clearSearch()

@@ -1,6 +1,6 @@
 <template>
   <div :class="$style.container">
-    <DrawerView v-model="modalStore.drawerOpen" />
+    <DrawerView v-model="drawer.isOpen" />
     <div :class="$style.wrap">
       <div :class="$style.logo" @click="goToPage('trips')">
         <UiSvg name="logo" size="40"/>
@@ -13,12 +13,10 @@
       </div>
 
       <div v-else-if="isSelected" :class="[$style.avia, tripStore.selectedTrip?.status === 'ended' ? $style.disabled : '']">
-        <div
-            @click="handleAviaClick()"
-        >
-         <div :class="$style.icon">
-           <UiSvg name="air" size="14"/>
-         </div>
+        <div @click="handleAviaClick()">
+          <div :class="$style.icon">
+            <UiSvg name="air" size="14"/>
+          </div>
         </div>
       </div>
 
@@ -28,10 +26,7 @@
             <UiSvg name="suitcase" />
           </div>
         </router-link>
-        <div
-            :class="$style.createTravel"
-            @click="createTrip()"
-        >
+        <div :class="$style.createTravel" @click="createTrip()">
           Создать поездку
         </div>
       </div>
@@ -39,19 +34,11 @@
 
     <div :class="$style.wrapper">
       <template v-if="isSelected && !isAviaPage && route.name === 'SelectedTrip'">
-        <div
-            v-if="showBackLink"
-            :class="$style.backTrip"
-            @click="goToPage('trips')"
-        >
+        <div v-if="showBackLink" :class="$style.backTrip" @click="goToPage('trips')">
           Вернуться к списку поездок
         </div>
 
-        <div
-            v-else
-            :class="$style.endTrip"
-            @click="endTrip()"
-        >
+        <div v-else :class="$style.endTrip" @click="endTrip()">
           завершить поездку
         </div>
       </template>
@@ -70,13 +57,13 @@ import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 import { useTripsStore } from "@/stores/tripsStore.ts"
-import { useModalStore } from '@/stores/modal'
+import { useDrawer } from '@/composables/useDrawer'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
 const tripStore = useTripStore()
 const tripsStore = useTripsStore()
-const modalStore = useModalStore()
+const drawer = useDrawer()
 const route = useRoute()
 const router = useRouter()
 const toast = useToast()
@@ -116,7 +103,7 @@ const endTrip = async () => {
 }
 
 const createTrip = () => {
-  modalStore.toggleDrawer()
+  drawer.toggle()
 }
 
 const showBackLink = computed(() => {
