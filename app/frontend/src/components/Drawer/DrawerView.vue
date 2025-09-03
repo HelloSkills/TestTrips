@@ -5,7 +5,7 @@
         <div :class="$style.wrap">
           <div :class="$style.title">
             <div :class="$style.create">Создание поездки</div>
-            <div @click="close" :class="$style.close">
+            <div @click="close()" :class="$style.close">
               <UiSvg name="close" />
             </div>
           </div>
@@ -15,7 +15,7 @@
                 type="text"
                 placeholder="Введите название поездки"
                 :class="$style.inputSearch"
-                @keyup.enter="createTrip"
+                @keyup.enter="createTrip()"
             >
           </div>
           <DrawerSelect ref="selectUsersRef" :isAvia="false"/>
@@ -25,7 +25,7 @@
               text="Создать"
               size="large"
               color="blue"
-              @click="createTrip"
+              @click="createTrip()"
           />
         </div>
       </div>

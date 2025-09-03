@@ -93,6 +93,7 @@ interface Props {
   variants: AviaVariant[]
 }
 defineProps<Props>();
+
 const userStore = useUserStore()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()

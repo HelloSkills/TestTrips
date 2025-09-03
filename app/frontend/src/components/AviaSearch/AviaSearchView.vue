@@ -17,7 +17,7 @@
             name="sort"
             value="cheap"
             v-model="aviaSearchStore.tripType"
-            @change="onChange"
+            @change="onChange()"
         />
         Сначала дешёвые
       </label>
@@ -28,7 +28,7 @@
             name="sort"
             value="expensive"
             v-model="aviaSearchStore.tripType"
-            @change="onChange"
+            @change="onChange()"
         />
         Сначала дорогие
       </label>

@@ -60,7 +60,6 @@
         </div>
       </div>
 
-      <!-- Бронь -->
       <div :class="$style.booking">
         <div
             :class="[$style.skeleton, $style.bookBtn]"

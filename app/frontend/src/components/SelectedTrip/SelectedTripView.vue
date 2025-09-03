@@ -9,7 +9,12 @@
 
     <div v-if="!isServices && showSearch" :class="$style.list">
       <div>Список услуг пуст</div>
-      <div :class="$style.createTravel" @click="goToPage">поиск авиа</div>
+      <div
+          :class="$style.createTravel"
+          @click="goToPage()"
+      >
+        поиск авиа
+      </div>
     </div>
     <router-view />
   </div>

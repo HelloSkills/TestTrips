@@ -11,7 +11,7 @@
             type="text"
             placeholder="Город вылета"
             @focus="onFocus('placeFrom')"
-            @keyup.enter="searchAir"
+            @keyup.enter="searchAir()"
         />
       </div>
 
@@ -25,14 +25,14 @@
             type="text"
             placeholder="Город прилёта"
             @focus="onFocus('placeTo')"
-            @keyup.enter="searchAir"
+            @keyup.enter="searchAir()"
         />
       </div>
       <div :class="$style.datepicker">
         <UiDatepicker
             v-model="dateFrom"
             placeholder="Туда"
-            @enter="searchAir"
+            @enter="searchAir()"
         />
       </div>
 
@@ -40,7 +40,7 @@
         <UiDatepicker
             v-model="dateTo"
             placeholder="Обратно"
-            @enter="searchAir"
+            @enter="searchAir()"
         />
       </div>
     </div>
@@ -50,7 +50,7 @@
           text="Найти"
           size="xxl"
           color="blue"
-          @click="searchAir"
+          @click="searchAir()"
       />
     </div>
   </div>

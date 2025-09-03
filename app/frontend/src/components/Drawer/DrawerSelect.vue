@@ -2,7 +2,7 @@
   <div :class="[$style.container, isAvia ? $style.avia : '']">
     <div :class="$style.wrapper">
 
-      <div :class="[$style.select, isAvia ? $style.aviaSelect : '']" @click="toggleDropdown" ref="selectRef">
+      <div :class="[$style.select, isAvia ? $style.aviaSelect : '']" @click="toggleDropdown()" ref="selectRef">
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
@@ -24,7 +24,6 @@
 
     </div>
 
-    <!-- Список выбранных пользователей для модалки -->
     <div v-if="!isAvia">
       <div
           v-for="user in userStore.selectedUsers"
@@ -38,7 +37,6 @@
       </div>
     </div>
 
-    <!-- Список выбранных пользователей для авиа -->
     <div v-else :class="$style.selectedUsersAvia">
       <div
           v-for="user in aviaPassengers"
