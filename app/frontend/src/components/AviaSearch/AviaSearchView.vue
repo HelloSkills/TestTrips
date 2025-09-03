@@ -11,27 +11,25 @@
     </div>
 
     <div v-if="!aviaSearchStore.isLoading && aviaSearchStore.filteredVariants.length > 0" :class="$style.options">
-      <label :class="$style.labels">
-        <input
-            type="radio"
-            name="sort"
-            value="cheap"
-            v-model="aviaSearchStore.tripType"
-            @change="onChange()"
-        />
-        Сначала дешёвые
-      </label>
+      <UiInput
+          v-model="aviaSearchStore.tripType"
+          type="radio"
+          name="sort"
+          value="cheap"
+          label="Сначала дешёвые"
+          :labelClass="$style.labels"
+          @change="onChange()"
+      />
 
-      <label :class="$style.labels">
-        <input
-            type="radio"
-            name="sort"
-            value="expensive"
-            v-model="aviaSearchStore.tripType"
-            @change="onChange()"
-        />
-        Сначала дорогие
-      </label>
+      <UiInput
+          v-model="aviaSearchStore.tripType"
+          type="radio"
+          name="sort"
+          value="expensive"
+          label="Сначала дорогие"
+          :labelClass="$style.labels"
+          @change="onChange()"
+      />
     </div>
     <div v-else-if="aviaSearchStore.isLoading" :class="$style.optionsSkeleton">
       <div :class="[$style.skeleton, $style.optionsBlock]"></div>
@@ -51,6 +49,7 @@
 import { onMounted } from 'vue'
 import AviaSearchItem from '@/components/AviaSearch/AviaSearchItem.vue'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
+import UiInput from "@/components/UI/UiInput.vue"
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 import { useJsonServer } from '@/composables/useJsonServer'
 

@@ -10,10 +10,10 @@
     <div v-if="!isServices && showSearch" :class="$style.list">
       <div>Список услуг пуст</div>
       <div
-          :class="$style.createTravel"
+          :class="[$style.createTravel, searchOff && $style.searchOff]"
           @click="goToPage()"
       >
-        поиск авиа
+        <span :class="[searchOff && $style.searchOff]">поиск авиа</span>
       </div>
     </div>
     <router-view />
@@ -26,8 +26,10 @@ import { computed } from "vue"
 import { storeToRefs } from 'pinia'
 import { useTripStore } from '@/stores/SelectedTripStore.ts'
 import { useRoute, useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const tripStore = useTripStore()
+const toast = useToast()
 const { selectedTrip } = storeToRefs(tripStore)
 const price = selectedTrip.value.price
 const passengers = selectedTrip.value.passengers
@@ -38,8 +40,15 @@ const router = useRouter()
 
 const isServices = computed(() => tripStore.getServices().length > 0)
 const showSearch = computed(() => !route.path.endsWith('/services'))
+const searchOff = computed(() => tripStore.selectedTrip?.status === 'ended')
 
 const goToPage = () => {
+
+  if (tripStore.selectedTrip?.status === 'ended') {
+    toast.info('Поездка завершена, услуги недоступны')
+    return
+  }
+
   router.push(route.fullPath + '/services')
 }
 </script>
@@ -69,5 +78,11 @@ const goToPage = () => {
   color: var(--color-blue);
   cursor: pointer;
   border-bottom: 1px dashed var(--color-blue);
+}
+
+.searchOff {
+  color: gray;
+  opacity: 0.6;
+  border-bottom: none;
 }
 </style>

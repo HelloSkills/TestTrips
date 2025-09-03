@@ -6,13 +6,13 @@
         <div :class="$style.uiSvg">
           <UiSvg name="search"/>
         </div>
-        <input
+        <UiInput
             v-model="searchQuery"
             type="text"
             placeholder="Введите название поездки или её номер"
-            :class="$style.inputSearch"
-            @keyup.enter="search()"
-        >
+            :className="$style.inputSearch"
+            @enter="search()"
+        />
       </div>
       <UiButton text="Найти" size="medium" color="blue" @click="search()" />
     </div>
@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import UiSvg from '@/components/UI/UiSvg.vue'
 import UiButton from '@/components/UI/UiButton.vue'
+import UiInput from "@/components/UI/UiInput.vue"
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { useModalStore } from '@/stores/modal.ts'

@@ -111,5 +111,6 @@ const cancel = () => emits('cancel')
   height: 20px;
   width: 20px;
   cursor: pointer;
+  color: #B3C1D1;
 }
 </style>

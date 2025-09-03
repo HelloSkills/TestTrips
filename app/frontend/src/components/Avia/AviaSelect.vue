@@ -5,13 +5,13 @@
         <div :class="$style.icon">
           <UiSvg name="air" size="14"/>
         </div>
-        <input
+        <UiInput
             v-model="placeFrom"
-            :class="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
             type="text"
             placeholder="Город вылета"
+            :className="[$style.input, errors.placeFrom.shake ? $style.shake : '']"
             @focus="onFocus('placeFrom')"
-            @keyup.enter="searchAir()"
+            @enter="searchAir()"
         />
       </div>
 
@@ -19,13 +19,13 @@
         <div :class="$style.icon">
           <UiSvg name="air" size="14"/>
         </div>
-        <input
+        <UiInput
             v-model="placeTo"
-            :class="[$style.input, errors.placeTo.shake ? $style.shake : '']"
             type="text"
             placeholder="Город прилёта"
+            :className="[$style.input, errors.placeTo.shake ? $style.shake : '']"
             @focus="onFocus('placeTo')"
-            @keyup.enter="searchAir()"
+            @enter="searchAir()"
         />
       </div>
       <div :class="$style.datepicker">
@@ -59,6 +59,7 @@
 <script setup lang="ts">
 import UiSvg from '@/components/UI/UiSvg.vue'
 import UiButton from '@/components/UI/UiButton.vue'
+import UiInput from "@/components/UI/UiInput.vue"
 import UiDatepicker from '@/components/UI/UiDatepicker.vue'
 
 import { ref } from 'vue'

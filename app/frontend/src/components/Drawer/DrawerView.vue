@@ -10,13 +10,13 @@
             </div>
           </div>
           <div :class="$style.name">
-            <input
+            <UiInput
                 v-model="nameTrip"
                 type="text"
                 placeholder="Введите название поездки"
-                :class="$style.inputSearch"
-                @keyup.enter="createTrip()"
-            >
+                :className="$style.inputSearch"
+                @enter="createTrip()"
+            />
           </div>
           <DrawerSelect ref="selectUsersRef" :isAvia="false"/>
         </div>
@@ -34,9 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import UiButton from "@/components/UI/UiButton.vue"
 import DrawerSelect from "@/components/Drawer/DrawerSelect.vue"
 import UiSvg from '@/components/UI/UiSvg.vue'
+import UiButton from "@/components/UI/UiButton.vue"
+import UiInput from "@/components/UI/UiInput.vue"
 import { ref } from 'vue'
 import { useTripsStore } from "@/stores/tripsStore.ts"
 import { useUserStore } from "@/stores/userStore.ts"
