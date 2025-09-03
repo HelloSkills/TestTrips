@@ -11,14 +11,14 @@
             type="text"
             placeholder="Введите название поездки или её номер"
             :class="$style.inputSearch"
-            @keyup.enter="search"
+            @keyup.enter="search()"
         >
       </div>
-      <UiButton text="Найти" size="medium" color="blue" @click="search" />
+      <UiButton text="Найти" size="medium" color="blue" @click="search()" />
     </div>
     <div v-if="!isTrips" :class="$style.list">
       <div>Список поездок пуст</div>
-      <div :class="$style.createTravel" @click="createTrip">создать поездку</div>
+      <div :class="$style.createTravel" @click="createTrip()">создать поездку</div>
     </div>
   </div>
 </template>

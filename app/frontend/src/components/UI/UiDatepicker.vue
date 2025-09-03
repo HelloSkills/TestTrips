@@ -1,7 +1,7 @@
 <template>
   <div :class="$style.datepickerWrapper">
     <div :class="$style.icon">
-      <UiSvg name="calendar" />
+      <UiSvg name="calendar" size="18"/>
     </div>
     <Datepicker
         v-model="selectedDate"

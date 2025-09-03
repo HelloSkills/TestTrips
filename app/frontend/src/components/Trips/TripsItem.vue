@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.container" v-for="trip in tripsStore.filteredTrips" :key="trip.id">
-    <!-- Блок с ценой -->
     <div v-if="trip.price > 0" :class="$style.withPrice">
       <div :class="$style.wrap">
         <div :class="$style.info">
@@ -31,7 +30,6 @@
       </div>
     </div>
 
-    <!-- Блок без цены -->
     <div v-else :class="$style.withoutPrice">
       <div :class="$style.wrapElse">
         <div :class="$style.info">
