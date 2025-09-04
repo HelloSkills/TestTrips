@@ -64,7 +64,7 @@ import UiDatepicker from '@/components/UI/UiDatepicker.vue'
 
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
+import { useAviaSearchStore } from '@/stores/AviaSearchStore.ts'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/formatDate.ts'
 import { useToast } from 'vue-toastification'

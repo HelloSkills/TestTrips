@@ -50,7 +50,7 @@ import { onMounted } from 'vue'
 import AviaSearchItem from '@/components/AviaSearch/AviaSearchItem.vue'
 import AviaSkeleton from '@/components/Avia/AviaSkeleton.vue'
 import UiInput from "@/components/UI/UiInput.vue"
-import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
+import { useAviaSearchStore } from '@/stores/AviaSearchStore.ts'
 import { useJsonServer } from '@/composables/useJsonServer'
 
 const aviaSearchStore = useAviaSearchStore()
