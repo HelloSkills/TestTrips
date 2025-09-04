@@ -67,8 +67,8 @@ import { useRouter } from 'vue-router'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore.ts'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
 import { formatDateForFilter } from '@/utils/formatDate.ts'
-import { useUserStore } from '@/stores/userStore.ts'
 import { useToast } from 'vue-toastification'
+import { useUser } from '@/composables/useUser.ts'
 
 interface Error {
   show: boolean
@@ -77,7 +77,7 @@ interface Error {
 
 const { getAviaVariants } = useJsonServer()
 
-const userStore = useUserStore()
+const { selectedUsers } = useUser()
 const router = useRouter()
 const aviaSearchStore = useAviaSearchStore()
 const toast = useToast()
@@ -98,7 +98,7 @@ const onFocus = (field: 'placeFrom' | 'placeTo') => {
 }
 
 const searchAir = async () => {
-  if (!userStore.selectedUsers.length) {
+  if (!selectedUsers.value.length) {
     toast.info('Необходимо выбрать хотя бы 1 пассажира')
     return
   }

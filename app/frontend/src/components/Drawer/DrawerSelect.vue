@@ -6,9 +6,9 @@
         <div :class="[$style.users, isAvia ? $style.aviaUsers : '']">
           {{ textPassengers }}
         </div>
-       <div :class="[$style.arrow, isOpen ? $style.open : '']">
-         <UiSvg name="arrow_down" />
-       </div>
+        <div :class="[$style.arrow, isOpen ? $style.open : '']">
+          <UiSvg name="arrow_down" />
+        </div>
       </div>
 
       <div v-if="isOpen" :class="[$style.dropdown, isAvia ? $style.aviadropdown : '']">
@@ -16,7 +16,7 @@
             v-for="user in availableUsers"
             :key="user.id"
             :class="$style.dropdownItem"
-            @click="selectUser(user)"
+            @click="handleSelectUser(user)"
         >
           {{ user.first_name }} {{ user.second_name }}
         </div>
@@ -26,14 +26,14 @@
 
     <div v-if="!isAvia">
       <div
-          v-for="user in userStore.selectedUsers"
+          v-for="user in selectedUsers"
           :key="user.id"
           :class="$style.selectedUsers"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-       <div :class="$style.icon" @click="userStore.deleteUser(user.id)">
-         <UiSvg name="delete" />
-       </div>
+        <div :class="$style.icon" @click="handleDeleteUser(user.id)">
+          <UiSvg name="delete" />
+        </div>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
           :class="$style.aviaUserItem"
       >
         <div :class="$style.userName">{{ user.first_name }} {{ user.second_name }}</div>
-        <div :class="$style.icon" @click="userStore.deleteUser(user.id)">
+        <div :class="$style.icon" @click="handleDeleteUser(user.id)">
           <UiSvg name="delete" />
         </div>
       </div>
@@ -55,22 +55,21 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useUserStore } from '@/stores/userStore'
 import { useTripsStore } from '@/stores/tripsStore'
 import UiSvg from '@/components/UI/UiSvg.vue'
+import { useUser } from '@/composables/useUser.ts'
 
 interface Props {
   isAvia: boolean
 }
 
 const props = defineProps<Props>()
-
 const isAvia = computed(() => props.isAvia)
 
 const route = useRoute()
 const tripId = route.params.id as string
 
-const userStore = useUserStore()
+const { users, selectedUsers, selectUser, deleteUser, loadUsers } = useUser()
 const tripsStore = useTripsStore()
 
 const isOpen = ref(false)
@@ -83,34 +82,38 @@ const selectRef = ref<HTMLElement | null>(null)
 const textPassengers = computed(() => isAvia.value ? 'Выберите пассажира' : 'Выберите сотрудников')
 
 const availableUsers = computed(() => {
-  const users = isAvia.value && tripId
+  const usersList = isAvia.value && tripId
       ? tripsStore.getUsersForTrip(tripId)
-      : userStore.users
-  return users.filter(u => !userStore.selectedUsers.some(sel => sel.id.toString() === u.id.toString()))
+      : users.value
+  return usersList.filter(u => !selectedUsers.value.some(sel => sel.id.toString() === u.id.toString()))
 })
 
 const aviaPassengers = computed(() => {
   return isAvia.value
-      ? userStore.selectedUsers.filter(u =>
+      ? selectedUsers.value.filter(u =>
           availableUsers.value.some(a => a.id.toString() === u.id.toString()) ||
           tripsStore.getUsersForTrip(tripId).some(a => a.id.toString() === u.id.toString())
       )
       : []
 })
 
-const selectUser = (user: any) => {
+const handleSelectUser = (user: any) => {
   if (isAvia.value) {
-    userStore.selectedUsers = [user]
+    selectedUsers.value = [user] // выбираем только одного пассажира
     isOpen.value = false
   } else {
-    userStore.selectUser(user)
+    selectUser(user)
     isOpen.value = false
   }
 }
 
+const handleDeleteUser = (id: string | number) => {
+  deleteUser(id)
+}
+
 onMounted(() => {
   if (route.path === '/') {
-    userStore.loadUsers()
+    loadUsers()
   }
 })
 </script>

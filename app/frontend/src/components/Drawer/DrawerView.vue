@@ -40,11 +40,10 @@ import UiButton from "@/components/UI/UiButton.vue"
 import UiInput from "@/components/UI/UiInput.vue"
 import { ref, watch } from 'vue'
 import { useTripsStore } from "@/stores/tripsStore.ts"
-import { useUserStore } from "@/stores/userStore.ts"
 import { useTripStore } from '@/stores/selectedTripStore'
-import { storeToRefs } from 'pinia'
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'
+import { useUser } from '@/composables/useUser.ts'
 
 interface Props {
   modelValue: boolean | Ref<boolean>
@@ -64,11 +63,10 @@ const selectUsersRef = ref<InstanceType<typeof DrawerSelect> | null>(null)
 const nameTrip = ref('')
 
 const tripStore = useTripsStore()
-const userStore = useUserStore()
 const selectedTripStore = useTripStore()
 const router = useRouter()
-const { selectedUsers } = storeToRefs(userStore)
 const toast = useToast()
+const { selectedUsers, clearSelectedUsers } = useUser()
 
 const createTrip = async () => {
   if (nameTrip.value.length === 0) {
@@ -97,7 +95,7 @@ const createTrip = async () => {
 const close = () => {
   isOpen.value = false
   emits('update:modelValue', false)
-  userStore.clearSelectedUsers()
+  clearSelectedUsers()
   nameTrip.value = ''
   selectUsersRef.value?.closeDropdown()
 }

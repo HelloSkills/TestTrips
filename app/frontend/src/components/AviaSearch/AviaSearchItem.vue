@@ -78,7 +78,7 @@
 import type { AviaVariant } from "@/types/types.ts"
 import { formatPrice } from '@/utils/formatPrice.ts'
 import { formatDayMonth } from '@/utils/formatDate.ts'
-import { useUserStore } from '@/stores/userStore'
+import { useUser } from '@/composables/useUser.ts'
 import { useTripStore } from '@/stores/SelectedTripStore'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
 import { computed, ref } from 'vue'
@@ -94,13 +94,13 @@ interface Props {
 }
 defineProps<Props>();
 
-const userStore = useUserStore()
+const { selectedUsers } = useUser()
 const tripStore = useTripStore()
 const aviaSearchStore = useAviaSearchStore()
 const router = useRouter()
 const toast = useToast()
 
-const selectedUser = computed(() => userStore.selectedUsers[0] || null)
+const selectedUser = computed(() => selectedUsers.value[0] || null)
 
 const isModalOpen = ref(false)
 const ticketToBook = ref<AviaVariant | null>(null)
