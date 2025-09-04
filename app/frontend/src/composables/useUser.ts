@@ -1,5 +1,5 @@
 import type { User } from '@/types/types'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useJsonServer } from '@/composables/useJsonServer'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -23,10 +23,10 @@ export function useUser() {
         }
     }
 
-    // Следим за изменением selectedUsers и сохраняем в localStorage
-    watch(selectedUsers, (currentSelectedUsers) => {
-        localStorage.setItem('selectedUsers', JSON.stringify(currentSelectedUsers))
-    }, { deep: true })
+    // Автоматически сохраняем selectedUsers в localStorage при любом изменении
+    watchEffect(() => {
+        localStorage.setItem('selectedUsers', JSON.stringify(selectedUsers.value))
+    })
 
     // Загружает список всех пользователей с сервера
     const loadUsers = async () => {
@@ -39,20 +39,20 @@ export function useUser() {
     }
 
     // Добавляет пользователя в выбранные (selectedUsers)
-    const selectUser = (userToSelect: User) => {
+    const selectUser = (user: User) => {
         if (selectedUsers.value.length >= 10) {
             toast.info('Нельзя выбрать более 10 сотрудников')
 
             return
         }
-        if (!selectedUsers.value.find(selectedUser => selectedUser.id === userToSelect.id)) {
-            selectedUsers.value.push(userToSelect)
+        if (!selectedUsers.value.find(selectedUser => selectedUser.id === user.id)) {
+            selectedUsers.value.push(user)
         }
     }
 
     // Удаляет пользователя из выбранных по id
-    const deleteUser = (userId: User['id']) => {
-        selectedUsers.value = selectedUsers.value.filter(selectedUser => selectedUser.id !== userId)
+    const deleteUser = (id: User['id']) => {
+        selectedUsers.value = selectedUsers.value.filter(selectedUser => selectedUser.id !== id)
     }
 
     // Полностью очищает список выбранных пользователей
@@ -70,9 +70,7 @@ export function useUser() {
     // Вычисляемый массив доступных пользователей (не выбранные)
     const availableUsers = computed(() => {
 
-        return users.value.filter(userInList =>
-            !selectedUsers.value.some(selectedUser => selectedUser.id === userInList.id)
-        )
+        return users.value.filter(user => !selectedUsers.value.some(selectedUser => selectedUser.id === user.id))
     })
 
     return {

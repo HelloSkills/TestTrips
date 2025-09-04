@@ -85,7 +85,10 @@ const availableUsers = computed(() => {
   const usersList = isAvia.value && tripId
       ? tripsStore.getUsersForTrip(tripId)
       : users.value
-  return usersList.filter(u => !selectedUsers.value.some(sel => sel.id.toString() === u.id.toString()))
+
+  return usersList.filter(user =>
+      !selectedUsers.value.some(selectedUser => selectedUser.id.toString() === user.id.toString())
+  )
 })
 
 const aviaPassengers = computed(() => {
