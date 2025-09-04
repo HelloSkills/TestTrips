@@ -79,7 +79,7 @@ import type { AviaVariant } from "@/types/types.ts"
 import { formatPrice } from '@/utils/formatPrice.ts'
 import { formatDayMonth } from '@/utils/formatDate.ts'
 import { useUser } from '@/composables/useUser.ts'
-import { useTripStore } from '@/stores/SelectedTripStore'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import { useAviaSearchStore } from '@/stores/useAviaSearchStore'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -95,7 +95,7 @@ interface Props {
 defineProps<Props>();
 
 const { selectedUsers } = useUser()
-const tripStore = useTripStore()
+const selectedTripStore = useSelectedTripStore()
 const aviaSearchStore = useAviaSearchStore()
 const router = useRouter()
 const toast = useToast()
@@ -117,10 +117,10 @@ const handleConfirm = async () => {
     return
   }
 
-  await tripStore.addService(selectedUser.value, ticketToBook.value)
+  await selectedTripStore.addService(selectedUser.value, ticketToBook.value)
 
-  if (tripStore.selectedTrip) {
-    router.push(`/trip/${tripStore.selectedTrip.id}`)
+  if (selectedTripStore.selectedTrip) {
+    router.push(`/trip/${selectedTripStore.selectedTrip.id}`)
   }
   toast.success('Поездка успешно забронирована')
 }
@@ -130,7 +130,9 @@ const handleCancel = () => {
 }
 
 const searchBack = () => {
-  router.push(`/trip/${tripStore.selectedTrip.id}/services`)
+  if (selectedTripStore.selectedTrip) {
+    router.push(`/trip/${selectedTripStore.selectedTrip.id}/services`)
+  }
 }
 </script>
 

@@ -12,7 +12,7 @@
         </router-link>
       </div>
 
-      <div v-else-if="isSelected" :class="[$style.avia, tripStore.selectedTrip?.status === 'ended' ? $style.disabled : '']">
+      <div v-else-if="isSelected" :class="[$style.avia, selectedTripStore.selectedTrip?.status === 'ended' ? $style.disabled : '']">
         <div @click="handleAviaClick()">
           <div :class="$style.icon">
             <UiSvg name="air" size="14"/>
@@ -55,13 +55,13 @@ import DrawerView from '@/components/Drawer/DrawerView.vue'
 import UiSvg from '@/components/UI/UiSvg.vue'
 import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
-import { useTripStore } from '@/stores/SelectedTripStore.ts'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import { useTripsStore } from "@/stores/tripsStore.ts"
 import { useDrawer } from '@/composables/useDrawer'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
-const tripStore = useTripStore()
+const selectedTripStore = useSelectedTripStore()
 const tripsStore = useTripsStore()
 const drawer = useDrawer()
 const route = useRoute()
@@ -77,19 +77,21 @@ const props = defineProps<Props>()
 const isAviaPage = computed(() => route.name === 'Avia' || route.name === 'Services')
 const isSelected = computed(() => !!props.selectedTrip)
 
+const selectedTrip = computed(() => selectedTripStore.selectedTrip)
+
 const goToPage = (page: string) => {
-  if (page === 'services' && tripStore.selectedTrip) {
-    router.push(`/trip/${tripStore.selectedTrip.id}/services`)
+  if (page === 'services' && selectedTripStore.selectedTrip) {
+    router.push(`/trip/${selectedTripStore.selectedTrip.id}/services`)
   }
 
   if (page === 'trips') {
-    tripStore.clearTrip()
+    selectedTripStore.clearTrip()
     router.push(`/`)
   }
 }
 
 const handleAviaClick = () => {
-  if (tripStore.selectedTrip?.status === 'ended') {
+  if (selectedTripStore.selectedTrip?.status === 'ended') {
     toast.info('Поездка завершена, услуги недоступны')
     return
   }
@@ -97,9 +99,9 @@ const handleAviaClick = () => {
 }
 
 const endTrip = async () => {
-  if (!tripStore.selectedTrip) return
-  await tripsStore.setTripStatus(tripStore.selectedTrip.id, 'ended')
-  toast.success(`Поездка успешно завершена`)
+  if (!selectedTripStore.selectedTrip) return
+  await tripsStore.setTripStatus(selectedTripStore.selectedTrip.id, 'ended')
+  toast.success('Поездка успешно завершена')
 }
 
 const createTrip = () => {
@@ -107,7 +109,7 @@ const createTrip = () => {
 }
 
 const showBackLink = computed(() => {
-  return tripStore.selectedTrip?.status === 'ended' && route.name === 'SelectedTrip'
+  return selectedTripStore.selectedTrip?.status === 'ended' && route.name === 'SelectedTrip'
 })
 </script>
 

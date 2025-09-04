@@ -1,61 +1,54 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import type { Trip, User, AviaVariant } from '@/types/types'
 import { useJsonServer } from '@/composables/useJsonServer.ts'
-import type { Trip, User, AviaVariant } from '@/types/types.ts'
 
-export const useTripStore = defineStore('trip', () => {
-    const { patchTripServices } = useJsonServer()
+export const useSelectedTripStore = defineStore('selectedTrip', {
+    state: () => ({
+        selectedTrip: null as Trip | null
+    }),
 
-    const selectedTrip = ref<Trip | null>(null)
+    actions: {
+        selectTrip(trip: Trip) {
+            this.selectedTrip = trip
+        },
 
-    const selectTrip = (trip: Trip) => {
-        selectedTrip.value = trip
-    }
+        clearTrip() {
+            this.selectedTrip = null
+        },
 
-    const clearTrip = () => {
-        selectedTrip.value = null
-    }
+        getServices() {
+            return this.selectedTrip?.services || []
+        },
 
-    const getServices = () => {
-        return selectedTrip.value?.services || []
-    }
+        async addService(user: User, ticket: AviaVariant) {
+            if (!this.selectedTrip) throw new Error('Сначала выберите поездку!')
 
-    // Добавляем сервис локально и пушим на бэк с обновлением price
-    const addService = async (user: User, ticket: AviaVariant) => {
-        if (!selectedTrip.value) throw new Error('Сначала выберите поездку!')
+            const newService = { user, ticket }
 
-        const newService = { user, ticket }
+            // пушим локально
+            this.selectedTrip.services.push(newService)
 
-        // пушим локально
-        selectedTrip.value.services.push(newService)
+            // обновляем локальную цену
+            this.selectedTrip.price += ticket.price
 
-        // обновляем локальную цену
-        selectedTrip.value.price += ticket.price
+            try {
+                const { patchTripServices } = useJsonServer()
 
-        try {
-            // пушим на бэк с price
-            const updatedTrip = await patchTripServices(
-                selectedTrip.value.id,
-                selectedTrip.value.services,
-                selectedTrip.value.price
-            )
+                // пушим на бэк с price
+                const updatedTrip = await patchTripServices(
+                    this.selectedTrip.id,
+                    this.selectedTrip.services,
+                    this.selectedTrip.price
+                )
 
-            // синхронизация с сервером
-            selectedTrip.value.services = updatedTrip.services
-            selectedTrip.value.price = updatedTrip.price
-        } catch (err) {
-            console.error('Ошибка при добавлении сервиса:', err)
-            throw err
+                // синхронизация с сервером
+                this.selectedTrip.services = updatedTrip.services
+                this.selectedTrip.price = updatedTrip.price
+            } catch (err) {
+                console.error('Ошибка при добавлении сервиса:', err)
+            }
+
+            return newService
         }
-
-        return newService
-    }
-
-    return {
-        selectedTrip,
-        selectTrip,
-        clearTrip,
-        getServices,
-        addService
     }
 })

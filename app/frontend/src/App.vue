@@ -10,10 +10,10 @@ import AppHeader from "@/components/AppHeader.vue"
 import { onMounted } from 'vue'
 import { useTripsStore } from '@/stores/tripsStore'
 import { storeToRefs } from 'pinia'
-import { useTripStore } from '@/stores/SelectedTripStore'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 
-const tripStore = useTripStore()
-const { selectedTrip } = storeToRefs(tripStore)
+const selectedTripStore = useSelectedTripStore()
+const { selectedTrip } = storeToRefs(selectedTripStore)
 
 const tripsStore = useTripsStore()
 

@@ -24,31 +24,30 @@
 import SelectedTripItem from "@/components/SelectedTrip/SelectedTripItem.vue"
 import { computed } from "vue"
 import { storeToRefs } from 'pinia'
-import { useTripStore } from '@/stores/SelectedTripStore.ts'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
-const tripStore = useTripStore()
+const selectedTripStore = useSelectedTripStore()
 const toast = useToast()
-const { selectedTrip } = storeToRefs(tripStore)
-const price = selectedTrip.value.price
-const passengers = selectedTrip.value.passengers
-const services = selectedTrip.value.services
+const { selectedTrip } = storeToRefs(selectedTripStore)
+
+const price = computed(() => selectedTrip.value?.price ?? 0)
+const passengers = computed(() => selectedTrip.value?.passengers ?? [])
+const services = computed(() => selectedTrip.value?.services ?? [])
 
 const route = useRoute()
 const router = useRouter()
 
-const isServices = computed(() => tripStore.getServices().length > 0)
+const isServices = computed(() => selectedTripStore.getServices().length > 0)
 const showSearch = computed(() => !route.path.endsWith('/services'))
-const searchOff = computed(() => tripStore.selectedTrip?.status === 'ended')
+const searchOff = computed(() => selectedTripStore.selectedTrip?.status === 'ended')
 
 const goToPage = () => {
-
-  if (tripStore.selectedTrip?.status === 'ended') {
+  if (selectedTripStore.selectedTrip?.status === 'ended') {
     toast.info('Поездка завершена, услуги недоступны')
     return
   }
-
   router.push(route.fullPath + '/services')
 }
 </script>

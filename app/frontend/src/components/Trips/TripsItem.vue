@@ -55,12 +55,12 @@ import { getEarliestDate } from "@/utils/formatDate.ts"
 import { formatPrice } from "@/utils/formatPrice.ts"
 import { useRouter } from 'vue-router'
 import { useTripsStore } from '@/stores/tripsStore'
-import { useTripStore } from '@/stores/selectedTripStore'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import UiSvg from "@/components/UI/UiSvg.vue"
 
 const router = useRouter()
 const tripsStore = useTripsStore()
-const selectedTripStore = useTripStore()
+const selectedTripStore = useSelectedTripStore()
 
 const goToTrip = (trip: Trip) => {
   selectedTripStore.selectTrip(trip)

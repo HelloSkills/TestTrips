@@ -40,7 +40,7 @@ import UiButton from "@/components/UI/UiButton.vue"
 import UiInput from "@/components/UI/UiInput.vue"
 import { ref, watch } from 'vue'
 import { useTripsStore } from "@/stores/tripsStore.ts"
-import { useTripStore } from '@/stores/selectedTripStore'
+import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'
 import { useUser } from '@/composables/useUser.ts'
@@ -62,14 +62,14 @@ watch(() => props.modelValue, val => isOpen.value = val)
 const selectUsersRef = ref<InstanceType<typeof DrawerSelect> | null>(null)
 const nameTrip = ref('')
 
-const tripStore = useTripsStore()
-const selectedTripStore = useTripStore()
+const tripsStore = useTripsStore()
+const selectedTripStore = useSelectedTripStore()
 const router = useRouter()
 const toast = useToast()
 const { selectedUsers, clearSelectedUsers } = useUser()
 
 const createTrip = async () => {
-  if (nameTrip.value.length === 0) {
+  if (!nameTrip.value) {
     toast.info('Необходимо указать название поездки')
     return
   }
@@ -78,7 +78,7 @@ const createTrip = async () => {
     return
   }
 
-  const trip = await tripStore.createTrip({
+  const trip = await tripsStore.createTrip({
     name: nameTrip.value,
     price: 0,
     passengers: selectedUsers.value,
@@ -89,7 +89,7 @@ const createTrip = async () => {
   close()
   selectedTripStore.selectTrip(trip)
   router.push(`/trip/${trip.id}`)
-  toast.success(`Поездка успешно создана`)
+  toast.success('Поездка успешно создана')
 }
 
 const close = () => {
