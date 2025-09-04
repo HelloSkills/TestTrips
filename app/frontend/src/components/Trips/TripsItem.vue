@@ -54,7 +54,7 @@ import type { Trip } from "@/types/types.ts"
 import { getEarliestDate } from "@/utils/formatDate.ts"
 import { formatPrice } from "@/utils/formatPrice.ts"
 import { useRouter } from 'vue-router'
-import { useTripsStore } from '@/stores/tripsStore'
+import { useTripsStore } from '@/stores/TripsStore'
 import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import UiSvg from "@/components/UI/UiSvg.vue"
 

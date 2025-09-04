@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useTripsStore } from '@/stores/tripsStore'
+import { useTripsStore } from '@/stores/TripsStore'
 import UiSvg from '@/components/UI/UiSvg.vue'
 import { useUser } from '@/composables/useUser.ts'
 

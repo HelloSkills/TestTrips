@@ -56,7 +56,7 @@ import UiSvg from '@/components/UI/UiSvg.vue'
 import { computed } from "vue"
 import type { Trip } from "@/types/types.ts"
 import { useSelectedTripStore } from '@/stores/selectedTripStore'
-import { useTripsStore } from "@/stores/tripsStore.ts"
+import { useTripsStore } from "@/stores/TripsStore.ts"
 import { useDrawer } from '@/composables/useDrawer'
 import { useRoute, useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'

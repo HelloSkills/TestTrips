@@ -31,7 +31,7 @@ import UiButton from '@/components/UI/UiButton.vue'
 import UiInput from "@/components/UI/UiInput.vue"
 import DrawerView from '@/components/Drawer/DrawerView.vue'
 import { ref, computed, onBeforeUnmount } from 'vue'
-import { useTripsStore } from '@/stores/tripsStore'
+import { useTripsStore } from '@/stores/TripsStore'
 import { useDrawer } from '@/composables/useDrawer'
 
 const tripsStore = useTripsStore()

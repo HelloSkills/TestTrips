@@ -39,7 +39,7 @@ import UiSvg from '@/components/UI/UiSvg.vue'
 import UiButton from "@/components/UI/UiButton.vue"
 import UiInput from "@/components/UI/UiInput.vue"
 import { ref, watch } from 'vue'
-import { useTripsStore } from "@/stores/tripsStore.ts"
+import { useTripsStore } from "@/stores/TripsStore.ts"
 import { useSelectedTripStore } from '@/stores/selectedTripStore'
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'

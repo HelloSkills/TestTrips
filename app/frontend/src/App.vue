@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import AppHeader from "@/components/AppHeader.vue"
 import { onMounted } from 'vue'
-import { useTripsStore } from '@/stores/tripsStore'
+import { useTripsStore } from '@/stores/TripsStore'
 import { storeToRefs } from 'pinia'
 import { useSelectedTripStore } from '@/stores/selectedTripStore'
 
